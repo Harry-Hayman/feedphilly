@@ -41,16 +41,11 @@ We set the language of the page to English and add classes for scrollbar and scr
         document.documentElement.classList.remove("dark");
       }
 
-      // Netlify Identity Configuration
+      // Configure Netlify Identity
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", () => {
           window.netlifyIdentity.setConfig({
-            enableExternal: true,
-            providers: ["Google"]
-          });
-          
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
+            enableExternalProviders: true
           });
         });
       }
