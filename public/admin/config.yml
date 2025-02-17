@@ -18,8 +18,20 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publication Date", name: "pubDate", widget: "datetime"}
-      - {label: "Author", name: "author", widget: "string"}
-      - {label: "Author Image", name: "authorImage", widget: "string"}
+      - label: "Author"
+        name: "author"
+        widget: "relation"
+        collection: "team"
+        search_fields: ["name"]
+        value_field: "name"
+        display_fields: ["name", "role"]
+      - label: "Author Image"
+        name: "authorImage"
+        widget: "relation"
+        collection: "team"
+        search_fields: ["name"]
+        value_field: "image"
+        display_fields: ["name"]
       - {label: "Author Image Alt", name: "authorImageAlt", widget: "string"}
       - {label: "Card Image", name: "cardImage", widget: "image"}
       - {label: "Card Image Alt", name: "cardImageAlt", widget: "string"}
