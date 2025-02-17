@@ -7,6 +7,8 @@ authorImageAlt: Gabrielle M.
 cardImage: src/images/blog/1729346962843.jpg
 cardImageAlt: anuj
 description: anuj
+contents:
+  - gg
 tags:
   - food security
 readTime: 5
