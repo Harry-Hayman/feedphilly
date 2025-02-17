@@ -2,16 +2,12 @@ backend:
   name: git-gateway
   branch: main
 
-local_backend: false
-
-media_folder: src/images/blog
-public_folder: ../../images/blog
+# These are relative to the git repository root
+media_folder: "src/images/blog" # Location where files will be stored in the repo
+public_folder: "src/images/blog" # The src attribute for uploaded media
 
 site_url: https://feedphilly.netlify.app
 display_url: https://feedphilly.netlify.app
-logo_url: https://feedphilly.netlify.app/images/logo.webp
-
-publish_mode: editorial_workflow
 
 collections:
   - name: "blog"
