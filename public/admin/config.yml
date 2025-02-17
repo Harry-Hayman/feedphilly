@@ -36,7 +36,6 @@ collections:
       - {label: "Card Image", name: "cardImage", widget: "image"}
       - {label: "Card Image Alt", name: "cardImageAlt", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Content Sections", name: "contents", widget: "list", field: {label: "Section", name: "section", widget: "text"}}
       - {label: "Tags", name: "tags", widget: "list", default: ["food security"]}
       - {label: "Read Time (minutes)", name: "readTime", widget: "number"}
       - {label: "Body", name: "body", widget: "markdown"}
