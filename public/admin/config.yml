@@ -1,19 +1,10 @@
 backend:
   name: git-gateway
   branch: main
-  auth_type: implicit
-  accept_roles:
-    - admin
-    - editor
-
-local_backend: false
-publish_mode: editorial_workflow
 
 media_folder: src/images/blog
 public_folder: ../../images/blog
 
-site_url: https://feedphillycoalition.org
-display_url: https://feedphillycoalition.org
 
 collections:
   - name: "blog"
