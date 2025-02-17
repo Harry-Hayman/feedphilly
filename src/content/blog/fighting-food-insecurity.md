@@ -2,7 +2,7 @@
 title: "Fighting Food Insecurity in Philadelphia: A Community Approach"
 pubDate: 2024-02-17
 author: "Harry Hayman"
-authorImage: "../../images/members/harryhayman_founder.jpg"
+authorImage: "src/images/blog/members/harryhayman_founder.jpg"
 authorImageAlt: "Harry Hayman portrait"
 cardImage: "../../images/feedphilly/feed_philly_donation_crowd.png"
 cardImageAlt: "Feed Philly volunteers distributing food to community members"
