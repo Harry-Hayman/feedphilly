@@ -28,8 +28,7 @@ We set the language of the page to English and add classes for scrollbar and scr
     <Meta meta={meta} structuredData={structuredData} />
     <!-- Define the title of the page -->
     <title>{title}</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-    ></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script is:inline>
       // Script to handle dark mode. It will check if the theme is stored in localStorage or if dark theme is preferred by system settings
       if (
@@ -42,18 +41,19 @@ We set the language of the page to English and add classes for scrollbar and scr
         document.documentElement.classList.remove("dark");
       }
 
-      // Netlify Identity Redirect
-      document.addEventListener("DOMContentLoaded", function () {
-        if (window.netlifyIdentity) {
-          window.netlifyIdentity.on("init", (user) => {
-            if (!user) {
-              window.netlifyIdentity.on("login", () => {
-                document.location.href = "/admin/";
-              });
-            }
+      // Netlify Identity Configuration
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", () => {
+          window.netlifyIdentity.setConfig({
+            enableExternal: true,
+            providers: ["Google"]
           });
-        }
-      });
+          
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        });
+      }
     </script>
     <script>
       import "@scripts/lenisSmoothScroll.js";
