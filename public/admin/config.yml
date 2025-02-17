@@ -2,9 +2,16 @@ backend:
   name: git-gateway
   branch: main
 
+local_backend: false
+
 media_folder: src/images/blog
 public_folder: ../../images/blog
 
+site_url: https://feedphilly.netlify.app
+display_url: https://feedphilly.netlify.app
+logo_url: https://feedphilly.netlify.app/images/logo.webp
+
+publish_mode: editorial_workflow
 
 collections:
   - name: "blog"
