@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/images/blog"
+public_folder: "../../images/blog"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publication Date", name: "pubDate", widget: "datetime"}
+      - {label: "Author", name: "author", widget: "string"}
+      - {label: "Author Image", name: "authorImage", widget: "string"}
+      - {label: "Author Image Alt", name: "authorImageAlt", widget: "string"}
+      - {label: "Card Image", name: "cardImage", widget: "image"}
+      - {label: "Card Image Alt", name: "cardImageAlt", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Content Sections", name: "contents", widget: "list", field: {label: "Section", name: "section", widget: "text"}}
+      - {label: "Tags", name: "tags", widget: "list", default: ["food security"]}
+      - {label: "Read Time (minutes)", name: "readTime", widget: "number"}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "team"
+    label: "Team Members"
+    folder: "src/content/team"
+    create: true
+    fields:
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Role", name: "role", widget: "string"}
+      - {label: "Bio", name: "bio", widget: "text"}
+      - {label: "Profile Image", name: "image", widget: "image"}

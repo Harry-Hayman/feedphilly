@@ -1,0 +1,126 @@
+---
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import HeroSection from "@components/sections/landing/HeroSection.astro";
+import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
+import TestimonialsSection from "@components/sections/testimonials/TestimonialsSection.astro";
+import FeaturesNavs from "@components/sections/features/FeaturesNavs.astro";
+import heroImage from "@images/feedphilly/hungry_girl_hero_image.webp";
+import donationImage from "@images/feedphilly/feed_philly_donation.png";
+import teamImage from "@images/feedphilly/feed_philly_team.jpg";
+import warehouseImage from "@images/feedphilly/feed_philly_warehouse.jpg";
+import truckImage from "@images/feedphilly/feed_philly_truck1.jpg";
+
+const features = [
+  {
+    heading: "Collaboration",
+    content:
+      "We bring together individuals, nonprofits, businesses, and policymakers to create a network of support and resources.",
+    svg: "groups",
+  },
+  {
+    heading: "Data-Driven Impact",
+    content:
+      "By leveraging data and research, we identify food deserts, gaps in resources, and opportunities for intervention.",
+    svg: "chart",
+  },
+  {
+    heading: "Community Programs",
+    content:
+      "From food distribution events to educational initiatives, we empower families with access to nutritious meals.",
+    svg: "heart",
+  },
+  {
+    heading: "Sustainable Solutions",
+    content:
+      "Our goal is to create systems that promote food equity for the future of Philadelphia.",
+    svg: "leaf",
+  },
+];
+---
+
+<MainLayout>
+  <HeroSection
+    title="Fighting Food Insecurity in <span class='text-green-500 dark:text-green-400'>Philadelphia</span>"
+    subTitle="Together, we can create a city where everyone has access to healthy, nutritious food."
+    primaryBtn="Get Involved"
+    primaryBtnURL="/get-involved"
+    secondaryBtn="Learn More"
+    secondaryBtnURL="/what-we-do"
+    src={heroImage}
+    alt="A young girl representing food insecurity in Philadelphia"
+  />
+
+  <FeaturesGeneral
+    title="Our Impact"
+    subTitle="Food insecurity is a critical issue affecting thousands of families in Philadelphia. We are dedicated to creating lasting change through collaborative, data-driven solutions."
+    src={donationImage}
+    alt="Feed Philly volunteers distributing food"
+    features={features}
+  />
+
+  <FeaturesNavs
+    title="How We Make a <span class='text-green-500 dark:text-green-400'>Difference</span>"
+    tabs={[
+      {
+        heading: "Food Distribution",
+        content:
+          "We organize regular food distribution events throughout Philadelphia, ensuring nutritious meals reach those who need them most.",
+        svg: "box",
+        src: warehouseImage,
+        alt: "Feed Philly warehouse operations",
+        first: true,
+      },
+      {
+        heading: "Community Outreach",
+        content:
+          "Our dedicated team works directly with communities to understand their needs and provide targeted support.",
+        svg: "users",
+        src: teamImage,
+        alt: "Feed Philly team members working in the community",
+        second: true,
+      },
+      {
+        heading: "Mobile Pantry",
+        content:
+          "Our mobile food pantry brings fresh food directly to neighborhoods with limited access to grocery stores.",
+        svg: "truck",
+        src: truckImage,
+        alt: "Feed Philly mobile food pantry truck",
+      },
+    ]}
+  />
+
+  <TestimonialsSection
+    title="Making Real Change"
+    subTitle="See how Feed Philly Coalition is impacting lives across Philadelphia."
+    testimonials={[
+      {
+        content:
+          "Feed Philly Coalition has been a lifeline for our community. Their dedication to fighting food insecurity has made a real difference in countless lives.",
+        author: "Maria Rodriguez",
+        role: "Community Leader | North Philadelphia",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?q=80&w=1453&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+      },
+    ]}
+    statistics={[
+      {
+        count: "50k+",
+        description: "meals distributed monthly to Philadelphia families",
+      },
+      {
+        count: "25+",
+        description: "community partners working together",
+      },
+      {
+        count: "15",
+        description: "neighborhoods served across Philadelphia",
+      },
+      {
+        count: "1000+",
+        description: "volunteer hours contributed monthly",
+      },
+    ]}
+  />
+</MainLayout>

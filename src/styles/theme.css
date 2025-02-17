@@ -1,0 +1,111 @@
+:root {
+  /* Primary greens */
+  --color-primary: #16a34a;
+  --color-primary-dark: #15803d;
+  --color-primary-light: #22c55e;
+  
+  /* Secondary colors for contrast */
+  --color-secondary: #0f766e;
+  --color-secondary-dark: #0d6b63;
+  --color-secondary-light: #14b8a6;
+  
+  /* Accent colors */
+  --color-accent: #a3e635;
+  --color-accent-dark: #84cc16;
+  --color-accent-light: #bef264;
+  
+  /* Button colors */
+  --btn-primary: var(--color-primary);
+  --btn-primary-hover: var(--color-primary-dark);
+  --btn-primary-text: #ffffff;
+  
+  --btn-secondary: var(--color-secondary);
+  --btn-secondary-hover: var(--color-secondary-dark);
+  --btn-secondary-text: #ffffff;
+}
+
+@layer utilities {
+  .text-primary {
+    color: var(--color-primary);
+  }
+
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+
+  /* Replace yellow with green in existing classes */
+  .text-yellow-500 {
+    color: var(--color-primary);
+  }
+
+  .text-yellow-400 {
+    color: var(--color-primary-light);
+  }
+
+  .bg-yellow-100 {
+    background-color: var(--color-accent-light);
+  }
+
+  .bg-yellow-500 {
+    background-color: var(--color-primary);
+  }
+
+  .bg-yellow-600 {
+    background-color: var(--color-primary-dark);
+  }
+
+  .bg-yellow-900 {
+    background-color: var(--color-primary-dark);
+  }
+
+  .dark .dark\:text-yellow-400 {
+    color: var(--color-accent);
+  }
+
+  .dark .dark\:bg-yellow-900 {
+    background-color: var(--color-primary-dark);
+  }
+
+  /* Button styles */
+  .btn-primary {
+    background-color: var(--btn-primary);
+    color: var(--btn-primary-text);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--btn-primary-hover);
+  }
+
+  .btn-secondary {
+    background-color: var(--btn-secondary);
+    color: var(--btn-secondary-text);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--btn-secondary-hover);
+  }
+
+  .selection\:bg-yellow-400::selection {
+    background-color: var(--color-accent);
+  }
+
+  .hover\:bg-yellow-700:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .dark .dark\:hover\:text-yellow-400:hover {
+    color: var(--color-accent);
+  }
+
+  .focus\:ring-yellow-500:focus {
+    --tw-ring-color: var(--color-primary);
+  }
+}

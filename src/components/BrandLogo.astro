@@ -1,0 +1,15 @@
+---
+import { Image } from "astro:assets";
+import logo from "@images/feedphilly/logo.webp";
+
+const { class: className } = Astro.props;
+---
+
+<Image
+  src={logo}
+  alt="Feed Philly Coalition"
+  class={`${className} scale-125`}
+  width={200}
+  height={75}
+  style="object-fit: contain;"
+/>

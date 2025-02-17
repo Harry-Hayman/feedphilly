@@ -1,0 +1,150 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  subTitle: string;
+  primaryBtn: string;
+  primaryBtnURL: string;
+  secondaryBtn: string;
+  secondaryBtnURL: string;
+  withReview?: boolean;
+  avatars?: Array<string>;
+  rating?: string;
+  starCount?: number;
+  reviews?: string;
+  src: ImageMetadata;
+  alt: string;
+}
+
+const {
+  title,
+  subTitle,
+  primaryBtn,
+  primaryBtnURL,
+  secondaryBtn,
+  secondaryBtnURL,
+  withReview = false,
+  avatars,
+  rating,
+  starCount = 5,
+  reviews,
+  src,
+  alt,
+} = Astro.props;
+---
+
+<section class="relative pb-24 pt-20 sm:pb-32 sm:pt-2">
+  <!-- Abstract Boundary Shape -->
+  <div
+    class="pointer-events-none absolute left-0 top-0 h-full w-full overflow-hidden"
+  >
+    <svg class="absolute h-auto w-full" viewBox="0 0 1200 800" fill="none">
+      <path
+        d="M600 0C850 0 1000 200 1150 350C1300 500 1200 800 900 800C600 800 300 700 150 500C0 300 100 0 600 0Z"
+        class="fill-green-100/30 dark:fill-green-900/20"></path>
+    </svg>
+  </div>
+
+  <div
+    class="relative mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8 2xl:max-w-screen-2xl"
+  >
+    <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <div class="relative mb-8">
+          <h1
+            class="mx-auto mb-4 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-200 sm:text-5xl lg:text-6xl lg:leading-tight"
+            set:html={title}
+          />
+          <p
+            class="text-pretty text-lg text-neutral-600 dark:text-neutral-400 sm:text-xl"
+          >
+            {subTitle}
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center gap-4 sm:flex-row sm:gap-3">
+          <a class="btn-primary" href={primaryBtnURL}>
+            {primaryBtn}
+            <svg
+              class="h-4 w-4"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13 7L18 12M18 12L13 17M18 12H6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </a>
+
+          <a class="btn-secondary" href={secondaryBtnURL}>
+            {secondaryBtn}
+          </a>
+        </div>
+
+        {
+          withReview && (
+            <div class="mt-6 flex items-center gap-x-3 divide-x divide-neutral-300 dark:divide-neutral-700">
+              <div class="flex -space-x-2">
+                {avatars?.map((avatar) => (
+                  <img
+                    class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-neutral-800"
+                    src={avatar}
+                    alt="User avatar"
+                    width={32}
+                    height={32}
+                  />
+                ))}
+              </div>
+              <div class="flex pl-3">
+                <div class="flex">
+                  {[...Array(starCount)].map((_, index) => (
+                    <svg
+                      class="h-5 w-5 text-green-500"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  ))}
+                </div>
+                <span class="ml-2 inline-flex items-center gap-x-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  <span set:html={rating} />
+                  <span class="border-e border-neutral-300 pe-2 dark:border-neutral-600" />
+                  <span set:html={reviews} />
+                </span>
+              </div>
+            </div>
+          )
+        }
+      </div>
+
+      <div class="relative ms-4">
+        <Image
+          src={src}
+          class="w-full max-w-xl rounded-3xl object-cover shadow-2xl lg:max-w-2xl"
+          alt={alt}
+          width={800}
+          height={600}
+        />
+        <!-- Decorative shape -->
+        <div
+          class="absolute -left-6 -top-6 -z-10 h-72 w-72 rounded-full bg-green-100/30 dark:bg-green-900/20"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

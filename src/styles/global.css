@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import theme overrides */
+@import './theme.css';
+
+/* Base styles */
+:root {
+  --primary-color: #22c55e;
+  --primary-hover: #16a34a;
+}
+
+@layer components {
+  /* Image optimization classes */
+  .img-optimize {
+    @apply object-cover w-full h-full;
+  }
+
+  .img-container {
+    @apply relative overflow-hidden;
+    aspect-ratio: 16/9;
+  }
+
+  /* Abstract shapes */
+  .shape-blur {
+    @apply absolute pointer-events-none;
+    filter: blur(60px);
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Hero section decorative elements */
+  .hero-decoration {
+    @apply absolute -z-10;
+    background: radial-gradient(circle at center, var(--primary-color) 0%, transparent 70%);
+    opacity: 0.1;
+  }
+
+  /* Consistent button styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white rounded-lg shadow-lg 
+           bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500
+           transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg border 
+           text-green-700 border-green-200 bg-green-50 hover:bg-green-100
+           focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2
+           dark:text-green-400 dark:border-green-800 dark:bg-green-900/20
+           dark:hover:bg-green-900/40 transition-colors duration-200;
+  }
+
+  /* Custom utility classes */
+  .bg-primary {
+    @apply bg-green-600;
+  }
+
+  .bg-primary-dark {
+    @apply bg-green-700;
+  }
+
+  .text-primary {
+    @apply text-green-600;
+  }
+
+  .bg-primary\/10 {
+    @apply bg-green-100 dark:bg-green-900/20;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-white rounded-lg shadow-lg p-6 dark:bg-neutral-800;
+  }
+
+  .card-hover {
+    @apply hover:shadow-xl transition-shadow duration-200;
+  }
+}
+
+/* Global focus styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-green-500 ring-offset-2 dark:ring-offset-neutral-900;
+}

@@ -1,0 +1,95 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { Image } from "astro:assets";
+import childrenImage from "@images/feedphilly/hungry_children.png";
+import crowdImage from "@images/feedphilly/feed_philly_donation_crowd.png";
+
+const stakeholders = [
+  {
+    title: "School District of Philadelphia",
+    description: "As the official partner for food insecurity, Feed Philly supports students with access to nutritious food, directly impacting their educational success and well-being.",
+    icon: "school"
+  },
+  {
+    title: "Local Government Officials",
+    description: "Engaging policymakers to support data-driven solutions, Feed Philly reinforces the role of food security in building resilient communities and boosting the economy.",
+    icon: "building"
+  },
+  {
+    title: "Business Community",
+    description: "Feed Philly brings value to businesses by addressing food insecurity, a critical factor in workforce stability and economic growth.",
+    icon: "briefcase"
+  },
+  {
+    title: "Anchor Institutions",
+    description: "We partner with hospitals, universities, and other anchor institutions to create sustainable solutions for food security.",
+    icon: "institution"
+  }
+];
+---
+
+<MainLayout title="Who We Serve | Feed Philly Coalition">
+  <div class="py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl md:text-6xl dark:text-white">
+          Who We Serve
+        </h1>
+        <p class="mx-auto mt-3 max-w-2xl text-xl text-neutral-500 sm:mt-4 dark:text-neutral-400">
+          We are a group of passionate individuals dedicated to addressing food insecurity in Philadelphia through collaboration and data-driven strategies.
+        </p>
+      </div>
+
+      <div class="mt-16">
+        <div class="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2">
+          <Image
+            src={childrenImage}
+            alt="Children affected by food insecurity"
+            class="rounded-lg shadow-xl"
+          />
+          <div class="flex flex-col justify-center">
+            <h2 class="text-3xl font-bold text-neutral-900 dark:text-white">
+              Making a Difference
+            </h2>
+            <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+              Food insecurity affects thousands of Philadelphia families, particularly children. We work with various stakeholders to ensure that no one in our community goes hungry.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-16">
+        <div class="grid gap-8 md:grid-cols-2">
+          {stakeholders.map((item) => (
+            <div class="rounded-lg bg-white p-8 shadow-lg dark:bg-neutral-800">
+              <div class="mb-4">
+                <span class={`inline-block rounded-lg bg-yellow-100 p-3 dark:bg-yellow-900`}>
+                  <svg class="h-6 w-6 text-yellow-600 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={
+                      item.icon === "school" ? "M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" :
+                      item.icon === "building" ? "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" :
+                      item.icon === "briefcase" ? "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" :
+                      "M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2m4-10a4 4 0 100-8 4 4 0 000 8zm6 0a4 4 0 100-8 4 4 0 000 8z"
+                    } />
+                  </svg>
+                </span>
+              </div>
+              <h3 class="mb-3 text-xl font-bold dark:text-white">{item.title}</h3>
+              <p class="text-neutral-600 dark:text-neutral-400">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-16">
+        <div class="mx-auto max-w-4xl">
+          <Image
+            src={crowdImage}
+            alt="Feed Philly serving the community"
+            class="rounded-lg shadow-xl"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>
