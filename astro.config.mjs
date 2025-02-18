@@ -11,6 +11,13 @@ export default defineConfig({
   site: "https://feedphilly.org",
   image: {
     domains: ["images.unsplash.com"],
+    remotePatterns: [],
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    }
+  },
+  assets: {
+    fallback: 'placeholder'
   },
   prefetch: true,
   integrations: [
