@@ -13,24 +13,28 @@ const team = [
     role: "Founder",
     bio: "Harry Hayman, Founder of Feed Philly Coalition, is committed to tackling food insecurity through a collaborative, technology-driven approach. With a background in food systems and community outreach, Harry builds partnerships with schools, government, and businesses to promote access to nutritious food as a foundation for a healthier Philadelphia.",
     avatar: harryImage,
+    id: "harryhayman",
   },
   {
     name: "Gabrielle M",
     role: "President",
     bio: "Gabrielle M, President of Feed Philly Coalition, is passionate about creating sustainable solutions to food insecurity in Philadelphia. With a background in public health and community organizing, Gabrielle leads initiatives to address food deserts, improve food access, and promote health equity for all Philadelphians.",
     avatar: gabrielleImage,
+    id: "gabriellem",
   },
   {
-    name: " David Greensburg",
-    role: " Community Outreach Coordinator",
+    name: "David Greensburg",
+    role: "Community Outreach Coordinator",
     bio: "David Greensburg, Community Outreach Coordinator at Feed Philly Coalition, is dedicated to building relationships with local organizations, schools, and businesses to expand access to healthy food in underserved communities. With a background in social work and community development, David is committed to creating a more equitable food system in Philadelphia.",
     avatar: davidImage,
+    id: "davidgreensburg",
   },
   {
     name: "Anuj Paudel",
     role: "Technical Lead",
     bio: "Anuj Paudel, Technical Lead at Feed Philly Coalition, is passionate about leveraging technology to address food insecurity in Philadelphia. With a background in software engineering and data analysis, Anuj develops innovative solutions to improve food access, streamline operations, and empower communities to fight hunger.",
     avatar: anujImage,
+    id: "anujpaudel",
   },
 ];
 ---
@@ -38,7 +42,7 @@ const team = [
 <MainLayout title="About Us | Feed Philly Coalition">
   <div class="py-12 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
+      <div class="animate-fade-up text-center opacity-0">
         <h1
           class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl md:text-6xl"
         >
@@ -52,42 +56,68 @@ const team = [
         </p>
       </div>
 
-      <div class="mt-16">
-        <div class="mx-auto max-w-5xl">
+      <div class="animate-fade-up mt-16 opacity-0 [animation-delay:200ms]">
+        <div class="mx-auto max-w-5xl overflow-hidden rounded-lg">
           <Image
             src={donationImage}
             alt="Feed Philly team at a community event"
-            class="w-full rounded-lg shadow-xl"
+            class="w-full rounded-lg shadow-xl transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
           />
         </div>
       </div>
 
-      <div class="mt-16">
-        <div class="grid gap-12 md:grid-cols-2 lg:gap-16">
-          {
-            team.map((member) => (
-              <div class="flex flex-col items-center md:flex-row">
-                <img
-                  src={member.avatar.src}
-                  alt={`Photo of ${member.name}`}
-                  class="h-32 w-32 rounded-full object-cover md:h-40 md:w-40"
-                />
-                <div class="mt-6 text-center md:ml-8 md:mt-0 md:text-left">
-                  <h3 class="text-xl font-bold text-neutral-900 dark:text-white">
-                    {member.name}
-                  </h3>
-                  <p class="mt-1 text-lg font-medium text-yellow-600 dark:text-yellow-400">
-                    {member.role}
-                  </p>
-                  <p class="mt-3 text-base text-neutral-600 dark:text-neutral-400">
-                    {member.bio}
-                  </p>
+      <div class="mt-16 space-y-16">
+        {
+          team.map((member, index) => (
+            <div
+              id={member.id}
+              class:list={[
+                "animate-fade-up scroll-mt-24 opacity-0",
+                { [`[animation-delay:${400 + index * 200}ms]`]: true },
+              ]}
+            >
+              <div class="group mx-auto max-w-4xl rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-green-50 hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700">
+                <div class="flex flex-col items-center gap-8 md:flex-row md:gap-12">
+                  <div class="relative flex-shrink-0">
+                    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-green-400 to-green-600 opacity-0 blur transition-all duration-300 group-hover:opacity-100" />
+                    <img
+                      src={member.avatar.src}
+                      alt={`Photo of ${member.name}`}
+                      class="relative h-40 w-40 rounded-full object-cover transition-transform duration-300 group-hover:scale-105 md:h-48 md:w-48"
+                    />
+                  </div>
+                  <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-neutral-900 transition-colors duration-300 group-hover:text-green-700 dark:text-white dark:group-hover:text-green-400">
+                      {member.name}
+                    </h3>
+                    <p class="mt-1 text-lg font-medium text-green-600 dark:text-green-400">
+                      {member.role}
+                    </p>
+                    <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400 md:text-lg">
+                      {member.bio}
+                    </p>
+                  </div>
                 </div>
               </div>
-            ))
-          }
-        </div>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
 </MainLayout>
+
+<script>
+  // Smooth scroll for anchor links
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function(this: HTMLAnchorElement, e: Event) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href")?.slice(1);
+      if (targetId) {
+        document.getElementById(targetId)?.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+</script>

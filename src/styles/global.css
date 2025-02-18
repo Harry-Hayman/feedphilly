@@ -11,11 +11,19 @@
   --primary-hover: #16a34a;
 }
 
-@layer components {
+/* Add smooth transitions to all interactive elements */
+* {
+  @apply transition-all duration-300 ease-in-out;
+}
 
+@layer components {
   /* Image optimization classes */
   .img-optimize {
-    @apply object-cover w-full h-full;
+    @apply object-cover w-full h-full transition-transform duration-500;
+  }
+
+  .img-optimize:hover {
+    @apply scale-105 transform;
   }
 
   .img-container {
@@ -37,13 +45,33 @@
     opacity: 0.1;
   }
 
-  /* Consistent button styles */
+  /* Enhanced button styles */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white rounded-lg shadow-lg bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white rounded-lg shadow-lg bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300;
+    transform: translateY(0);
+  }
+
+  .btn-primary:hover {
+    @apply shadow-xl;
+    transform: translateY(-2px);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg border text-green-700 border-green-200 bg-green-50 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:text-green-400 dark:border-green-800 dark:bg-green-900/20 dark:hover:bg-green-900/40 transition-colors duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg border text-green-700 border-green-200 bg-green-50 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:text-green-400 dark:border-green-800 dark:bg-green-900/20 dark:hover:bg-green-900/40 transition-all duration-300;
+    transform: translateY(0);
+  }
+
+  .btn-secondary:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(0);
   }
 
   /* Custom utility classes */
@@ -63,17 +91,59 @@
     @apply bg-green-100 dark:bg-green-900/20;
   }
 
-  /* Card styles */
+  /* Enhanced card styles */
   .card {
-    @apply bg-white rounded-lg shadow-lg p-6 dark:bg-neutral-800;
+    @apply bg-white rounded-lg shadow-lg p-6 dark:bg-neutral-800 transition-all duration-300;
   }
 
   .card-hover {
-    @apply hover:shadow-xl transition-shadow duration-200;
+    @apply hover:shadow-xl hover:-translate-y-1 transition-all duration-300;
+  }
+
+  /* Navigation link animations */
+  .nav-link {
+    @apply relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  /* Form input animations */
+  .form-input {
+    @apply transition-all duration-300 border-2 border-transparent focus:border-green-500 focus:ring-1 focus:ring-green-500;
+  }
+
+  /* Testimonial card animations */
+  .testimonial-card {
+    @apply transition-all duration-500;
+  }
+
+  .testimonial-card:hover {
+    @apply transform -translate-y-2 shadow-xl;
+  }
+
+  /* Feature icon animations */
+  .feature-icon {
+    @apply transition-transform duration-300;
+  }
+
+  .feature-icon:hover {
+    @apply transform scale-110;
   }
 }
 
 /* Global focus styles */
 *:focus-visible {
   @apply outline-none ring-2 ring-green-500 ring-offset-2 dark:ring-offset-neutral-900;
+}
+
+/* Dark mode transition */
+.dark {
+  @apply transition-colors duration-300;
 }

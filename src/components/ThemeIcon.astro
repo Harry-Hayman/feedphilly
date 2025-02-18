@@ -1,13 +1,13 @@
-<!-- Dark Theme Toggle Button --><!-- This button is shown when the light theme is active, and when clicked, it switches the theme to dark -->
+<!-- Dark Theme Toggle Button -->
 <button
   type="button"
   aria-label="Dark Theme Toggle"
-  class="hs-dark-mode group flex h-8 w-8 items-center justify-center rounded-full font-medium text-neutral-600 outline-none ring-zinc-500 transition duration-300 hover:bg-neutral-200 hover:text-green-400 hs-dark-mode-active:hidden dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-green-300 dark:focus:outline-none"
+  class="hs-dark-mode group relative flex h-8 w-8 items-center justify-center rounded-full font-medium text-neutral-600 outline-none ring-zinc-500 transition-all duration-300 ease-in-out hover:scale-110 hover:text-green-500 hs-dark-mode-active:hidden dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-green-400 dark:focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500"
   data-hs-theme-click-value="dark"
 >
   <!-- The SVG displayed shows an abstract icon that represents the moon (dark theme) -->
   <svg
-    class="h-4 w-4 flex-shrink-0"
+    class="h-4 w-4 flex-shrink-0 transition-transform duration-500 ease-out group-hover:rotate-[360deg]"
     width="24"
     height="24"
     viewBox="0 0 24 24"
@@ -18,18 +18,19 @@
     stroke-linejoin="round"
     ><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg
   >
-  <!-- Light Theme Toggle Button -->
-  <!-- This button is hidden by default and only appears when the dark theme is active, when clicked, it switches to the light theme -->
+  <span class="absolute inset-0 -z-10 scale-75 rounded-full bg-green-100 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-20 dark:bg-green-500"></span>
 </button>
+
+<!-- Light Theme Toggle Button -->
 <button
   type="button"
   aria-label="Light Theme Toggle"
-  class="hs-dark-mode group hidden h-8 w-8 items-center justify-center rounded-full font-medium text-neutral-600 outline-none ring-zinc-500 transition duration-300 hover:text-green-400 hs-dark-mode-active:flex dark:text-neutral-400 dark:ring-zinc-200 dark:hover:bg-neutral-700 dark:hover:text-green-300 dark:focus:outline-none"
+  class="hs-dark-mode group relative hidden h-8 w-8 items-center justify-center rounded-full font-medium text-neutral-600 outline-none ring-zinc-500 transition-all duration-300 ease-in-out hover:scale-110 hover:text-green-500 hs-dark-mode-active:flex dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-green-400 dark:focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500"
   data-hs-theme-click-value="light"
 >
   <!-- The SVG displayed shows a standard sun icon that stands for the light theme -->
   <svg
-    class="h-4 w-4 flex-shrink-0"
+    class="h-4 w-4 flex-shrink-0 transition-transform duration-500 ease-out group-hover:rotate-[360deg]"
     width="24"
     height="24"
     viewBox="0 0 24 24"
@@ -45,4 +46,5 @@
       d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"
     ></path></svg
   >
+  <span class="absolute inset-0 -z-10 scale-75 rounded-full bg-green-100 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-20 dark:bg-green-500"></span>
 </button>
