@@ -21,13 +21,15 @@ interface Props {
         class="absolute start-0 top-0 size-full rounded-xl object-cover"
         src={blogEntry.data.cardImage}
         alt={blogEntry.data.cardImageAlt}
+        width={800}
+        height={600}
         draggable={"false"}
         loading={"eager"}
         format={"avif"}
       />
     </div>
   </div>
-  <!-- Container for the blog post's heading, author avatar, author's role, and read more button -->
+  <!-- Container for the blog post's heading, author avatar, and read more button -->
   <div class="sm:order-1">
     <!-- Blog title which is also a hyperlink to the blog detail page  -->
     <h2
@@ -45,11 +47,8 @@ interface Props {
       <AvatarBlogLarge blogEntry={blogEntry} />
 
       <div class="ms-3 sm:ms-4">
-        <p class="font-bold text-neutral-800 dark:text-neutral-200 sm:mb-1">
+        <p class="font-bold text-neutral-800 dark:text-neutral-200">
           {blogEntry.data.author}
-        </p>
-        <p class="text-xs text-neutral-500">
-          {blogEntry.data.role}
         </p>
       </div>
     </div>

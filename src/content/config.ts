@@ -28,7 +28,31 @@ const team = defineCollection({
   })
 });
 
+const products = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    description: z.string(),
+    main: z.object({
+      imgCard: image(),
+      imgAlt: z.string(),
+    })
+  })
+});
+
+const achivement = defineCollection({
+  type: 'content',
+  schema: z.object({})
+});
+
+const feedphilly = defineCollection({
+  type: 'content',
+  schema: z.object({})
+});
+
 export const collections = {
   blog,
-  team
+  team,
+  products,
+  achivement,
+  feedphilly
 };

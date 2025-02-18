@@ -7,6 +7,7 @@ authorImageAlt: Gabrielle M.
 cardImage: src/images/blog/hungry_philadelphian_people.png
 cardImageAlt: Food insecurity in Philadelphia
 description: Exploring the challenges of food insecurity in Philadelphia and its impact on local communities
+contents: ["Understanding Food Insecurity", "Key Statistics", "Community Impact"]
 tags:
   - food security
   - philadelphia
@@ -22,5 +23,3 @@ Food insecurity remains a critical challenge in Philadelphia, affecting thousand
 - Many neighborhoods qualify as food deserts, lacking access to fresh, nutritious food
 
 The impact of food insecurity extends beyond hunger, affecting education, health, and overall community well-being. Local organizations and community members are working together to address this challenge through various initiatives and support programs.
-
-
