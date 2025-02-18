@@ -12,6 +12,7 @@ const blog = defineCollection({
     cardImageAlt: z.string(),
     description: z.string(),
     contents: z.array(z.string()),
+    markdown: z.string().optional(),
     tags: z.array(z.string()).default(['food security']),
     readTime: z.number().optional()
   })

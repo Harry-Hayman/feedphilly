@@ -32,14 +32,13 @@ collections:
         search_fields: ["name"]
         value_field: "image"
         display_fields: ["name"]
-      - {label: "Author Image Alt", name: "authorImageAlt", widget: "string"}
+        options_length: 0
       - {label: "Card Image", name: "cardImage", widget: "image"}
       - {label: "Card Image Alt", name: "cardImageAlt", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Contents", name: "contents", widget: "list", default: ["Food Security"]}
       - {label: "Tags", name: "tags", widget: "list", default: ["food security"]}
       - {label: "Read Time (minutes)", name: "readTime", widget: "number"}
-      # - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Body", name: "body", widget: "markdown"}
 
   - name: "team"
     label: "Team Members"
