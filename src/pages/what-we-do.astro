@@ -95,7 +95,7 @@ const stakeholders = [
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="animate-fade-in text-center">
         <h1
-          class="animate-slide-up text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl md:text-6xl"
+          class="animate-slide-up text-4xl font-bold tracking-tight text-green-600 dark:text-green-400 sm:text-5xl md:text-6xl uppercase"
         >
           Our Work
         </h1>
@@ -110,14 +110,14 @@ const stakeholders = [
       <!-- Our Impact Section -->
       <div class="animate-fade-up mt-16 opacity-0 [animation-delay:400ms]">
         <h2
-          class="mb-8 text-center text-3xl font-bold text-neutral-900 dark:text-white"
+          class="mb-8 text-center text-3xl font-bold uppercase text-neutral-900 dark:text-white"
         >
-          Our Impact
+          Our <span class="text-green-600 dark:text-green-400">Impact</span>
         </h2>
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {
             impact.map((item) => (
-              <div class="flex flex-col items-center rounded-lg bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-green-50 hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700">
+              <div class="flex flex-col items-center rounded-lg bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-green-50 hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:border dark:border-neutral-700">
                 <span class="bg-primary/10 mb-4 inline-block rounded-lg p-3 transition-transform duration-300 hover:scale-110">
                   <svg
                     class="text-primary h-6 w-6"
@@ -162,18 +162,18 @@ const stakeholders = [
       <!-- How We Make Difference Section -->
       <div class="animate-fade-up mt-24 opacity-0 [animation-delay:600ms]">
         <h2
-          class="text-1xl mb-8 text-center font-bold text-neutral-900 dark:text-white"
+          class="text-3xl mb-12 text-center font-bold uppercase text-neutral-900 dark:text-white"
         >
-          How We Make a Difference
+          How We Make a <span class="text-green-600 dark:text-green-400">Difference</span>
         </h2>
         <div class="grid gap-8 md:grid-cols-2">
           {
             howWeMakeDifference.map((item) => (
               <a
-                class="group block rounded-lg bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-green-50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                class="group block rounded-lg bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:bg-green-50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:border dark:border-neutral-700"
                 aria-label={`Learn more about ${item.heading}`}
               >
-                <div class="flex gap-6 p-6">
+                <div class="flex gap-8 p-8">
                   <div class="flex-shrink-0">
                     <span class="bg-primary/10 inline-block rounded-lg p-3 transition-transform duration-300 group-hover:scale-110">
                       <svg
@@ -200,7 +200,7 @@ const stakeholders = [
                     </span>
                   </div>
                   <div class="flex-grow">
-                    <h3 class="mb-2 text-xl font-bold text-neutral-900 transition-colors duration-300 group-hover:text-green-600 dark:text-white dark:group-hover:text-green-400">
+                    <h3 class="mb-3 text-xl font-bold text-neutral-900 transition-colors duration-300 group-hover:text-green-600 dark:text-white dark:group-hover:text-green-400 uppercase">
                       {item.heading}
                     </h3>
                     <p class="text-neutral-600 transition-colors duration-300 group-hover:text-neutral-700 dark:text-neutral-400 dark:group-hover:text-neutral-300">
@@ -216,8 +216,8 @@ const stakeholders = [
 
       <!-- Who We Serve Section -->
       <div class="animate-fade-up mt-24 opacity-0 [animation-delay:800ms]">
-        <h2 class="mb-8 text-3xl font-bold text-neutral-900 dark:text-white">
-          Who We Serve
+        <h2 class="mb-12 text-3xl font-bold uppercase text-center text-neutral-900 dark:text-white">
+          Who We <span class="text-green-600 dark:text-green-400">Serve</span>
         </h2>
         <div class="grid gap-12 lg:grid-cols-2">
           <Image
@@ -236,7 +236,7 @@ const stakeholders = [
             <div class="grid gap-6">
               {
                 stakeholders.map((item) => (
-                  <div class="flex items-start gap-4 rounded-lg bg-white p-4 shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-green-50 hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700">
+                  <div class="flex items-start gap-6 rounded-lg bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-2 hover:bg-green-50 hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:border dark:border-neutral-700">
                     <span class="bg-primary/10 inline-block rounded-lg p-3 transition-transform duration-300 hover:scale-110">
                       <svg
                         class="text-primary h-6 w-6"
@@ -261,7 +261,7 @@ const stakeholders = [
                       </svg>
                     </span>
                     <div>
-                      <h3 class="text-lg font-semibold text-neutral-900 dark:text-white">
+                      <h3 class="text-lg font-bold text-neutral-900 dark:text-white uppercase mb-2">
                         {item.title}
                       </h3>
                       <p class="mt-1 text-neutral-600 dark:text-neutral-400">
