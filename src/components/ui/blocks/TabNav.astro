@@ -14,12 +14,12 @@ interface Props {
 
 // Define button classes
 const buttonClasses = `
-  w-full rounded-xl p-4 text-start focus:outline-none
+  w-full rounded-xl p-6 text-start focus:outline-none
   ${first ? "active" : ""}
   hover:bg-green-50 dark:hover:bg-neutral-700/50
   group-[.active]:bg-green-50 dark:group-[.active]:bg-neutral-700
   transition-all duration-300
-  md:p-5
+  md:p-6 lg:p-8
   cursor-pointer
   group
 `;
@@ -37,12 +37,12 @@ const buttonClasses = `
     <slot />
     <span class="ms-6 grow">
       <span
-        class="block text-lg font-bold text-neutral-800 group-[.active]:text-green-600 dark:text-neutral-200 dark:group-[.active]:text-green-400"
+        class="block text-lg font-bold text-neutral-800 group-[.active]:text-green-600 dark:text-neutral-200 dark:group-[.active]:text-green-400 md:text-xl"
       >
         {heading}
       </span>
       <span
-        class="mt-1 block text-neutral-500 group-[.active]:text-neutral-600 dark:text-neutral-400 dark:group-[.active]:text-neutral-200"
+        class="mt-2 block text-base text-neutral-500 group-[.active]:text-neutral-600 dark:text-neutral-400 dark:group-[.active]:text-neutral-200 md:text-lg"
       >
         {content}
       </span>
