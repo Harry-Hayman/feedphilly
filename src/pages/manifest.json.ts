@@ -39,8 +39,8 @@ export const GET: APIRoute = async () => {
   );
 
   const manifest = {
-    short_name: "ScrewFast",
-    name: "ScrewFast",
+    short_name: "feedphilly",
+    name: "feedphilly",
     icons,
     display: "minimal-ui",
     id: "/",

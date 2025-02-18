@@ -1,10 +1,9 @@
 {
   "title": "Simple, Transparent Pricing",
-  "subTitle": "Boost efficiency with ScrewFast's clear, value-driven plans.",
+  "subTitle": "Boost efficiency with feedphilly's clear, value-driven plans.",
   "badge": "Best value",
   "thirdOption": "Enterprise Solutions?",
   "btnText": "Get a Custom Quote",
-
   "starterKit": {
     "name": "Starter Kit",
     "description": "Best option for DIY projects",
@@ -19,7 +18,6 @@
     "purchaseBtnTitle": "Get the Starter Kit",
     "purchaseLink": "#"
   },
-
   "professionalToolbox": {
     "name": "Professional Toolbox",
     "description": "Best for large scale uses",
