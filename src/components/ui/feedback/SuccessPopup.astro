@@ -1,0 +1,104 @@
+---
+const { message = "Thank you for submitting!" } = Astro.props;
+
+interface Props {
+  message?: string;
+}
+---
+
+<div
+  id="success-popup"
+  class="fixed left-1/2 top-4 z-50 -translate-x-1/2 transform opacity-0 transition-all duration-300 ease-out"
+>
+  <div class="rounded-lg bg-green-600 px-6 py-3 shadow-lg dark:bg-green-500">
+    <div class="flex items-center gap-2">
+      <svg
+        class="h-5 w-5 text-white"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <p class="text-sm font-medium text-white">{message}</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showPopup(message: string, isError = false) {
+    const popup = document.getElementById("success-popup");
+    if (popup) {
+      const messageEl = popup.querySelector("p");
+      if (messageEl) messageEl.textContent = message;
+      
+      if (isError) {
+        popup.querySelector(".bg-green-600")?.classList.replace("bg-green-600", "bg-red-600");
+        popup.querySelector(".dark\\:bg-green-500")?.classList.replace("dark:bg-green-500", "dark:bg-red-500");
+      } else {
+        popup.querySelector(".bg-red-600")?.classList.replace("bg-red-600", "bg-green-600");
+        popup.querySelector(".dark\\:bg-red-500")?.classList.replace("dark:bg-red-500", "dark:bg-green-500");
+      }
+
+      popup.classList.remove("opacity-0", "-translate-y-4");
+      popup.classList.add("opacity-100", "translate-y-0");
+      setTimeout(() => {
+        popup.classList.add("opacity-0", "-translate-y-4");
+        popup.classList.remove("opacity-100", "translate-y-0");
+      }, 3000);
+    }
+  }
+
+  // Add to window for access from inline scripts
+  window.showSuccessPopup = showPopup;
+
+  // Handle form submissions
+  document.addEventListener("DOMContentLoaded", () => {
+    const forms = document.querySelectorAll("form[data-show-success]");
+    forms.forEach((form) => {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.classList.add("opacity-50");
+        }
+
+        const formData = new FormData(form as HTMLFormElement);
+        
+        try {
+          // Google Apps Script requires CORS preflight
+          const response = await fetch(form.action, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams(formData as any).toString()
+          });
+          
+          // Google Apps Script returns a redirect on success
+          // Check if we got a redirect or ok status
+          if (response.ok || response.redirected) {
+            showPopup(form.dataset.successMessage || "Submission successful!");
+            (form as HTMLFormElement).reset();
+          } else {
+            throw new Error("Submission failed");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          showPopup("Sorry, something went wrong. Please try again.", true);
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.classList.remove("opacity-50");
+          }
+        }
+      });
+    });
+  });
+</script>
