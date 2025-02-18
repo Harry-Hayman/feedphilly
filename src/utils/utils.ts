@@ -12,4 +12,9 @@ function capitalize(str:string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-  export { formatDate, capitalize };
+// Generate URL-friendly slug
+function generateSlug(id: string): string {
+  return id.replace(/\.md$/, '').replace(/\s+/g, '-').toLowerCase();
+}
+
+export { formatDate, capitalize, generateSlug };

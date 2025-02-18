@@ -18,10 +18,18 @@ interface Props {
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: { post },
-  }));
+  return posts.map((post) => {
+    // Create URL-friendly slug from the post ID:
+    // - Remove .md extension
+    // - Convert spaces to hyphens
+    // - Convert to lowercase
+    const slug = post.id.replace(/\.md$/, '').replace(/\s+/g, '-').toLowerCase();
+    
+    return {
+      params: { id: slug },
+      props: { post },
+    };
+  });
 }
 
 const { post } = Astro.props;
