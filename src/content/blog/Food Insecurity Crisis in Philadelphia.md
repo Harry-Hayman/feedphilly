@@ -1,17 +1,21 @@
 ---
 title: Food Insecurity Crisis in Philadelphia
 pubDate: 2025-02-17T21:26:00.000Z
-author: Gabrielle M.
-authorImage: /src/images/blog/members/Gabrielle M- President .jpg
-authorImageAlt: Gabrielle M.
+author: Harry Hayman
+authorImage: /src/images/blog/members/harryhayman_founder.jpg
 cardImage: src/images/blog/hungry_philadelphian_people.png
 cardImageAlt: Food insecurity in Philadelphia
-description: Exploring the challenges of food insecurity in Philadelphia and its impact on local communities
-contents: ["Understanding Food Insecurity", "Key Statistics", "Community Impact"]
 tags:
   - food security
   - philadelphia
 readTime: 5
+authorImageAlt: Gabrielle M.
+contents:
+  - Understanding Food Insecurity
+  - Key Statistics
+  - Community Impact
+description: Exploring the challenges of food insecurity in Philadelphia and its
+  impact on local communities
 ---
 
 # Understanding Food Insecurity in Philadelphia
