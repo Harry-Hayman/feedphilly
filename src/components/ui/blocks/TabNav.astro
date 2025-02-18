@@ -15,8 +15,9 @@ interface Props {
 // Define button classes
 const buttonClasses = `
   w-full rounded-xl p-4 text-start focus:outline-none
-  ${first ? "active bg-green-50 dark:bg-neutral-700" : ""}
-  hover:bg-green-50 dark:hover:bg-neutral-700
+  ${first ? "active" : ""}
+  hover:bg-green-50 dark:hover:bg-neutral-700/50
+  group-[.active]:bg-green-50 dark:group-[.active]:bg-neutral-700
   transition-all duration-300
   md:p-5
   cursor-pointer

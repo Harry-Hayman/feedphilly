@@ -108,9 +108,13 @@ interface Props {
       // Update active state of buttons
       tabButtons.forEach(btn => {
         const isActive = btn.getAttribute('data-hs-tab') === targetId;
-        btn.classList.toggle('active', isActive);
-        btn.classList.toggle('bg-green-50', isActive);
-        btn.setAttribute('aria-selected', isActive.toString());
+        if (isActive) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+        } else {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        }
       });
     }
 
@@ -124,12 +128,6 @@ interface Props {
     });
 
     // Initialize first tab as active
-    const firstButton = tabButtons[0];
-    if (firstButton) {
-      const firstTargetId = firstButton.getAttribute('data-hs-tab');
-      if (firstTargetId) {
-        showTab(firstTargetId);
-      }
-    }
+    showTab('#tabs-with-card-1');
   });
 </script>
