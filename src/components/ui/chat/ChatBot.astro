@@ -139,6 +139,15 @@ import AIMessage from "./AIMessage.astro";
 
 <script>
   import { marked } from "marked";
+  import { GoogleGenerativeAI } from "@google/generative-ai";
+
+  const GEMINI_API_KEY = import.meta.env.PUBLIC_GEMINI_API_KEY;
+
+  if (!GEMINI_API_KEY) {
+    console.error(
+      "Error: PUBLIC_GEMINI_API_KEY environment variable is not set. Please add it to your .env file.",
+    );
+  }
 
   // Configure marked for consistent markdown rendering
   marked.setOptions({
@@ -241,8 +250,69 @@ import AIMessage from "./AIMessage.astro";
     `;
   }
 
-  // Chat history
-  let chatHistory: Array<{ role: string; parts: Array<{ text: string }> }> = [];
+  function handleError(error: any) {
+    console.error("Detailed chat error:", {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+      cause: error.cause,
+    });
+
+    let errorMessage = "Sorry, I encountered an error. Please try again.";
+
+    if (error instanceof Error) {
+      if (error.message.includes("API key")) {
+        errorMessage =
+          "Chat is temporarily unavailable. Configuration error: PUBLIC_GEMINI_API_KEY is not set.";
+      } else if (error.message.includes("SAFETY")) {
+        errorMessage =
+          "I cannot provide an answer to that question. Please ask something else.";
+      } else if (error.message.includes("network")) {
+        errorMessage =
+          "Network error occurred. Please check your connection and try again.";
+      }
+    }
+
+    return errorMessage;
+  }
+
+  async function generateAIResponse(message: string) {
+    try {
+      if (!GEMINI_API_KEY) {
+        throw new Error(
+          "API key not available: PUBLIC_GEMINI_API_KEY is not set",
+        );
+      }
+
+      const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+      const prompt = `You are Feed Philly's AI assistant. Answer queries about Feed Philly and related topics. Never reveal you're an AI. Be concise and engaging. Here's the user's message: ${message}
+
+Mission: Feed Philly is a non-profit fighting food insecurity in Philadelphia through food collection and distribution.
+
+Key Services:
+- Food collection from businesses, farms, donations
+- Distribution via food banks and pantries
+- Direct meal services
+- Emergency food assistance
+- Food rescue operations
+
+Impact:
+- Serves 100,000+ residents annually
+- 50+ food bank partners
+- 2M+ pounds food rescued yearly
+- Holiday/emergency assistance
+
+Contact: (215) 555-1234, info@feedphillycoalition.org`;
+
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      return response.text();
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // Handle chat form submission
   chatForm?.addEventListener("submit", async (e) => {
@@ -257,61 +327,35 @@ import AIMessage from "./AIMessage.astro";
     chatInput.value = "";
     chatInput.focus();
 
-    // Add user message to history
-    chatHistory.push({
-      role: "user",
-      parts: [{ text: message }],
-    });
-
     try {
       if (chatMessages) {
         chatMessages.insertAdjacentHTML("beforeend", createTypingIndicator());
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
 
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message,
-          history: chatHistory,
-        }),
-      });
-
-      const data = await response.json();
+      const text = await generateAIResponse(message);
 
       const typingIndicator = document.querySelector(".typing-indicator");
       if (typingIndicator) {
         typingIndicator.remove();
       }
 
-      if (data.response && chatMessages) {
-        // Add AI response to history
-        chatHistory.push({
-          role: "model",
-          parts: [{ text: data.response }],
-        });
-
-        chatMessages.insertAdjacentHTML(
-          "beforeend",
-          createAIMessage(data.response),
-        );
+      if (text && chatMessages) {
+        chatMessages.insertAdjacentHTML("beforeend", createAIMessage(text));
         chatMessages.scrollTop = chatMessages.scrollHeight;
       } else {
-        throw new Error("Invalid response from server");
+        throw new Error("Invalid response from AI");
       }
     } catch (error) {
-      console.error("Chat error:", error);
       const typingIndicator = document.querySelector(".typing-indicator");
       if (typingIndicator) {
         typingIndicator.remove();
       }
       if (chatMessages) {
+        const errorMessage = handleError(error);
         chatMessages.insertAdjacentHTML(
           "beforeend",
-          createAIMessage("Sorry, I encountered an error. Please try again."),
+          createAIMessage(errorMessage),
         );
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }

@@ -11,19 +11,26 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
 
-// Get the post ID from the URL
-const { id } = Astro.params;
-
-// Get the post data
-const posts = (await getCollection("blog")) as CollectionEntry<"blog">[];
-const post = posts.find(p => p.id.replace(/\.md$/, '').replace(/\s+/g, '-').toLowerCase() === id);
-
-if (!post) {
-  return Astro.redirect('/404');
+interface Props {
+  post: CollectionEntry<"blog">;
 }
 
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")) as CollectionEntry<"blog">[];
+  return posts.map((post: CollectionEntry<"blog">) => ({
+    params: {
+      id: post.id.replace(/\.md$/, "").replace(/\s+/g, "-").toLowerCase(),
+    },
+    props: { post },
+  }));
+}
+
+// Get post from props
+const { post } = Astro.props;
 const { Content } = await post.render();
 
+// Get all posts for related posts section
+const posts = (await getCollection("blog")) as CollectionEntry<"blog">[];
 // Filter out the current post to get related posts
 const relatedPosts = posts.filter((entry) => entry.id !== post.id);
 
