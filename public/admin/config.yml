@@ -8,6 +8,7 @@ public_folder: "src/images/blog" # The src attribute for uploaded media
 
 site_url: https://feedphilly.netlify.app
 display_url: https://feedphilly.netlify.app
+local_backend: true
 
 collections:
   - name: "blog"
@@ -40,10 +41,13 @@ collections:
       - {label: "Read Time (minutes)", name: "readTime", widget: "number"}
       - {label: "Body", name: "body", widget: "markdown"}
 
-
   - name: "team"
     label: "Team Members"
     folder: "src/content/team"
     create: true
     fields:
       - {label: "Name", name: "name", widget: "string"}
+      - {label: "Role", name: "role", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Bio", name: "bio", widget: "text"}
+      - {label: "Order", name: "order", widget: "number", required: false}

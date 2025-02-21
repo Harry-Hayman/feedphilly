@@ -3,25 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Content Manager</title>
-  <!-- Include the script that enables Netlify Identity on this page. -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" async></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    #cms-root {
+      min-height: 100vh;
+    }
+  </style>
+  <!-- Include Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Include the script that builds the page and powers Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" defer></script>
-  
+  <div id="cms-root"></div>
+  <!-- Include the Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    // Simple initialization after both scripts are loaded
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', user => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+
+    // Initialize the CMS
     window.addEventListener('load', function() {
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('init', user => {
-          if (!user) {
-            window.netlifyIdentity.open('login');
-          }
-        });
-      }
+      CMS.registerPreviewStyle("/_astro/index.css");
+      CMS.init();
     });
   </script>
 </body>
