@@ -19,19 +19,13 @@
 [[headers]]
   for = "/admin/*"
   [headers.values]
+    # Essential security headers
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
-    # More permissive CSP to allow all required resources
-    Content-Security-Policy = """
-      default-src 'self' https: 'unsafe-inline' 'unsafe-eval';
-      img-src 'self' data: blob: https:;
-      media-src 'self' data: blob: https:;
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://identity.netlify.com https://unpkg.com;
-      style-src 'self' 'unsafe-inline' https://unpkg.com;
-      connect-src 'self' https://api.github.com https://api.netlify.com data: blob: https:;
-      frame-src 'self' https://identity.netlify.com
-    """
-    Access-Control-Allow-Credentials = "true"
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
-    Access-Control-Allow-Headers = "Authorization, Origin, Content-Type, Accept"
+    Content-Security-Policy = "frame-ancestors 'none'; default-src 'self' https://identity.netlify.com https://unpkg.com; script-src 'self' 'unsafe-inline' https://identity.netlify.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: https://unpkg.com; connect-src 'self' https://api.netlify.com;"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
