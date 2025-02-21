@@ -5,11 +5,9 @@ import Navbar from "@components/sections/Navbar.astro";
 import FooterSection from "@components/sections/FooterSection.astro";
 import ChatBot from "@components/ui/chat/ChatBot.astro";
 import { SITE } from "@data/constants.ts";
-import "../styles/global.css";
-import "../styles/theme.css";
 
-// Setting expected props
-const { title = SITE.title, meta, structuredData, lang = "en" } = Astro.props;
+// Import styles directly
+import "../styles/global.css";
 
 // Interface to type-check the properties
 interface Props {
@@ -18,6 +16,9 @@ interface Props {
   structuredData?: object;
   lang?: string;
 }
+
+// Setting expected props
+const { title = SITE.title, meta, structuredData, lang = "en" } = Astro.props;
 ---
 
 <!doctype html>
@@ -29,14 +30,23 @@ interface Props {
     <Meta meta={meta} structuredData={structuredData} />
     <!-- Define the title of the page -->
     <title>{title}</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-    ></script>
+
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Global styles -->
+    <style is:global>
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+    </style>
+
+    <!-- Theme handling script -->
     <script is:inline>
-      // Script to handle dark mode. It will check if the theme is stored in localStorage or if dark theme is preferred by system settings
       if (
         localStorage.getItem("hs_theme") === "dark" ||
         (!("hs_theme" in localStorage) &&
@@ -46,15 +56,26 @@ interface Props {
       } else {
         document.documentElement.classList.remove("dark");
       }
+    </script>
 
-      // Netlify Identity Configuration
+    <!-- Netlify Identity Configuration -->
+    <script is:inline>
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
           if (!user) {
             window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin";
+              document.location.href = "/admin/";
             });
+          } else {
+            // If user is already logged in and on admin page, stay there
+            if (document.location.pathname.startsWith("/admin/")) {
+              return;
+            }
           }
+        });
+
+        window.netlifyIdentity.on("logout", () => {
+          document.location.href = "/";
         });
       }
     </script>

@@ -8,6 +8,11 @@
   to = "/admin/index.html"
   status = 200
 
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
 [build.environment]
   NODE_VERSION = "18"
   NETLIFY_USE_YARN = "false"
@@ -19,15 +24,20 @@
     X-XSS-Protection = "1; mode=block"
     Content-Security-Policy = """
       default-src 'self' https:;
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://identity.netlify.com https://unpkg.com https://widget.cloudinary.com https://cdn.jsdelivr.net;
-      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net;
-      font-src 'self' https://fonts.gstatic.com;
-      img-src 'self' data: https: blob: https://res.cloudinary.com;
-      media-src 'self' data: https: blob:;
-      connect-src 'self' https://api.netlify.com https://api.github.com data: blob: https:;
-      frame-src 'self' https://identity.netlify.com https://widget.cloudinary.com;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:;
+      style-src 'self' 'unsafe-inline' https:;
+      img-src 'self' data: https: blob:;
+      font-src 'self' https: data:;
+      connect-src 'self' https: wss: blob:;
+      media-src 'self' https: blob:;
+      frame-src 'self' https:;
+      worker-src 'self' blob:;
+      child-src 'self' blob:;
+      object-src 'none';
       base-uri 'self';
-      form-action 'self'
+      form-action 'self' https:;
+      frame-ancestors 'none';
+      upgrade-insecure-requests;
     """
 
 [[headers]]

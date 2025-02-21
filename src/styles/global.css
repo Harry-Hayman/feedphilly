@@ -1,9 +1,12 @@
-/* Import theme overrides */
-@import './theme.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Theme CSS */
+:root {
+  --primary-color: #449735;
+  --primary-hover: #367c2a;
+}
 
 /* Base styles */
 @layer base {
@@ -13,11 +16,6 @@
   p {
     font-family: 'Open Sans', system-ui, sans-serif;
   }
-}
-
-:root {
-  --primary-color: #449735;
-  --primary-hover: #367c2a;
 }
 
 /* Custom leaf cursor */
@@ -37,35 +35,7 @@ button:hover, [role="button"]:hover {
 }
 
 @layer components {
-  /* Image optimization classes */
-  .img-optimize {
-    @apply object-cover w-full h-full transition-transform duration-500;
-  }
-
-  .img-optimize:hover {
-    @apply scale-105 transform;
-  }
-
-  .img-container {
-    @apply relative overflow-hidden;
-    aspect-ratio: 16/9;
-  }
-
-  /* Abstract shapes */
-  .shape-blur {
-    @apply absolute pointer-events-none;
-    filter: blur(60px);
-    transform: translate3d(0, 0, 0);
-  }
-
-  /* Hero section decorative elements */
-  .hero-decoration {
-    @apply absolute -z-10;
-    background: radial-gradient(circle at center, var(--primary-color) 0%, transparent 70%);
-    opacity: 0.1;
-  }
-
-  /* Enhanced button styles */
+  /* Button Components */
   .btn-primary {
     @apply inline-flex items-center justify-center px-2 py-2 text-sm font-medium text-white rounded-lg shadow-lg bg-[#449735] hover:bg-[#367c2a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#449735] transition-all duration-300;
     transform: translateY(0);
@@ -85,16 +55,21 @@ button:hover, [role="button"]:hover {
     transform: translateY(0);
   }
 
-  .btn-secondary:hover {
-    @apply shadow-lg;
-    transform: translateY(-2px);
+  /* Image handling */
+  .img-optimize {
+    @apply object-cover w-full h-full transition-transform duration-500;
   }
 
-  .btn-secondary:active {
-    transform: translateY(0);
+  .img-optimize:hover {
+    @apply scale-105 transform;
   }
 
-  /* Custom utility classes */
+  .img-container {
+    @apply relative overflow-hidden;
+    aspect-ratio: 16/9;
+  }
+
+  /* Utility classes */
   .bg-primary {
     @apply bg-green-600;
   }
@@ -111,7 +86,7 @@ button:hover, [role="button"]:hover {
     @apply bg-green-100 dark:bg-green-900/20;
   }
 
-  /* Enhanced card styles */
+  /* Card styles */
   .card {
     @apply bg-white rounded-lg shadow-lg p-6 dark:bg-neutral-800 transition-all duration-300;
   }
@@ -120,7 +95,7 @@ button:hover, [role="button"]:hover {
     @apply hover:shadow-xl hover:-translate-y-1 transition-all duration-300;
   }
 
-  /* Navigation link animations */
+  /* Navigation */
   .nav-link {
     @apply relative;
   }
@@ -133,48 +108,14 @@ button:hover, [role="button"]:hover {
   .nav-link:hover::after {
     @apply w-full;
   }
+}
 
-  /* Form input animations */
-  .form-input {
-    @apply transition-all duration-300 border-2 border-transparent focus:border-green-500 focus:ring-1 focus:ring-green-500;
-  }
-
-  /* Testimonial card animations */
-  .testimonial-card {
-    @apply transition-all duration-500;
-  }
-
-  .testimonial-card:hover {
-    @apply transform -translate-y-2 shadow-xl;
-  }
-
-  /* Stats arrow animation */
-  @keyframes popStats {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.6); }
-  }
-
-  .stats-arrow {
-    @apply inline-block;
-    animation: popStats 2s infinite ease-in-out;
-  }
-
-  /* Feature icon animations */
-  .feature-icon {
-    @apply transition-transform duration-300;
-  }
-
-  .feature-icon:hover {
-    @apply transform scale-110;
-  }
+/* Dark mode styles */
+.dark {
+  @apply transition-colors duration-300;
 }
 
 /* Global focus styles */
 *:focus-visible {
   @apply outline-none ring-2 ring-green-500 ring-offset-2 dark:ring-offset-neutral-900;
-}
-
-/* Dark mode transition */
-.dark {
-  @apply transition-colors duration-300;
 }

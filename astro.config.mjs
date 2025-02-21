@@ -9,11 +9,17 @@ import { fileURLToPath } from 'url';
 export default defineConfig({
   site: 'https://feedphilly.netlify.app',
   output: 'server',
-  adapter: netlify(),
+  adapter: netlify({
+    edgeMiddleware: true
+  }),
+  build: {
+    inlineStylesheets: 'always'
+  },
   integrations: [
     tailwind({
       // Ensure Tailwind classes are processed
-      applyBaseStyles: false,
+      applyBaseStyles: true,
+      nesting: true,
     }),
     mdx({
       // Enable MDX features
@@ -42,15 +48,6 @@ export default defineConfig({
         '@utils': fileURLToPath(new URL('./src/utils', import.meta.url))
       }
     },
-    build: {
-      cssCodeSplit: true,
-      assetsDir: '_astro',
-      rollupOptions: {
-        output: {
-          assetFileNames: 'assets/[name][extname]'
-        }
-      }
-    },
     css: {
       postcss: {
         plugins: async () => [
@@ -58,6 +55,17 @@ export default defineConfig({
           (await import('autoprefixer')).default,
         ],
       },
+    },
+    build: {
+      cssCodeSplit: false,
+      cssMinify: true,
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[name][extname]',
+          chunkFileNames: 'assets/[name].[hash].js',
+          entryFileNames: 'assets/[name].[hash].js',
+        }
+      }
     }
   }
 });
