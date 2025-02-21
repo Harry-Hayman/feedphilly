@@ -5,11 +5,14 @@ import { Image } from "astro:assets";
 import { formatDate, generateSlug } from "@utils/utils";
 import type { CollectionEntry } from "astro:content";
 
-const { blogEntry } = Astro.props;
-
 interface Props {
   blogEntry: CollectionEntry<"blog">;
 }
+
+const { blogEntry } = Astro.props;
+
+// Early return if no blog entry is provided
+if (!blogEntry) return null;
 ---
 
 <!-- The following anchor tag is the main container for the card.
@@ -25,14 +28,20 @@ interface Props {
   <div
     class="relative h-[350px] w-full flex-shrink-0 overflow-hidden rounded-xl before:absolute before:inset-x-0 before:z-[1] before:size-full before:bg-gradient-to-t before:from-neutral-900/[.7]"
   >
-    <Image
-      class="absolute start-0 top-0 size-full object-cover transition duration-500 group-hover:scale-110"
-      src={blogEntry.data.cardImage}
-      alt={blogEntry.data.cardImageAlt}
-      draggable={"false"}
-      loading={"eager"}
-      format={"avif"}
-    />
+    {
+      blogEntry.data.cardImage && (
+        <Image
+          class="absolute start-0 top-0 size-full object-cover transition duration-500 group-hover:scale-110"
+          src={blogEntry.data.cardImage}
+          alt={blogEntry.data.cardImageAlt || "Blog post image"}
+          draggable={"false"}
+          loading={"eager"}
+          format={"avif"}
+          width={800}
+          height={350}
+        />
+      )
+    }
   </div>
   <!-- The container for the blog author's avatar and associated metadata (author name and publication date) -->
   <div class="absolute inset-x-0 top-0 z-10">

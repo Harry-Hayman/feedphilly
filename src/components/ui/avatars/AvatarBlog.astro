@@ -1,24 +1,39 @@
 ---
 // Import necessary components
 import { Image } from "astro:assets";
-
 import type { CollectionEntry } from "astro:content";
-
-const { blogEntry } = Astro.props;
 
 interface Props {
   blogEntry: CollectionEntry<"blog">;
 }
+
+const { blogEntry } = Astro.props;
+
+// Early return if no blog entry is provided
+if (!blogEntry) return null;
+
+// Default avatar image URL (you might want to replace this with an actual default avatar image)
+const defaultAvatarUrl = "/src/images/blog/members/default-avatar.jpg";
 ---
 
 <div class="flex-shrink-0">
-  <Image
-    class="size-[46px] rounded-full border-2 border-neutral-50"
-    src={blogEntry.data.authorImage}
-    alt={blogEntry.data.authorImageAlt}
-    width={46}
-    height={46}
-    draggable={"false"}
-    format={"avif"}
-  />
+  {
+    blogEntry.data.authorImage ? (
+      <Image
+        class="size-[46px] rounded-full border-2 border-neutral-50"
+        src={blogEntry.data.authorImage}
+        alt={blogEntry.data.authorImageAlt || `${blogEntry.data.author}'s avatar`}
+        width={46}
+        height={46}
+        draggable={"false"}
+        format={"avif"}
+      />
+    ) : (
+      <div class="size-[46px] rounded-full border-2 border-neutral-50 bg-neutral-200 dark:bg-neutral-700">
+        <div class="flex h-full items-center justify-center text-sm font-medium text-neutral-600 dark:text-neutral-300">
+          {blogEntry.data.author?.[0]?.toUpperCase() || "?"}
+        </div>
+      </div>
+    )
+  }
 </div>

@@ -6,11 +6,14 @@ import { generateSlug } from "@utils/utils";
 import AvatarBlogLarge from "@components/ui/avatars/AvatarBlogLarge.astro";
 import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
 
-const { blogEntry } = Astro.props;
-
 interface Props {
   blogEntry: CollectionEntry<"blog">;
 }
+
+const { blogEntry } = Astro.props;
+
+// Early return if no blog entry is provided
+if (!blogEntry) return null;
 ---
 
 <!-- Root container, which is divided into 2 grid column layout for larger screens -->
@@ -18,16 +21,20 @@ interface Props {
   <!-- Container for the blog post's cover image -->
   <div class="sm:order-2">
     <div class="relative rounded-lg pt-[50%] sm:pt-[100%]">
-      <Image
-        class="absolute start-0 top-0 size-full rounded-xl object-cover"
-        src={blogEntry.data.cardImage}
-        alt={blogEntry.data.cardImageAlt}
-        width={800}
-        height={600}
-        draggable={"false"}
-        loading={"eager"}
-        format={"avif"}
-      />
+      {
+        blogEntry.data.cardImage && (
+          <Image
+            class="absolute start-0 top-0 size-full rounded-xl object-cover"
+            src={blogEntry.data.cardImage}
+            alt={blogEntry.data.cardImageAlt || "Blog post image"}
+            width={800}
+            height={600}
+            draggable={"false"}
+            loading={"eager"}
+            format={"avif"}
+          />
+        )
+      }
     </div>
   </div>
   <!-- Container for the blog post's heading, author avatar, and read more button -->

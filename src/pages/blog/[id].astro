@@ -8,38 +8,25 @@ import SocialShare from "@components/ui/buttons/SocialShare.astro";
 import PostFeedback from "@components/ui/feedback/PostFeedback.astro";
 import { Image } from "astro:assets";
 import { capitalize, formatDate } from "@utils/utils";
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
 
-interface Props {
-  post: CollectionEntry<"blog">;
+// Get the post ID from the URL
+const { id } = Astro.params;
+
+// Get the post data
+const posts = await getCollection("blog");
+const post = posts.find(p => p.id.replace(/\.md$/, '').replace(/\s+/g, '-').toLowerCase() === id) as CollectionEntry<"blog"> | undefined;
+
+if (!post) {
+  return Astro.redirect('/404');
 }
 
-export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  return posts.map((post) => {
-    // Create URL-friendly slug from the post ID:
-    // - Remove .md extension
-    // - Convert spaces to hyphens
-    // - Convert to lowercase
-    const slug = post.id.replace(/\.md$/, '').replace(/\s+/g, '-').toLowerCase();
-    
-    return {
-      params: { id: slug },
-      props: { post },
-    };
-  });
-}
-
-const { post } = Astro.props;
-const { Content } = await render(post);
-
-// Get all blog posts
-const blogPosts = await getCollection("blog");
+const { Content } = await post.render();
 
 // Filter out the current post to get related posts
-const relatedPosts = blogPosts.filter((entry) => entry.id !== post.id);
+const relatedPosts = posts.filter((entry) => entry.id !== post.id) as CollectionEntry<"blog">[];
 
 const pageTitle = `${post.data.title} | ${SITE.title}`;
 ---

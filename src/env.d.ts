@@ -1,18 +1,32 @@
 /// <reference types="astro/client" />
 
-interface ImportMetaEnv {
-  readonly GEMINI_API_KEY: string;
-  readonly PUBLIC_TIDIO_ID: string;
+declare module 'astro:content' {
+  interface Render {
+    '.md': Promise<{
+      Content: import('astro').MarkdownInstance<{}>['Content'];
+      headings: import('astro').MarkdownHeading[];
+      remarkPluginFrontmatter: Record<string, any>;
+    }>;
+  }
 }
 
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
+declare module 'astro:content' {
+  export interface CollectionEntry<C> {
+    id: string;
+    slug: string;
+    body: string;
+    collection: C;
+    data: any;
+    render(): Render['.md'];
+  }
 
-interface Window {
-  tidioChatApi?: {
-    show: () => void;
-    open: () => void;
-    hide: () => void;
-  };
+  export function getCollection<C = any>(
+    collection: C,
+    filter?: (entry: CollectionEntry<C>) => boolean
+  ): Promise<CollectionEntry<C>[]>;
+
+  export function getEntry<C = any>(
+    collection: C,
+    slug: string
+  ): Promise<CollectionEntry<C>>;
 }

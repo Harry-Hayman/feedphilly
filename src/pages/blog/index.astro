@@ -8,14 +8,12 @@ import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
 
 // Get all blogs post and sort them based on publish date
-const blogPosts: CollectionEntry<"blog">[] = (await getCollection("blog")).sort(
-  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
-    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const blogPosts = (await getCollection("blog")) as CollectionEntry<"blog">[];
+blogPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-// Separate the most recent post from others
-const mostRecentPost: CollectionEntry<"blog"> = blogPosts[0];
-const otherPosts: CollectionEntry<"blog">[] = blogPosts.slice(1);
+// Separate the most recent post from others, with safe fallbacks
+const mostRecentPost: CollectionEntry<"blog"> | undefined = blogPosts[0];
+const otherPosts: CollectionEntry<"blog">[] = blogPosts.length > 1 ? blogPosts.slice(1) : [];
 
 // Define variables for page content
 const title: string = "Feed Philly Coalition Blog";
@@ -64,18 +62,33 @@ const pageTitle: string = `Blog | ${SITE.title}`;
     </div>
   </section>
 
-  <section
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
-  >
-    <!--Blog posts grid-->
-    <div class="grid gap-6 lg:grid-cols-2">
-      {otherPosts.map((blogEntry) => <CardBlog blogEntry={blogEntry} />)}
-    </div>
-  </section>
-  <!--Most recent blog post-->
-  <section
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
-  >
-    <CardBlogRecent blogEntry={mostRecentPost} />
-  </section>
+  {
+    blogPosts.length === 0 ? (
+      <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+        <div class="text-center">
+          <p class="text-lg text-neutral-600 dark:text-neutral-400">
+            No blog posts available at the moment. Check back soon!
+          </p>
+        </div>
+      </section>
+    ) : (
+      <>
+        <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+          <!--Blog posts grid-->
+          <div class="grid gap-6 lg:grid-cols-2">
+            {otherPosts.map((blogEntry) => (
+              <CardBlog blogEntry={blogEntry} />
+            ))}
+          </div>
+        </section>
+        {
+          mostRecentPost && (
+            <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+              <CardBlogRecent blogEntry={mostRecentPost} />
+            </section>
+          )
+        }
+      </>
+    )
+  }
 </MainLayout>
