@@ -6,6 +6,15 @@
 @tailwind utilities;
 
 /* Base styles */
+@layer base {
+  html {
+    font-family: 'Montserrat', system-ui, sans-serif;
+  }
+  p {
+    font-family: 'Open Sans', system-ui, sans-serif;
+  }
+}
+
 :root {
   --primary-color: #22c55e;
   --primary-hover: #16a34a;
@@ -58,7 +67,7 @@ button:hover, [role="button"]:hover {
 
   /* Enhanced button styles */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white rounded-lg shadow-lg bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300;
+    @apply inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base font-medium text-white rounded-lg shadow-lg bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300;
     transform: translateY(0);
   }
 
@@ -72,7 +81,7 @@ button:hover, [role="button"]:hover {
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg border text-green-700 border-green-200 bg-green-50 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:text-green-400 dark:border-green-800 dark:bg-green-900/20 dark:hover:bg-green-900/40 transition-all duration-300;
+    @apply inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base font-medium rounded-lg border text-green-700 border-green-200 bg-green-50 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:text-green-400 dark:border-green-800 dark:bg-green-900/20 dark:hover:bg-green-900/40 transition-all duration-300;
     transform: translateY(0);
   }
 

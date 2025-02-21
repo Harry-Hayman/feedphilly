@@ -34,7 +34,9 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative pb-24 pt-20 sm:pb-32 sm:pt-2 animate-fade-in">
+<section
+  class="relative flex min-h-[80vh] animate-fade-in items-center pb-8 pt-6 sm:pb-12 sm:pt-12"
+>
   <!-- Abstract Boundary Shape -->
   <div
     class="pointer-events-none absolute left-0 top-0 h-full w-full overflow-hidden"
@@ -49,22 +51,25 @@ const {
   <div
     class="relative mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8 2xl:max-w-screen-2xl"
   >
-    <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-      <div>
+    <div class="grid items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-16">
+      <div class="lg:-mt-24">
         <div class="relative mb-8">
           <h1
-            class="mx-auto mb-4 text-balance text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-200 sm:text-5xl lg:text-6xl lg:leading-tight animate-slide-up"
+            class="mx-auto mb-6 animate-slide-up text-balance text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-200 sm:text-5xl sm:leading-[1.1] lg:text-6xl lg:leading-[1.1] max-w-5xl"
             set:html={title}
           />
           <p
-            class="text-pretty text-lg text-neutral-600 dark:text-neutral-400 sm:text-xl animate-slide-up [animation-delay:200ms]"
+            class="animate-slide-up text-pretty text-lg text-neutral-600 [animation-delay:200ms] dark:text-neutral-400 sm:text-2xl lg:text-xl"
           >
             {subTitle}
           </p>
         </div>
 
-        <div class="flex flex-col items-center gap-4 sm:flex-row sm:gap-3">
-          <a class="btn-primary" href={primaryBtnURL}>
+        <div class="flex items-center gap-3">
+          <a
+            class="btn-primary min-w-[140px] justify-center"
+            href={primaryBtnURL}
+          >
             {primaryBtn}
             <svg
               class="h-4 w-4"
@@ -83,7 +88,10 @@ const {
             </svg>
           </a>
 
-          <a class="btn-secondary" href={secondaryBtnURL}>
+          <a
+            class="btn-secondary min-w-[140px] justify-center"
+            href={secondaryBtnURL}
+          >
             {secondaryBtn}
           </a>
         </div>
@@ -94,7 +102,7 @@ const {
               <div class="flex -space-x-2">
                 {avatars?.map((avatar) => (
                   <img
-                    class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-neutral-800 hover:scale-110 hover:z-10 transition-all duration-300"
+                    class="inline-block h-8 w-8 rounded-full ring-2 ring-white transition-all duration-300 hover:z-10 hover:scale-110 dark:ring-neutral-800"
                     src={avatar}
                     alt="User avatar"
                     width={32}
@@ -131,17 +139,17 @@ const {
         }
       </div>
 
-      <div class="relative ms-4">
+      <div class="relative ms-4 flex items-center justify-center">
         <Image
           src={src}
-          class="w-full max-w-xl rounded-3xl object-cover shadow-2xl lg:max-w-2xl transition-all duration-700 hover:scale-[1.02] hover:shadow-green-200/20 hover:shadow-2xl"
+          class="w-full max-w-[340px] rounded-3xl object-cover shadow-2xl transition-all duration-700 hover:scale-[1.02] hover:shadow-2xl hover:shadow-green-200/20 sm:max-w-[460px] lg:max-w-2xl"
           alt={alt}
           width={800}
           height={600}
         />
         <!-- Decorative shape -->
         <div
-          class="absolute -left-6 -top-6 -z-10 h-72 w-72 rounded-full bg-green-100/30 dark:bg-green-900/20 animate-pulse-slow"
+          class="absolute -left-6 -top-6 -z-10 h-72 w-72 animate-pulse-slow rounded-full bg-green-100/30 dark:bg-green-900/20"
         >
         </div>
       </div>

@@ -7,6 +7,10 @@ export default {
   ],
   darkMode: "class",
   theme: {
+    fontFamily: {
+      sans: ['Montserrat', 'ui-sans-serif', 'system-ui'],
+      body: ['Open Sans', 'ui-sans-serif', 'system-ui'],
+    },
     colors: {
       transparent: "transparent",
       current: "currentColor",
