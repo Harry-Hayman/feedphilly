@@ -1,14 +1,6 @@
 [build]
   command = "npm run build"
-  publish = "dist"
-  functions = ".netlify/functions"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
-[[edge_functions]]
-  function = "entry"
-  path = "/*"
+  publish = ".netlify/functions-internal/entry.mjs"
 
 [[redirects]]
   from = "/admin/*"
@@ -22,7 +14,6 @@
 [[headers]]
   for = "/admin/*"
   [headers.values]
-    # Security headers with unsafe-eval allowed for CMS
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     Content-Security-Policy = """
@@ -39,20 +30,9 @@
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/.netlify/functions/entry"
   status = 200
-  force = false
+  force = true
 
-[build.processing]
-  skip_processing = false
-
-[build.processing.css]
-  bundle = true
-  minify = true
-
-[build.processing.js]
-  bundle = true
-  minify = true
-
-[build.processing.images]
-  compress = true
+[functions]
+  directory = ".netlify/functions-internal"
