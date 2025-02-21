@@ -20,5 +20,7 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# for ssr
 .vercel
 .netlify
