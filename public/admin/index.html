@@ -7,27 +7,62 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+  <!-- Loading indicator -->
+  <div id="loading" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    z-index: 9999;
+  ">
+    <p style="font-family: sans-serif;">Loading CMS...</p>
+  </div>
+
+  <!-- Load Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', user => {
-        if (!user) {
-          window.netlifyIdentity.open('login');
+    // Wait for both identity widget and CMS to load
+    function initCMS() {
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', user => {
+          // Hide loading indicator once initialized
+          document.getElementById('loading').style.display = 'none';
+          
+          if (!user) {
+            window.netlifyIdentity.open('login');
+          }
+        });
+
+        // Handle login/logout
+        window.netlifyIdentity.on('login', () => {
+          window.location.reload();
+        });
+
+        window.netlifyIdentity.on('logout', () => {
+          window.location.href = '/';
+        });
+
+        // Initialize CMS with error handling
+        try {
+          CMS.init();
+        } catch (err) {
+          console.error('Failed to initialize CMS:', err);
+          document.getElementById('loading').innerHTML = '<p style="font-family: sans-serif; color: red;">Failed to load CMS. Please refresh the page.</p>';
         }
-      });
+      } else {
+        // If identity widget hasn't loaded yet, try again
+        setTimeout(initCMS, 50);
+      }
     }
 
-    // Initialize CMS
-    CMS.init();
-
-    // Handle login status
-    window.netlifyIdentity.on('login', () => {
-      window.location.reload();
-    });
-
-    window.netlifyIdentity.on('logout', () => {
-      window.location.href = '/';
-    });
+    // Start initialization process
+    window.addEventListener('load', initCMS);
   </script>
 </body>
 </html>
