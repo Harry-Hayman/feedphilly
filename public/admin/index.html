@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +10,7 @@
       margin: 0;
       padding: 0;
     }
+
     #cms-root {
       min-height: 100vh;
     }
@@ -16,6 +18,7 @@
   <!-- Include Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
+
 <body>
   <div id="cms-root"></div>
   <!-- Include the Decap CMS -->
@@ -32,10 +35,25 @@
     }
 
     // Initialize the CMS
-    window.addEventListener('load', function() {
-      CMS.registerPreviewStyle("/_astro/index.css");
-      CMS.init();
+    window.addEventListener('load', function () {
+      // Register preview styles for the admin interface
+      CMS.registerPreviewStyle("/assets/index.css");
+
+      // Initialize backend config
+      CMS.init({
+        config: {
+          load_config_file: true,
+          local_backend: true,
+          backend: {
+            name: "git-gateway",
+            branch: "main"
+          },
+          media_folder: "src/images/blog",
+          public_folder: "src/images/blog"
+        }
+      });
     });
   </script>
 </body>
+
 </html>

@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://feedphilly.netlify.app',
   output: 'server',
   adapter: netlify({
     edgeMiddleware: true, // Enable edge middleware
@@ -55,9 +56,9 @@ export default defineConfig({
     css: {
       postcss: {
         plugins: async () => [
-            (await import('tailwindcss')).default,
-            (await import('autoprefixer')).default,
-          ],
+          (await import('tailwindcss')).default,
+          (await import('autoprefixer')).default,
+        ],
       },
     }
   }
