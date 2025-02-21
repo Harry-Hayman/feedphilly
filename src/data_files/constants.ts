@@ -5,7 +5,7 @@ export const SITE = {
   tagline: "Fighting Food Insecurity Together",
   description: "Feed Philly Coalition brings together individuals, nonprofits, businesses, and policymakers to address food insecurity in Philadelphia through collaborative, data-driven solutions and sustainable community programs.",
   description_short: "Creating lasting change through collaborative, data-driven solutions to food insecurity in Philadelphia.",
-  url: "https://feedphilly.org",
+  url: "https://feedphillycoalition.org",
   author: "Feed Philly Coalition",
 };
 

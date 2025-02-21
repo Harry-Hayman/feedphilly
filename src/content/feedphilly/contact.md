@@ -3,7 +3,7 @@
 Join us in the fight against hunger. Your support can provide a meal, restore hope, and change a life. Reach out to us today and make a difference!
 
 (215) 555-1234
-info@feedphilly.org
+info@feedphillycoalition.org
 Philadelphia, PA 19004
 
 ## Contact Form (If you have one)
@@ -12,7 +12,7 @@ Philadelphia, PA 19004
 
 ## Social Media
 
-[Facebook](facebook.com) | [Twitter](twitter.com) | [Pinterest](pinterest.com) | [LinkedIn](linkedin.com) | [WhatsApp](whatsapp.com) | [Email](mailto:info@feedphilly.org) | [Share](share.com)
+[Facebook](facebook.com) | [Twitter](twitter.com) | [Pinterest](pinterest.com) | [LinkedIn](linkedin.com) | [WhatsApp](whatsapp.com) | [Email](mailto:info@feedphillycoalition.org) | [Share](share.com)
 
 ## Address
 

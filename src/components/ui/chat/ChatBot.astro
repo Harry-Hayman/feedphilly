@@ -2,84 +2,133 @@
 import UserMessage from "./UserMessage.astro";
 import AIMessage from "./AIMessage.astro";
 ---
+
 <div class="fixed bottom-0 right-0 z-50 p-4 md:p-6">
   <!-- Chat Button -->
   <button
     id="chatButton"
-    class="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-brand-green to-brand-green/90 shadow-lg hover:shadow-xl active:shadow-md transform hover:scale-105 active:scale-95 transition-all duration-200"
+    class="flex h-14 w-14 transform items-center justify-center rounded-full bg-gradient-to-r from-brand-green to-brand-green/90 shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-95 active:shadow-md"
     aria-label="Chat with Feed Philly Assistant"
   >
     <span class="sr-only">Open chat</span>
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-7 w-7 text-white"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+      ></path>
     </svg>
   </button>
 
   <!-- Chat Interface -->
   <div
     id="chatInterface"
-    class="hidden fixed bottom-20 right-4 md:right-6 w-[calc(100vw-2rem)] sm:w-[420px] h-[min(650px,75vh)] bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10 overflow-hidden transform-gpu transition-all duration-300 ease-out opacity-0 scale-95"
+    class="fixed bottom-20 right-4 hidden h-[min(650px,75vh)] w-[calc(100vw-2rem)] scale-95 transform-gpu overflow-hidden rounded-2xl bg-white opacity-0 shadow-2xl ring-1 ring-black/5 transition-all duration-300 ease-out dark:bg-neutral-900 dark:ring-white/10 sm:w-[420px] md:right-6"
     role="dialog"
     aria-labelledby="chatTitle"
   >
     <!-- Chat Header -->
-    <div class="flex items-center gap-4 p-4 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-lg border-b border-gray-100 dark:border-neutral-800">
-      <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-brand-green to-brand-green/80 shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+    <div
+      class="flex items-center gap-4 border-b border-gray-100 bg-white/95 p-4 backdrop-blur-lg dark:border-neutral-800 dark:bg-neutral-900/95"
+    >
+      <div
+        class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-brand-green to-brand-green/80 shadow-md"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-7 w-7 text-white"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+          ></path>
         </svg>
       </div>
       <div class="flex-1">
-        <h2 id="chatTitle" class="text-lg font-semibold text-gray-900 dark:text-white">Feed Philly Assistant</h2>
+        <h2
+          id="chatTitle"
+          class="text-lg font-semibold text-gray-900 dark:text-white"
+        >
+          Feed Philly Assistant
+        </h2>
         <div class="flex items-center gap-2">
-          <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-          <p class="text-sm text-brand-green font-medium">Online</p>
+          <span class="h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
+          <p class="text-sm font-medium text-brand-green">Online</p>
         </div>
       </div>
-      <button 
-        id="closeChat" 
-        class="p-2 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full transition-colors duration-200"
+      <button
+        id="closeChat"
+        class="rounded-full p-2 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-neutral-800"
         aria-label="Close chat"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-gray-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
 
     <!-- Chat Container -->
-    <div class="flex flex-col h-[calc(100%-72px)]">
+    <div class="flex h-[calc(100%-72px)] flex-col">
       <!-- Chat Messages -->
-      <div 
-        id="chatMessages" 
-        class="flex-1 overflow-y-auto px-4 py-4 space-y-4 overflow-x-hidden hover:overflow-y-auto"
+      <div
+        id="chatMessages"
+        class="flex-1 space-y-4 overflow-y-auto overflow-x-hidden px-4 py-4 hover:overflow-y-auto"
         role="log"
         aria-live="polite"
         style="scroll-behavior: smooth;"
       >
         <!-- Initial AI Message -->
-        <AIMessage message="Hi! 👋 I'm here to help with questions about Feed Philly. Contact us at (215) 555-1234 or info@feedphilly.org. How can I assist you?" />
+        <AIMessage
+          message="Hi! 👋 I'm here to help with questions about Feed Philly. Contact us at (215) 555-1234 or info@feedphillycoalition.org. How can I assist you?"
+        />
       </div>
 
       <!-- Chat Input -->
-      <div class="p-4 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-lg border-t border-gray-100 dark:border-neutral-800">
+      <div
+        class="border-t border-gray-100 bg-white/95 p-4 backdrop-blur-lg dark:border-neutral-800 dark:bg-neutral-900/95"
+      >
         <form id="chatForm" class="flex items-end gap-3">
           <div class="flex-1">
             <input
               type="text"
               id="chatInput"
-              class="w-full rounded-2xl border-2 border-gray-200 dark:border-neutral-700 pl-5 pr-4 py-3 text-base bg-white dark:bg-neutral-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-brand-green dark:focus:border-brand-green shadow-sm transition-all duration-200"
+              class="w-full rounded-2xl border-2 border-gray-200 bg-white py-3 pl-5 pr-4 text-base text-gray-900 placeholder-gray-500 shadow-sm transition-all duration-200 focus:border-brand-green focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-brand-green"
               placeholder="Type your message..."
               aria-label="Chat message"
             />
           </div>
           <button
             type="submit"
-            class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-brand-green to-brand-green/90 text-white shadow-lg hover:shadow-xl active:shadow-md transform hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green dark:focus:ring-offset-neutral-900"
+            class="flex h-12 w-12 transform items-center justify-center rounded-full bg-gradient-to-r from-brand-green to-brand-green/90 text-white shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brand-green focus:ring-offset-2 active:scale-95 active:shadow-md dark:focus:ring-offset-neutral-900"
             aria-label="Send message"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform rotate-90" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 rotate-90 transform"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"
+              ></path>
             </svg>
           </button>
         </form>
@@ -89,41 +138,49 @@ import AIMessage from "./AIMessage.astro";
 </div>
 
 <script>
-  const chatButton = document.getElementById('chatButton');
-  const closeChat = document.getElementById('closeChat');
-  const chatInterface = document.getElementById('chatInterface');
-  const chatForm = document.getElementById('chatForm');
-  const chatInput = document.getElementById('chatInput') as HTMLInputElement;
-  const chatMessages = document.getElementById('chatMessages');
+  import { marked } from "marked";
+
+  // Configure marked for consistent markdown rendering
+  marked.setOptions({
+    breaks: true,
+    gfm: true,
+  });
+
+  const chatButton = document.getElementById("chatButton");
+  const closeChat = document.getElementById("closeChat");
+  const chatInterface = document.getElementById("chatInterface");
+  const chatForm = document.getElementById("chatForm");
+  const chatInput = document.getElementById("chatInput") as HTMLInputElement;
+  const chatMessages = document.getElementById("chatMessages");
   let isOpen = false;
 
   // Toggle chat interface with animation
-  chatButton?.addEventListener('click', () => {
+  chatButton?.addEventListener("click", () => {
     isOpen = true;
-    chatInterface?.classList.remove('hidden');
+    chatInterface?.classList.remove("hidden");
     requestAnimationFrame(() => {
-      chatInterface?.classList.add('opacity-100', 'scale-100');
-      chatInterface?.classList.remove('opacity-0', 'scale-95');
+      chatInterface?.classList.add("opacity-100", "scale-100");
+      chatInterface?.classList.remove("opacity-0", "scale-95");
     });
     chatInput?.focus();
 
     if (window.innerWidth < 768) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     }
   });
 
-  closeChat?.addEventListener('click', () => {
+  closeChat?.addEventListener("click", () => {
     isOpen = false;
     if (chatInterface) {
-      chatInterface.classList.add('opacity-0', 'scale-95');
-      chatInterface.classList.remove('opacity-100', 'scale-100');
-      
+      chatInterface.classList.add("opacity-0", "scale-95");
+      chatInterface.classList.remove("opacity-100", "scale-100");
+
       setTimeout(() => {
-        chatInterface.classList.add('hidden');
+        chatInterface.classList.add("hidden");
       }, 300);
     }
-    
-    document.body.style.overflow = '';
+
+    document.body.style.overflow = "";
   });
 
   function createUserMessage(message: string) {
@@ -146,6 +203,7 @@ import AIMessage from "./AIMessage.astro";
   }
 
   function createAIMessage(message: string) {
+    const parsedMessage = marked(message);
     return `
       <div class="flex justify-start mb-4">
         <div class="flex items-end gap-3">
@@ -155,8 +213,8 @@ import AIMessage from "./AIMessage.astro";
             </svg>
           </div>
           <div class="max-w-[75%] shrink-0">
-            <div class="bg-brand-green text-white px-5 py-3 rounded-2xl rounded-bl-sm text-base shadow-md break-words">
-              ${message}
+            <div class="bg-brand-green text-white px-5 py-3 rounded-2xl rounded-bl-sm text-base shadow-md break-words prose prose-invert prose-p:my-0 prose-ul:my-0 prose-li:my-0">
+              ${parsedMessage}
             </div>
           </div>
         </div>
@@ -183,88 +241,113 @@ import AIMessage from "./AIMessage.astro";
     `;
   }
 
+  // Chat history
+  let chatHistory: Array<{ role: string; parts: Array<{ text: string }> }> = [];
+
   // Handle chat form submission
-  chatForm?.addEventListener('submit', async (e) => {
+  chatForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const message = chatInput.value.trim();
     if (!message) return;
 
     if (chatMessages) {
-      chatMessages.insertAdjacentHTML('beforeend', createUserMessage(message));
+      chatMessages.insertAdjacentHTML("beforeend", createUserMessage(message));
     }
-    
-    chatInput.value = '';
+
+    chatInput.value = "";
     chatInput.focus();
+
+    // Add user message to history
+    chatHistory.push({
+      role: "user",
+      parts: [{ text: message }],
+    });
 
     try {
       if (chatMessages) {
-        chatMessages.insertAdjacentHTML('beforeend', createTypingIndicator());
+        chatMessages.insertAdjacentHTML("beforeend", createTypingIndicator());
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
 
-      const response = await fetch('/api/chat', {
-        method: 'POST',
+      const response = await fetch("/api/chat", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({
+          message,
+          history: chatHistory,
+        }),
       });
 
       const data = await response.json();
-      
-      const typingIndicator = document.querySelector('.typing-indicator');
+
+      const typingIndicator = document.querySelector(".typing-indicator");
       if (typingIndicator) {
         typingIndicator.remove();
       }
 
       if (data.response && chatMessages) {
-        chatMessages.insertAdjacentHTML('beforeend', createAIMessage(data.response));
+        // Add AI response to history
+        chatHistory.push({
+          role: "model",
+          parts: [{ text: data.response }],
+        });
+
+        chatMessages.insertAdjacentHTML(
+          "beforeend",
+          createAIMessage(data.response),
+        );
         chatMessages.scrollTop = chatMessages.scrollHeight;
       } else {
-        throw new Error('Invalid response from server');
+        throw new Error("Invalid response from server");
       }
     } catch (error) {
-      console.error('Chat error:', error);
-      const typingIndicator = document.querySelector('.typing-indicator');
+      console.error("Chat error:", error);
+      const typingIndicator = document.querySelector(".typing-indicator");
       if (typingIndicator) {
         typingIndicator.remove();
       }
       if (chatMessages) {
-        chatMessages.insertAdjacentHTML('beforeend', createAIMessage('Sorry, I encountered an error. Please try again.'));
+        chatMessages.insertAdjacentHTML(
+          "beforeend",
+          createAIMessage("Sorry, I encountered an error. Please try again."),
+        );
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
     }
   });
 
   // Handle keyboard shortcuts
-  chatInput?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+  chatInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      chatForm?.dispatchEvent(new Event('submit'));
+      chatForm?.dispatchEvent(new Event("submit"));
     }
   });
 
   // Handle mobile keyboard adjustments
-  if ('virtualKeyboard' in navigator) {
-    window.addEventListener('virtualKeyboardGeometryChange', (event) => {
+  if ("virtualKeyboard" in navigator) {
+    window.addEventListener("virtualKeyboardGeometryChange", (event) => {
       if (chatInterface && isOpen) {
         const windowHeight = window.innerHeight;
-        const keyboardHeight = (event as any).virtualKeyboardGeometryChange?.height || 0;
+        const keyboardHeight =
+          (event as any).virtualKeyboardGeometryChange?.height || 0;
         chatInterface.style.bottom = `${keyboardHeight + 20}px`;
       }
     });
   }
 
   // Handle window resize
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     if (chatInterface && isOpen && window.innerWidth >= 768) {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
   });
 
   // Enable smooth scrolling on messages container
   if (chatMessages) {
-    chatMessages.addEventListener('wheel', (e) => {
+    chatMessages.addEventListener("wheel", (e) => {
       e.stopPropagation();
     });
   }
