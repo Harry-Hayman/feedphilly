@@ -1,24 +1,26 @@
+@tailwind utilities;
+
 :root {
   /* Primary greens */
   --color-primary: #449735;
   --color-primary-dark: #367c2a;
   --color-primary-light: #B8E5A6;
-  
+
   /* Secondary colors for contrast */
   --color-secondary: #C3DA49;
   --color-secondary-dark: #b1c73c;
   --color-secondary-light: #d4e674;
-  
+
   /* Accent colors */
   --color-accent: #F8E9DC;
   --color-accent-dark: #f0d6c3;
   --color-accent-light: #fdf5ef;
-  
+
   /* Button colors */
   --btn-primary: var(--color-primary);
   --btn-primary-hover: var(--color-primary-dark);
   --btn-primary-text: #ffffff;
-  
+
   --btn-secondary: var(--color-primary);
   --btn-secondary-hover: var(--color-primary-dark);
   --btn-secondary-text: #ffffff;

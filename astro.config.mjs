@@ -54,10 +54,10 @@ export default defineConfig({
     },
     css: {
       postcss: {
-        plugins: [
-          require('tailwindcss'),
-          require('autoprefixer'),
-        ],
+        plugins: async () => [
+            (await import('tailwindcss')).default,
+            (await import('autoprefixer')).default,
+          ],
       },
     }
   }
