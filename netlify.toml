@@ -4,12 +4,6 @@
   functions = ".netlify/functions-internal"
 
 [[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/entry"
-  status = 200
-  force = true
-
-[[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
   status = 200
