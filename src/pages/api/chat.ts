@@ -57,7 +57,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
 
       const result = await chat.sendMessage(`Remember, you are Feed Philly's assistant helping with related queries. Make answer concise. Engage with customer. ${message}`);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
 
       return new Response(

@@ -1,7 +1,6 @@
 ---
 // Import necessary components and utilities
 import MainLayout from "@/layouts/MainLayout.astro";
-import AvatarBlogLarge from "@components/ui/avatars/AvatarBlogLarge.astro";
 import CardRelated from "@components/ui/cards/CardRelated.astro";
 import Bookmark from "@components/ui/buttons/Bookmark.astro";
 import SocialShare from "@components/ui/buttons/SocialShare.astro";
@@ -16,8 +15,8 @@ import { SITE } from "@data/constants";
 const { id } = Astro.params;
 
 // Get the post data
-const posts = await getCollection("blog");
-const post = posts.find(p => p.id.replace(/\.md$/, '').replace(/\s+/g, '-').toLowerCase() === id) as CollectionEntry<"blog"> | undefined;
+const posts = (await getCollection("blog")) as CollectionEntry<"blog">[];
+const post = posts.find(p => p.id.replace(/\.md$/, '').replace(/\s+/g, '-').toLowerCase() === id);
 
 if (!post) {
   return Astro.redirect('/404');
@@ -26,7 +25,7 @@ if (!post) {
 const { Content } = await post.render();
 
 // Filter out the current post to get related posts
-const relatedPosts = posts.filter((entry) => entry.id !== post.id) as CollectionEntry<"blog">[];
+const relatedPosts = posts.filter((entry) => entry.id !== post.id);
 
 const pageTitle = `${post.data.title} | ${SITE.title}`;
 ---
