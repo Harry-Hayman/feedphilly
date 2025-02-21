@@ -14,7 +14,8 @@ interface Props {
   <h3 class="text-neutral-700 dark:text-neutral-300">{title}</h3>
   <button
     type="button"
-    class="group inline-flex items-center gap-x-2 rounded-lg border border-neutral-400 px-3 py-2 text-sm font-medium text-neutral-700 hover:border-yellow-500 hover:bg-yellow-500 hover:shadow-2xl hover:shadow-yellow-500 dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-yellow-500 dark:hover:text-neutral-700 dark:hover:border-yellow-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600"
+    id="feedback-yes"
+    class="group inline-flex items-center gap-x-2 rounded-lg border border-neutral-400 px-3 py-2 text-sm font-medium text-neutral-700 hover:border-neutral-600 hover:bg-neutral-600 hover:text-white dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-600 dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600 transition-all duration-200"
   >
     <svg
       class="size-4 flex-shrink-0 transition duration-300 group-hover:-translate-y-1 group-focus-visible:-translate-y-1"
@@ -34,6 +35,7 @@ interface Props {
   </button>
   <button
     type="button"
+    id="feedback-no"
     class="group inline-flex items-center gap-x-2 rounded-lg border border-neutral-400 px-3 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-400/30 dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-700/60 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600"
   >
     <svg
@@ -53,3 +55,148 @@ interface Props {
     {secondChoice}
   </button>
 </div>
+
+<!-- Newsletter Popup -->
+<div
+  id="newsletter-popup"
+  class="fixed inset-0 z-[70] hidden"
+>
+  <div class="fixed inset-0 bg-black/30 dark:bg-black/50"></div>
+  <div class="fixed left-1/2 top-1/2 z-[80] w-full max-w-lg -translate-x-1/2 -translate-y-1/2 transform rounded-xl bg-white p-6 shadow-xl dark:bg-neutral-800">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-start justify-between">
+        <div>
+          <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-200">
+            Join Our Newsletter
+          </h3>
+          <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+            Stay informed about our initiatives and how you can help fight food insecurity in Philadelphia.
+          </p>
+        </div>
+        <button
+          type="button"
+          class="close-newsletter text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+        >
+          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <form
+        action="https://script.google.com/macros/s/AKfycbwKalp-KaNNhzfpsjE8uWuIC7t7_Gbw3IQMFzZT1vsTmB31zGXi3q8YgFiSZnlRJJ_u5A/exec"
+        method="POST"
+        data-show-success
+        data-success-message="Thanks for subscribing to our newsletter!"
+        class="grid gap-4"
+        id="newsletter-form"
+      >
+        <div>
+          <label for="email-popup" class="sr-only">Email address</label>
+          <input
+            type="email"
+            name="Email"
+            id="email-popup"
+            required
+            class="block w-full rounded-lg border border-neutral-300 px-4 py-3 text-sm text-neutral-900 placeholder:text-neutral-500 focus:border-green-600 focus:ring-green-600 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100 dark:placeholder:text-neutral-400"
+            placeholder="Enter your email"
+          />
+          <input type="hidden" name="type" value="email" />
+        </div>
+        <button
+          type="submit"
+          class="inline-flex w-full items-center justify-center rounded-lg bg-green-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-green-500 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 active:translate-y-0 dark:bg-green-500 dark:hover:bg-green-400"
+        >
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const yesButton = document.getElementById('feedback-yes');
+    const popup = document.getElementById('newsletter-popup');
+    const closeButtons = document.querySelectorAll('.close-newsletter');
+    const form = document.getElementById('newsletter-form') as HTMLFormElement;
+
+    function showNewsletterPopup() {
+      if (popup) {
+        popup.classList.remove('hidden');
+      }
+    }
+
+    function hideNewsletterPopup() {
+      if (popup) {
+        popup.classList.add('hidden');
+      }
+    }
+
+    yesButton?.addEventListener('click', () => {
+      showNewsletterPopup();
+    });
+
+    closeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        hideNewsletterPopup();
+      });
+    });
+
+    // Close on background click
+    popup?.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        hideNewsletterPopup();
+      }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        hideNewsletterPopup();
+      }
+    });
+
+    // Handle form submission
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      
+      // Close popup immediately
+      hideNewsletterPopup();
+      
+      // Process form in background
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      if (submitButton) {
+        submitButton.disabled = true;
+      }
+
+      fetch(form.action, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData as any).toString(),
+      })
+        .then(response => {
+          if (response.ok || response.redirected) {
+            // Show success message after API call completes
+            window.showSuccessPopup?.(form.dataset.successMessage || 'Subscription successful!');
+            form.reset();
+          } else {
+            throw new Error('Submission failed');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          window.showSuccessPopup?.('Sorry, something went wrong. Please try again.', true);
+        })
+        .finally(() => {
+          if (submitButton) {
+            submitButton.disabled = false;
+          }
+        });
+    });
+  });
+</script>

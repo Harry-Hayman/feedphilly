@@ -145,9 +145,31 @@ const socialLinks = [
               </div>
               <button
                 type="submit"
-                class="inline-flex items-center rounded-md border border-transparent bg-green-600 px-6 py-3 text-base font-medium text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-green-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 active:translate-y-0 disabled:pointer-events-none disabled:translate-y-0 disabled:opacity-50 dark:bg-green-500 dark:hover:bg-green-600"
+                class="inline-flex items-center rounded-md border border-transparent bg-green-600 px-2 py-2 text-sm font-medium text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-green-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 active:translate-y-0 disabled:pointer-events-none disabled:translate-y-0 disabled:opacity-50 dark:bg-green-500 dark:hover:bg-green-600"
               >
-                Send Message
+                <span class="inline-flex items-center gap-2">
+                  <svg
+                    class="hidden h-4 w-4 animate-spin"
+                    id="loading-spinner"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  <span id="button-text">Send Message</span>
+                </span>
                 <svg
                   class="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
@@ -162,6 +184,62 @@ const socialLinks = [
                 </svg>
               </button>
             </form>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                const form = document.querySelector("form[data-show-success]") as HTMLFormElement;
+                const submitButton = form?.querySelector(
+                  'button[type="submit"]'
+                ) as HTMLButtonElement;
+                const loadingSpinner =
+                  submitButton?.querySelector("#loading-spinner");
+                const buttonText = submitButton?.querySelector("#button-text");
+
+                form?.addEventListener("submit", async (e: SubmitEvent) => {
+                  e.preventDefault();
+
+                  // Show loading state
+                  if (loadingSpinner && buttonText && submitButton) {
+                    loadingSpinner.classList.remove("hidden");
+                    submitButton.disabled = true;
+                  }
+
+                  const formData = new FormData(form);
+
+                  try {
+                    const response = await fetch(form.action, {
+                      method: "POST",
+                      mode: "cors",
+                      headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                      },
+                      body: new URLSearchParams(formData as any).toString(),
+                    });
+
+                    if (response.ok || response.redirected) {
+                      window.showSuccessPopup?.(
+                        form.dataset.successMessage || "Submission successful!",
+                      );
+                      form.reset();
+                    } else {
+                      throw new Error("Submission failed");
+                    }
+                  } catch (error) {
+                    console.error("Error:", error);
+                    window.showSuccessPopup?.(
+                      "Sorry, something went wrong. Please try again.",
+                      true,
+                    );
+                  } finally {
+                    // Hide loading state
+                    if (loadingSpinner && buttonText && submitButton) {
+                      loadingSpinner.classList.add("hidden");
+                      submitButton.disabled = false;
+                    }
+                  }
+                });
+              });
+            </script>
           </div>
         </div>
 
