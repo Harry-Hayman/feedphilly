@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://feedphilly.netlify.app',
-  output: 'static',
+  output: 'hybrid',
   integrations: [
     tailwind({
       // Ensure Tailwind classes are processed
