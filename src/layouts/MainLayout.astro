@@ -6,6 +6,7 @@ import FooterSection from "@components/sections/FooterSection.astro";
 import ChatBot from "@components/ui/chat/ChatBot.astro";
 import { SITE } from "@data/constants.ts";
 import "../styles/global.css";
+import "../styles/theme.css";
 
 // Setting expected props
 const { title = SITE.title, meta, structuredData, lang = "en" } = Astro.props;
@@ -19,18 +20,21 @@ interface Props {
 }
 ---
 
-<!--
-This is the main structure for the page.
-We set the language of the page to English and add classes for scrollbar and scroll behavior.
--->
+<!doctype html>
 <html lang={lang} class="scrollbar-hide lenis lenis-smooth scroll-pt-16">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Adding metadata to the HTML document -->
     <Meta meta={meta} structuredData={structuredData} />
     <!-- Define the title of the page -->
     <title>{title}</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"
     ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script is:inline>
       // Script to handle dark mode. It will check if the theme is stored in localStorage or if dark theme is preferred by system settings
       if (
@@ -54,15 +58,6 @@ We set the language of the page to English and add classes for scrollbar and scr
         });
       }
     </script>
-    <script>
-      import "@scripts/lenisSmoothScroll.js";
-    </script>
-    <script is:inline>
-      // Initialize Lenis on document load
-      document.addEventListener('DOMContentLoaded', () => {
-        import('@scripts/lenisSmoothScroll.js');
-      });
-    </script>
   </head>
   <body
     class="bg-neutral-200 selection:bg-green-400 selection:text-neutral-700 dark:bg-neutral-800"
@@ -75,5 +70,8 @@ We set the language of the page to English and add classes for scrollbar and scr
     </div>
     <FooterSection />
     <ChatBot />
+    <script>
+      import "@scripts/lenisSmoothScroll.js";
+    </script>
   </body>
 </html>

@@ -9,10 +9,13 @@ import { fileURLToPath } from 'url';
 export default defineConfig({
   output: 'server',
   adapter: netlify({
-    edgeMiddleware: true // Enable edge middleware
+    edgeMiddleware: true, // Enable edge middleware
   }),
   integrations: [
-    tailwind(),
+    tailwind({
+      // Ensure Tailwind classes are processed
+      applyBaseStyles: false,
+    }),
     mdx({
       // Enable MDX features
       syntaxHighlight: 'prism',
@@ -41,12 +44,21 @@ export default defineConfig({
       }
     },
     build: {
+      cssCodeSplit: true,
       assetsDir: '_astro',
       rollupOptions: {
         output: {
           assetFileNames: 'assets/[name][extname]'
         }
       }
+    },
+    css: {
+      postcss: {
+        plugins: [
+          require('tailwindcss'),
+          require('autoprefixer'),
+        ],
+      },
     }
   }
 });
