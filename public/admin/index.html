@@ -23,46 +23,83 @@
     <p style="font-family: sans-serif;">Loading CMS...</p>
   </div>
 
-  <!-- Load Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
   <script>
+    // Debug function to track initialization steps
+    function debug(msg) {
+      console.log('CMS Debug:', msg);
+      document.getElementById('loading').innerHTML = `<p style="font-family: sans-serif;">${msg}</p>`;
+    }
+
+    // Function to load Decap CMS script
+    function loadCMS() {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
+    }
+
     // Wait for both identity widget and CMS to load
-    function initCMS() {
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('init', user => {
-          // Hide loading indicator once initialized
-          document.getElementById('loading').style.display = 'none';
-          
-          if (!user) {
-            window.netlifyIdentity.open('login');
-          }
-        });
+    async function initCMS() {
+      try {
+        debug('Loading CMS script...');
+        await loadCMS();
+        debug('CMS script loaded');
 
-        // Handle login/logout
-        window.netlifyIdentity.on('login', () => {
-          window.location.reload();
-        });
-
-        window.netlifyIdentity.on('logout', () => {
-          window.location.href = '/';
-        });
-
-        // Initialize CMS with error handling
-        try {
-          CMS.init();
-        } catch (err) {
-          console.error('Failed to initialize CMS:', err);
-          document.getElementById('loading').innerHTML = '<p style="font-family: sans-serif; color: red;">Failed to load CMS. Please refresh the page.</p>';
+        if (!window.CMS) {
+          throw new Error('CMS object not found');
         }
-      } else {
-        // If identity widget hasn't loaded yet, try again
-        setTimeout(initCMS, 50);
+
+        // Initialize CMS
+        debug('Initializing CMS...');
+        await CMS.init();
+        debug('CMS initialized');
+
+        // Set up identity
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on('init', user => {
+            debug('Identity initialized');
+            if (!user) {
+              debug('No user, opening login');
+              window.netlifyIdentity.open('login');
+            } else {
+              debug('User authenticated');
+              document.getElementById('loading').style.display = 'none';
+            }
+          });
+
+          window.netlifyIdentity.on('login', () => {
+            debug('Login successful, reloading...');
+            window.location.reload();
+          });
+
+          window.netlifyIdentity.on('logout', () => {
+            debug('Logged out, redirecting...');
+            window.location.href = '/';
+          });
+        } else {
+          throw new Error('Netlify Identity not loaded');
+        }
+      } catch (err) {
+        console.error('CMS Error:', err);
+        document.getElementById('loading').innerHTML = `
+          <div style="font-family: sans-serif; text-align: center;">
+            <p style="color: red;">Failed to initialize CMS</p>
+            <p>Error: ${err.message}</p>
+            <button onclick="window.location.reload()">Try Again</button>
+          </div>
+        `;
       }
     }
 
-    // Start initialization process
-    window.addEventListener('load', initCMS);
+    // Start initialization when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCMS);
+    } else {
+      initCMS();
+    }
   </script>
 </body>
 </html>
