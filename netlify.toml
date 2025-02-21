@@ -4,7 +4,7 @@
   functions = ".netlify/functions"
 
 [[plugins]]
-  package = "@astrojs/netlify/functions"
+  package = "@netlify/plugin-astro"
 
 # Ignore Dependabot PRs from auto-deployment
 [build.ignore]
