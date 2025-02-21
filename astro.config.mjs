@@ -2,12 +2,14 @@ import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import netlify from "@astrojs/netlify";
 import { fileURLToPath } from 'url';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://feedphilly.netlify.app',
-  output: 'hybrid',
+  output: 'server',
+  adapter: netlify(),
   integrations: [
     tailwind({
       // Ensure Tailwind classes are processed
