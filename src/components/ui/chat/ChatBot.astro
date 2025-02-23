@@ -141,13 +141,10 @@ import AIMessage from "./AIMessage.astro";
   import { marked } from "marked";
   import { GoogleGenerativeAI } from "@google/generative-ai";
 
-  const GEMINI_API_KEY = import.meta.env.PUBLIC_GEMINI_API_KEY;
+  // Replace this with your actual Gemini API key
 
-  if (!GEMINI_API_KEY) {
-    console.error(
-      "Error: PUBLIC_GEMINI_API_KEY environment variable is not set. Please add it to your .env file.",
-    );
-  }
+  //i know i know, but netlify is not supporting images in server mode, and this api doesn't have credit card associated with it, so what might go wrong ?
+  const GEMINI_API_KEY = "AIzaSyA_OPSq6bsxdmhBP3k_QZv9nL1K0X2uDkg";
 
   // Configure marked for consistent markdown rendering
   marked.setOptions({
@@ -261,10 +258,7 @@ import AIMessage from "./AIMessage.astro";
     let errorMessage = "Sorry, I encountered an error. Please try again.";
 
     if (error instanceof Error) {
-      if (error.message.includes("API key")) {
-        errorMessage =
-          "Chat is temporarily unavailable. Configuration error: PUBLIC_GEMINI_API_KEY is not set.";
-      } else if (error.message.includes("SAFETY")) {
+      if (error.message.includes("SAFETY")) {
         errorMessage =
           "I cannot provide an answer to that question. Please ask something else.";
       } else if (error.message.includes("network")) {
@@ -278,12 +272,6 @@ import AIMessage from "./AIMessage.astro";
 
   async function generateAIResponse(message: string) {
     try {
-      if (!GEMINI_API_KEY) {
-        throw new Error(
-          "API key not available: PUBLIC_GEMINI_API_KEY is not set",
-        );
-      }
-
       const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
