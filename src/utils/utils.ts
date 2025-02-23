@@ -1,3 +1,10 @@
+// Calculate read time based on content length
+function calculateReadTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
+
 // Format the date to a string
 function formatDate(date: Date): string {
     const options: Intl.DateTimeFormatOptions = {year: 'numeric', month: 'short', day: 'numeric'};
@@ -17,4 +24,4 @@ function generateSlug(id: string): string {
   return id.replace(/\.md$/, '').replace(/\s+/g, '-').toLowerCase();
 }
 
-export { formatDate, capitalize, generateSlug };
+export { formatDate, capitalize, generateSlug, calculateReadTime };

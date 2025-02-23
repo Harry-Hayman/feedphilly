@@ -6,7 +6,7 @@ import Bookmark from "@components/ui/buttons/Bookmark.astro";
 import SocialShare from "@components/ui/buttons/SocialShare.astro";
 import PostFeedback from "@components/ui/feedback/PostFeedback.astro";
 import { Image } from "astro:assets";
-import { capitalize, formatDate } from "@utils/utils";
+import { capitalize, formatDate, calculateReadTime } from "@utils/utils";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
@@ -28,6 +28,9 @@ export async function getStaticPaths() {
 // Get post from props
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+// Calculate read time if not provided in frontmatter
+const readTime = post.data.readTime ?? calculateReadTime(post.body);
 
 // Get all posts for related posts section
 const posts = (await getCollection("blog")) as CollectionEntry<"blog">[];
@@ -71,7 +74,7 @@ const pageTitle = `${post.data.title} | ${SITE.title}`;
                   <li
                     class="relative inline-block pe-6 before:absolute before:end-2 before:top-1/2 before:size-1 before:-translate-y-1/2 before:rounded-full before:bg-neutral-300 last:pe-0 last-of-type:before:hidden dark:text-neutral-400 dark:before:bg-neutral-600"
                   >
-                    {post.data.readTime} min read
+                    {readTime} min read
                   </li>
                 </ul>
               </div>
