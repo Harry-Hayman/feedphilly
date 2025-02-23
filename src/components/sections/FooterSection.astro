@@ -7,7 +7,7 @@ import Icon from "@components/ui/icons/Icon.astro";
 import BrandLogo from "@components/BrandLogo.astro";
 import { SITE } from "@data/constants";
 import { Image } from "astro:assets";
-import logo from "@images/feedphilly/logo.webp";
+import logo from "@images/FPC-logo-stacked.png";
 
 // Define the variables that will be used in this component
 const sectionThreeTitle: string = "Join Our Newsletter";
@@ -22,7 +22,7 @@ const sectionThreeContent: string =
     <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-5">
       <div class="col-span-full lg:col-span-1">
         <!-- Brand Logo -->
-        <Image src={logo} alt="Feed Philly Logo" class="h-auto w-32" />
+        <Image src={logo} alt="Feed Philly Logo" class="h-auto w-64" />
         <p class="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
           Feed Philly Coalition is dedicated to addressing food insecurity in
           Philadelphia through a collaborative, data-driven approach.
