@@ -6,8 +6,8 @@ backend:
 media_folder: "src/images/blog" # Location where files will be stored in the repo
 public_folder: "src/images/blog" # The src attribute for uploaded media
 
-site_url: https://feedphilly.netlify.app
-display_url: https://feedphilly.netlify.app
+site_url: https://feedphillycoalition.org
+display_url: https://feedphillycoalition.org
 local_backend: true
 
 collections:

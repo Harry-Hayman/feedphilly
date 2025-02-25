@@ -1,48 +1,39 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 import donationImage from "@images/feedphilly/feed_philly_donation_crowd2.png";
-import harryImage from "@images/blog/members/harryhayman_founder.jpg";
-import gabrielleImage from "@images/blog/members/Gabrielle M- President .jpg";
-import davidImage from "@images/blog/members/David Greensburg-Communications I.jpg";
-import anujImage from "@images/blog/members/David Greensburg-Communications I.jpg";
 
-const team = [
-  {
-    name: "Harry Hayman",
-    role: "Founder",
-    bio: "Harry Hayman, Founder of Feed Philly Coalition, is committed to tackling food insecurity through a collaborative, technology-driven approach. With a background in food systems and community outreach, Harry builds partnerships with schools, government, and businesses to promote access to nutritious food as a foundation for a healthier Philadelphia.",
-    avatar: harryImage,
-    id: "harryhayman",
-  },
-  {
-    name: "Gabrielle M",
-    role: "President",
-    bio: "Gabrielle M, President of Feed Philly Coalition, is passionate about creating sustainable solutions to food insecurity in Philadelphia. With a background in public health and community organizing, Gabrielle leads initiatives to address food deserts, improve food access, and promote health equity for all Philadelphians.",
-    avatar: gabrielleImage,
-    id: "gabriellem",
-  },
-  {
-    name: "David Greensburg",
-    role: "Community Outreach Coordinator",
-    bio: "David Greensburg, Community Outreach Coordinator at Feed Philly Coalition, is dedicated to building relationships with local organizations, schools, and businesses to expand access to healthy food in underserved communities. With a background in social work and community development, David is committed to creating a more equitable food system in Philadelphia.",
-    avatar: davidImage,
-    id: "davidgreensburg",
-  },
-  {
-    name: "Anuj Paudel",
-    role: "Technical Lead",
-    bio: "Anuj Paudel, Technical Lead at Feed Philly Coalition, is passionate about leveraging technology to address food insecurity in Philadelphia. With a background in software engineering and data analysis, Anuj develops innovative solutions to improve food access, streamline operations, and empower communities to fight hunger.",
-    avatar: anujImage,
-    id: "anujpaudel",
-  },
-];
+const teamMembers = await getCollection("team") as CollectionEntry<"team">[];
+console.log("Found team members:", teamMembers.length);
+
+const team = teamMembers
+  .sort((a, b) => {
+    const orderA = typeof a.data.order === 'number' ? a.data.order : 999;
+    const orderB = typeof b.data.order === 'number' ? b.data.order : 999;
+    return orderA - orderB;
+  })
+  .map((member) => {
+    console.log("Member data:", member.data);
+    return {
+      name: member.data.name,
+      role: member.data.role,
+      bio: member.data.bio,
+      avatar: member.data.image,
+      id: member.slug
+    };
+  });
+
+console.log("Team mapped:", team);
+
+console.log("Final processed team:", team.length);
 ---
 
 <MainLayout title="About Us | Feed Philly Coalition">
   <div class="py-12 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="animate-fade-up text-center opacity-0">
+      <div class="text-center">
         <h1
           class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl md:text-6xl"
         >
@@ -56,7 +47,7 @@ const team = [
         </p>
       </div>
 
-      <div class="animate-fade-up mt-16 opacity-0 [animation-delay:200ms]">
+      <div class="mt-16">
         <div class="mx-auto max-w-5xl overflow-hidden rounded-lg">
           <Image
             src={donationImage}
@@ -67,40 +58,36 @@ const team = [
       </div>
 
       <div class="mt-16 space-y-16">
-        {
-          team.map((member, index) => (
-            <div
-              id={member.id}
-              class:list={[
-                "animate-fade-up scroll-mt-24 opacity-0",
-                { [`[animation-delay:${400 + index * 200}ms]`]: true },
-              ]}
-            >
-              <div class="group mx-auto max-w-4xl rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-green-50 hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700">
-                <div class="flex flex-col items-center gap-8 md:flex-row md:gap-12">
-                  <div class="relative flex-shrink-0">
-                    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-green-400 to-green-600 opacity-0 blur transition-all duration-300 group-hover:opacity-100" />
-                    <img
-                      src={member.avatar.src}
-                      alt={`Photo of ${member.name}`}
-                      class="relative h-40 w-40 rounded-full object-cover transition-transform duration-300 group-hover:scale-105 md:h-48 md:w-48"
-                    />
-                  </div>
-                  <div class="text-center md:text-left">
-                    <h3 class="text-2xl font-bold text-neutral-900 transition-colors duration-300 group-hover:text-green-700 dark:text-white dark:group-hover:text-green-400">
-                      {member.name}
-                    </h3>
-                    <p class="mt-1 text-lg font-medium text-green-600 dark:text-green-400">
-                      {member.role}
-                    </p>
-                    <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400 md:text-lg">
-                      {member.bio}
-                    </p>
-                  </div>
+       {
+         team.map((member) => (
+           <div id={member.id} class="scroll-mt-24">
+             <div class="group mx-auto max-w-4xl rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-green-50 hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700">
+               <div class="flex flex-col items-center gap-8 md:flex-row md:gap-12">
+                 <div class="relative flex-shrink-0">
+                   <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-green-400 to-green-600 opacity-0 blur transition-all duration-300 group-hover:opacity-100" />
+                   <Image
+                     src={member.avatar}
+                     width={200}
+                     height={200}
+                     alt={`Photo of ${member.name}`}
+                     class="relative h-40 w-40 rounded-full object-cover transition-transform duration-300 group-hover:scale-105 md:h-48 md:w-48"
+                   />
+                </div>
+                <div class="text-center md:text-left">
+                  <h3 class="text-2xl font-bold text-neutral-900 transition-colors duration-300 group-hover:text-green-700 dark:text-white dark:group-hover:text-green-400">
+                    {member.name}
+                  </h3>
+                  <p class="mt-1 text-lg font-medium text-green-600 dark:text-green-400">
+                    {member.role}
+                  </p>
+                  <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400 md:text-lg">
+                    {member.bio}
+                  </p>
                 </div>
               </div>
             </div>
-          ))
+          </div>
+        ))
         }
       </div>
     </div>
@@ -109,15 +96,20 @@ const team = [
 
 <script>
   // Smooth scroll for anchor links
-  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function(this: HTMLAnchorElement, e: Event) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href")?.slice(1);
-      if (targetId) {
-        document.getElementById(targetId)?.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
+  document
+    .querySelectorAll<HTMLAnchorElement>('a[href^="#"]')
+    .forEach((anchor) => {
+      anchor.addEventListener(
+        "click",
+        function (this: HTMLAnchorElement, e: Event) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href")?.slice(1);
+          if (targetId) {
+            document.getElementById(targetId)?.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
+        },
+      );
     });
-  });
 </script>

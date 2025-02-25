@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://feedphilly.netlify.app',
+  site: 'https://feedphillycoalition.org',
   output: 'static',
   integrations: [
     tailwind({

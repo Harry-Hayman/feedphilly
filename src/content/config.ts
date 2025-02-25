@@ -24,7 +24,8 @@ const team = defineCollection({
     name: z.string(),
     role: z.string(),
     bio: z.string(),
-    image: image()
+    image: image(),
+    order: z.number().optional()
   })
 });
 
