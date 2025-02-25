@@ -5,29 +5,23 @@ import { getCollection } from "astro:content";
 import { type CollectionEntry } from "astro:content";
 import donationImage from "@images/feedphilly/feed_philly_donation_crowd2.png";
 
-const teamMembers = await getCollection("team") as CollectionEntry<"team">[];
-console.log("Found team members:", teamMembers.length);
+const teamMembers = (await getCollection("team")) as CollectionEntry<"team">[];
 
 const team = teamMembers
   .sort((a, b) => {
-    const orderA = typeof a.data.order === 'number' ? a.data.order : 999;
-    const orderB = typeof b.data.order === 'number' ? b.data.order : 999;
+    const orderA = typeof a.data.order === "number" ? a.data.order : 999;
+    const orderB = typeof b.data.order === "number" ? b.data.order : 999;
     return orderA - orderB;
   })
   .map((member) => {
-    console.log("Member data:", member.data);
     return {
       name: member.data.name,
       role: member.data.role,
       bio: member.data.bio,
       avatar: member.data.image,
-      id: member.slug
+      id: member.slug,
     };
   });
-
-console.log("Team mapped:", team);
-
-console.log("Final processed team:", team.length);
 ---
 
 <MainLayout title="About Us | Feed Philly Coalition">
@@ -58,36 +52,36 @@ console.log("Final processed team:", team.length);
       </div>
 
       <div class="mt-16 space-y-16">
-       {
-         team.map((member) => (
-           <div id={member.id} class="scroll-mt-24">
-             <div class="group mx-auto max-w-4xl rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-green-50 hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700">
-               <div class="flex flex-col items-center gap-8 md:flex-row md:gap-12">
-                 <div class="relative flex-shrink-0">
-                   <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-green-400 to-green-600 opacity-0 blur transition-all duration-300 group-hover:opacity-100" />
-                   <Image
-                     src={member.avatar}
-                     width={200}
-                     height={200}
-                     alt={`Photo of ${member.name}`}
-                     class="relative h-40 w-40 rounded-full object-cover transition-transform duration-300 group-hover:scale-105 md:h-48 md:w-48"
-                   />
-                </div>
-                <div class="text-center md:text-left">
-                  <h3 class="text-2xl font-bold text-neutral-900 transition-colors duration-300 group-hover:text-green-700 dark:text-white dark:group-hover:text-green-400">
-                    {member.name}
-                  </h3>
-                  <p class="mt-1 text-lg font-medium text-green-600 dark:text-green-400">
-                    {member.role}
-                  </p>
-                  <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400 md:text-lg">
-                    {member.bio}
-                  </p>
+        {
+          team.map((member) => (
+            <div id={member.id} class="scroll-mt-24">
+              <div class="group mx-auto max-w-4xl rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-green-50 hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700">
+                <div class="flex flex-col items-center gap-8 md:flex-row md:gap-12">
+                  <div class="relative flex-shrink-0">
+                    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-green-400 to-green-600 opacity-0 blur transition-all duration-300 group-hover:opacity-100" />
+                    <Image
+                      src={member.avatar}
+                      width={200}
+                      height={200}
+                      alt={`Photo of ${member.name}`}
+                      class="relative h-40 w-40 rounded-full object-cover transition-transform duration-300 group-hover:scale-105 md:h-48 md:w-48"
+                    />
+                  </div>
+                  <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-neutral-900 transition-colors duration-300 group-hover:text-green-700 dark:text-white dark:group-hover:text-green-400">
+                      {member.name}
+                    </h3>
+                    <p class="mt-1 text-lg font-medium text-green-600 dark:text-green-400">
+                      {member.role}
+                    </p>
+                    <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400 md:text-lg">
+                      {member.bio}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))
+          ))
         }
       </div>
     </div>
