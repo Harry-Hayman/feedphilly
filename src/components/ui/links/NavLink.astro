@@ -7,51 +7,26 @@ interface Props {
   url: string;
   name: string;
 }
+
+// Get the current path
+const currentPath = Astro.url.pathname;
+const isActive =
+  currentPath === url ||
+  (url !== '/' && currentPath.startsWith(url));
 ---
 
-<!--
-Re-usable link component for navigation bar. Highlights the active link
-by comparing the current URL with the href of each link.
-We assign an ID matching the URL for easy reference in our script.
-If URL is '/' (home page), assign ID as 'home' 
--->
 <a
-  id={url === "/" ? "home" : url.replace("/", "")}
   href={url}
   data-astro-prefetch
-  class="nav-link relative text-base font-medium text-neutral-600 outline-none hover:text-green-600 dark:text-neutral-400 dark:hover:text-green-400 md:py-3 md:text-sm 2xl:text-base after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-green-500 after:transition-width after:duration-200 after:content-[''] hover:after:w-full"
+  class:list={[
+    "nav-link relative text-base font-medium outline-none md:py-3 md:text-sm 2xl:text-base",
+    "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-green-500 after:transition-width after:duration-200 after:content-['']",
+    {
+      "text-green-600 dark:text-green-500 after:w-full": isActive,
+      "text-neutral-600 dark:text-neutral-400 hover:text-green-600 dark:hover:text-green-400 after:w-0 hover:after:w-full": !isActive
+    }
+  ]}
+  aria-current={isActive ? "page" : undefined}
 >
   {name}
 </a>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let url = window.location.pathname;
-    let urlSegments = url.split("/");
-    let navId;
-
-    if (url === "/") {
-      navId = "home";
-    } else {
-      navId = url.replace("/", "");
-    }
-
-    let nav = document.getElementById(navId);
-
-    if (nav) {
-      nav.classList.remove(
-        "text-neutral-600",
-        "dark:text-neutral-400",
-        "hover:text-neutral-500",
-        "dark:hover:text-neutral-500"
-      );
-      nav.classList.add(
-        "text-green-600",
-        "dark:text-green-500",
-        "after:w-full",
-        "after:bg-green-500"
-      );
-      nav.setAttribute("aria-current", "page");
-    }
-  });
-</script>
