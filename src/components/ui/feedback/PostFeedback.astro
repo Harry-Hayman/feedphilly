@@ -15,7 +15,7 @@ interface Props {
   <button
     type="button"
     id="feedback-yes"
-    class="group inline-flex items-center gap-x-2 rounded-lg border border-neutral-400 px-3 py-2 text-sm font-medium text-neutral-700 hover:border-neutral-600 hover:bg-neutral-600 hover:text-white dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-600 dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600 transition-all duration-200"
+    class="group inline-flex items-center gap-x-2 rounded-lg border border-neutral-400 px-3 py-2 text-sm font-medium text-neutral-700 transition-all duration-200 hover:border-neutral-600 hover:bg-neutral-600 hover:text-white dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-600 dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600"
   >
     <svg
       class="size-4 flex-shrink-0 transition duration-300 group-hover:-translate-y-1 group-focus-visible:-translate-y-1"
@@ -57,20 +57,22 @@ interface Props {
 </div>
 
 <!-- Newsletter Popup -->
-<div
-  id="newsletter-popup"
-  class="fixed inset-0 z-[70] hidden"
->
+<div id="newsletter-popup" class="fixed inset-0 z-[70] hidden">
   <div class="fixed inset-0 bg-black/30 dark:bg-black/50"></div>
-  <div class="fixed left-1/2 top-1/2 z-[80] w-full max-w-lg -translate-x-1/2 -translate-y-1/2 transform rounded-xl bg-white p-6 shadow-xl dark:bg-neutral-800">
+  <div
+    class="fixed left-1/2 top-1/2 z-[80] w-full max-w-lg -translate-x-1/2 -translate-y-1/2 transform rounded-xl bg-white p-6 shadow-xl dark:bg-neutral-800"
+  >
     <div class="flex flex-col gap-4">
       <div class="flex items-start justify-between">
         <div>
-          <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-200">
+          <h3
+            class="text-xl font-semibold text-neutral-800 dark:text-neutral-200"
+          >
             Join Our Newsletter
           </h3>
           <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-            Stay informed about our initiatives and how you can help fight food insecurity in Philadelphia.
+            Stay informed about our initiatives and how you can help fight food
+            insecurity in Philadelphia.
           </p>
         </div>
         <button
@@ -78,13 +80,16 @@ interface Props {
           class="close-newsletter text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
         >
           <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
           </svg>
         </button>
       </div>
-      
+
       <form
-        action="https://script.google.com/macros/s/AKfycbwKalp-KaNNhzfpsjE8uWuIC7t7_Gbw3IQMFzZT1vsTmB31zGXi3q8YgFiSZnlRJJ_u5A/exec"
+        action="https://tinyurl.com/feed-philly-form"
         method="POST"
         data-show-success
         data-success-message="Thanks for subscribing to our newsletter!"
@@ -115,82 +120,89 @@ interface Props {
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const yesButton = document.getElementById('feedback-yes');
-    const popup = document.getElementById('newsletter-popup');
-    const closeButtons = document.querySelectorAll('.close-newsletter');
-    const form = document.getElementById('newsletter-form') as HTMLFormElement;
+  document.addEventListener("DOMContentLoaded", () => {
+    const yesButton = document.getElementById("feedback-yes");
+    const popup = document.getElementById("newsletter-popup");
+    const closeButtons = document.querySelectorAll(".close-newsletter");
+    const form = document.getElementById("newsletter-form") as HTMLFormElement;
 
     function showNewsletterPopup() {
       if (popup) {
-        popup.classList.remove('hidden');
+        popup.classList.remove("hidden");
       }
     }
 
     function hideNewsletterPopup() {
       if (popup) {
-        popup.classList.add('hidden');
+        popup.classList.add("hidden");
       }
     }
 
-    yesButton?.addEventListener('click', () => {
+    yesButton?.addEventListener("click", () => {
       showNewsletterPopup();
     });
 
-    closeButtons.forEach(button => {
-      button.addEventListener('click', () => {
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
         hideNewsletterPopup();
       });
     });
 
     // Close on background click
-    popup?.addEventListener('click', (e) => {
+    popup?.addEventListener("click", (e) => {
       if (e.target === popup) {
         hideNewsletterPopup();
       }
     });
 
     // Close on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
         hideNewsletterPopup();
       }
     });
 
     // Handle form submission
-    form?.addEventListener('submit', (e) => {
+    form?.addEventListener("submit", (e) => {
       e.preventDefault();
       const formData = new FormData(form);
-      
+
       // Close popup immediately
       hideNewsletterPopup();
-      
+
       // Process form in background
-      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const submitButton = form.querySelector(
+        'button[type="submit"]',
+      ) as HTMLButtonElement;
       if (submitButton) {
         submitButton.disabled = true;
       }
 
       fetch(form.action, {
-        method: 'POST',
-        mode: 'cors',
+        method: "POST",
+        mode: "cors",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams(formData as any).toString(),
       })
-        .then(response => {
+        .then((response) => {
           if (response.ok || response.redirected) {
             // Show success message after API call completes
-            window.showSuccessPopup?.(form.dataset.successMessage || 'Subscription successful!');
+            window.showSuccessPopup?.(
+              form.dataset.successMessage || "Subscription successful!",
+            );
             form.reset();
           } else {
-            throw new Error('Submission failed');
+            throw new Error("Submission failed");
           }
         })
-        .catch(error => {
-          console.error('Error:', error);
-          window.showSuccessPopup?.('Sorry, something went wrong. Please try again.', true);
+        .catch((error) => {
+          console.error("Error:", error);
+          window.showSuccessPopup?.(
+            "Sorry, something went wrong. Please try again.",
+            true,
+          );
         })
         .finally(() => {
           if (submitButton) {
