@@ -20,7 +20,7 @@ if (!blogEntry) return null;
 <div class="grid gap-8 sm:grid-cols-2 sm:items-center">
   <!-- Container for the blog post's cover image -->
   <div class="sm:order-2">
-    <div class="relative rounded-lg pt-[50%] sm:pt-[100%]">
+    <div class="relative rounded-lg pt-[60%] sm:pt-[80%]">
       {
         blogEntry.data.cardImage && (
           <Image
@@ -41,7 +41,7 @@ if (!blogEntry) return null;
   <div class="sm:order-1">
     <!-- Blog title which is also a hyperlink to the blog detail page  -->
     <h2
-      class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-3xl lg:text-4xl lg:leading-tight xl:text-5xl xl:leading-tight"
+      class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-3xl lg:text-3xl lg:leading-tight xl:text-4xl"
     >
       <a
         class="outline-none ring-zinc-500 transition duration-300 hover:text-green-400 focus-visible:ring dark:text-neutral-300 dark:ring-zinc-200 dark:hover:text-neutral-50 dark:focus:outline-none"
