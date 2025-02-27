@@ -58,7 +58,13 @@ interface Props {
           class="w-full rounded-lg"
           src={imgOne}
           alt={imgOneAlt}
-          format={"avif"}
+          width={600}
+          height={450}
+          loading="lazy"
+          decoding="async"
+          format="avif"
+          quality={80}
+          densities={[1, 1.5, 2]}
         />
       </div>
     ) : (
@@ -68,16 +74,28 @@ interface Props {
           class="w-full rounded-xl"
           src={imgOne}
           alt={imgOneAlt}
-          draggable={"false"}
-          format={"avif"}
+          width={400}
+          height={300}
+          loading="lazy"
+          decoding="async"
+          format="avif"
+          quality={80}
+          densities={[1, 1.5, 2]}
+          draggable="false"
         />
         <!-- Second image in a two-image layout -->
         <Image
           class="mt-4 w-full rounded-xl lg:mt-10"
           src={imgTwo}
           alt={imgTwoAlt}
-          draggable={"false"}
-          format={"avif"}
+          width={400}
+          height={300}
+          loading="lazy"
+          decoding="async"
+          format="avif"
+          quality={80}
+          densities={[1, 1.5, 2]}
+          draggable="false"
         />
       </div>
     )

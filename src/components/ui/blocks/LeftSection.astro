@@ -26,8 +26,14 @@ interface Props {
     class="w-full rounded-xl"
     src={img}
     alt={imgAlt}
-    draggable={"false"}
-    format={"avif"}
+    width={600}
+    height={450}
+    loading="lazy"
+    decoding="async"
+    format="avif"
+    quality={80}
+    densities={[1, 1.5, 2]}
+    draggable="false"
   />
   <!-- The container for title, subtitle, and optional CTA button -->
   <div class="mt-4 md:mt-0">

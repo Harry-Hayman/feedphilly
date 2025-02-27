@@ -44,7 +44,9 @@ const {
     <svg class="absolute h-auto w-full" viewBox="0 0 1200 800" fill="none">
       <path
         d="M600 0C850 0 1000 200 1150 350C1300 500 1200 800 900 800C600 800 300 700 150 500C0 300 100 0 600 0Z"
-        class="fill-green-100/30 dark:fill-green-900/20"></path>
+        class="fill-green-100/30 dark:fill-green-900/20"
+      >
+      </path>
     </svg>
   </div>
 
@@ -55,7 +57,7 @@ const {
       <div class="lg:-mt-24">
         <div class="relative mb-8">
           <h1
-            class="mx-auto mb-6 animate-slide-up text-balance text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-200 sm:text-5xl sm:leading-[1.1] lg:text-6xl lg:leading-[1.1] max-w-5xl"
+            class="mx-auto mb-6 max-w-5xl animate-slide-up text-balance text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-200 sm:text-5xl sm:leading-[1.1] lg:text-6xl lg:leading-[1.1]"
             set:html={title}
           />
           <p
@@ -142,16 +144,16 @@ const {
       <div class="relative ms-4 flex items-center justify-center">
         <Image
           src={src}
-          class="w-full max-w-[340px] rounded-3xl object-cover shadow-2xl transition-all duration-700 hover:scale-[1.02] hover:shadow-2xl hover:shadow-green-200/20 sm:max-w-[460px] lg:max-w-2xl"
+          class="w-full max-w-[340px] rounded-3xl object-cover shadow-2xl sm:max-w-[460px] lg:max-w-2xl"
           alt={alt}
-          width={800}
-          height={600}
+          width={460}
+          height={345}
+          loading="eager"
+          decoding="sync"
+          fetchpriority="high"
+          densities={[1, 1.5, 2]}
+          format="avif"
         />
-        <!-- Decorative shape -->
-        <div
-          class="absolute -left-6 -top-6 -z-10 h-72 w-72 animate-pulse-slow rounded-full bg-green-100/30 dark:bg-green-900/20"
-        >
-        </div>
       </div>
     </div>
   </div>

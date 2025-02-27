@@ -1,17 +1,40 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://identity.netlify.com https://api.netlify.com;" />
     <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
     <title>Content Manager</title>
+    
+    <!-- Preload critical scripts -->
+    <link rel="preload" href="https://identity.netlify.com/v1/netlify-identity-widget.js" as="script" crossorigin="anonymous" />
+    <link rel="preload" href="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js" as="script" crossorigin="anonymous" />
 </head>
 
 <body>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+    <script>
+        // Error handling for script loading
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'SCRIPT') {
+                console.error('Script loading failed:', e.target.src);
+                // You might want to show a user-friendly error message here
+            }
+        }, true);
+    </script>
+    
+    <script
+        src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+        crossorigin="anonymous"
+        defer
+        onerror="console.error('Failed to load Netlify Identity widget')"
+    ></script>
+    <script
+        src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"
+        crossorigin="anonymous"
+        defer
+        onerror="console.error('Failed to load Decap CMS')"
+    ></script>
 </body>
-
 </html>

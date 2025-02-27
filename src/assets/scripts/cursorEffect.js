@@ -1,13 +1,19 @@
-// Add green glow effect that follows the cursor
+// Optimized cursor glow effect
 document.addEventListener('DOMContentLoaded', () => {
   const glow = document.createElement('div');
   glow.classList.add('cursor-glow');
   document.body.appendChild(glow);
 
+  let ticking = false;
+  const updateGlowPosition = (e) => {
+    glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    ticking = false;
+  };
+
   document.addEventListener('mousemove', (e) => {
-    requestAnimationFrame(() => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
-    });
-  });
+    if (!ticking) {
+      requestAnimationFrame(() => updateGlowPosition(e));
+      ticking = true;
+    }
+  }, { passive: true });
 });

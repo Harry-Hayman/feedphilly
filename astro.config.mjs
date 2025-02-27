@@ -22,10 +22,18 @@ export default defineConfig({
     sitemap()
   ],
   image: {
-    // Enable sharp for image optimization
     service: {
       entrypoint: 'astro/assets/services/sharp'
-    }
+    },
+    // Optimize image quality and formats
+    format: ['avif', 'webp'],
+    quality: 80,
+    minimumDimensions: true
+  },
+  compressHTML: true,
+  experimental: {
+    // Extract critical CSS
+    inlineStylesheets: 'always'
   },
   vite: {
     resolve: {
@@ -43,9 +51,22 @@ export default defineConfig({
     build: {
       cssCodeSplit: true,
       assetsDir: '_astro',
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true
+        }
+      },
       rollupOptions: {
         output: {
-          assetFileNames: 'assets/[name][extname]'
+          assetFileNames: 'assets/[name].[hash][extname]',
+          chunkFileNames: 'assets/[name].[hash].js',
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return 'vendor';
+            }
+          }
         }
       }
     },
@@ -54,6 +75,12 @@ export default defineConfig({
         plugins: async () => [
           (await import('tailwindcss')).default,
           (await import('autoprefixer')).default,
+          (await import('cssnano')).default({
+            preset: ['default', {
+              discardComments: { removeAll: true },
+              normalizeWhitespace: true
+            }]
+          })
         ],
       },
     }

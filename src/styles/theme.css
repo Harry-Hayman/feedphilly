@@ -1,20 +1,20 @@
 @tailwind utilities;
 
 :root {
-  /* Primary greens */
-  --color-primary: #449735;
-  --color-primary-dark: #367c2a;
-  --color-primary-light: #B8E5A6;
+  /* Primary greens with improved contrast */
+  --color-primary: #2E7D32;
+  --color-primary-dark: #1B5E20;
+  --color-primary-light: #81C784;
 
-  /* Secondary colors for contrast */
-  --color-secondary: #C3DA49;
-  --color-secondary-dark: #b1c73c;
-  --color-secondary-light: #d4e674;
+  /* Secondary colors with better contrast */
+  --color-secondary: #558B2F;
+  --color-secondary-dark: #33691E;
+  --color-secondary-light: #7CB342;
 
-  /* Accent colors */
-  --color-accent: #F8E9DC;
-  --color-accent-dark: #f0d6c3;
-  --color-accent-light: #fdf5ef;
+  /* Accent colors with improved contrast */
+  --color-accent: #F4511E;
+  --color-accent-dark: #D84315;
+  --color-accent-light: #FF7043;
 
   /* Button colors */
   --btn-primary: var(--color-primary);
@@ -24,6 +24,17 @@
   --btn-secondary: var(--color-primary);
   --btn-secondary-hover: var(--color-primary-dark);
   --btn-secondary-text: #ffffff;
+}
+
+/* Dark mode overrides for better contrast */
+.dark {
+  --color-primary: #66BB6A;
+  --color-primary-dark: #43A047;
+  --color-primary-light: #A5D6A7;
+  
+  --color-accent: #FF8A65;
+  --color-accent-dark: #FF7043;
+  --color-accent-light: #FFAB91;
 }
 
 @layer utilities {

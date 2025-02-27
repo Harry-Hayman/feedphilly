@@ -17,8 +17,8 @@
 }
 
 :root {
-  --primary-color: #449735;
-  --primary-hover: #367c2a;
+  --primary-color: #2E7D32;  /* Darker green for better contrast */
+  --primary-hover: #1B5E20;  /* Even darker for hover state */
 }
 
 /* Custom leaf cursor */
@@ -71,7 +71,7 @@ button:hover,
 
   /* Enhanced button styles */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-2 py-2 text-sm font-medium text-white rounded-lg shadow-lg bg-[#449735] hover:bg-[#367c2a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#449735] transition-all duration-300;
+    @apply inline-flex items-center justify-center px-2 py-2 text-sm font-medium text-white rounded-lg shadow-lg bg-[#2E7D32] hover:bg-[#1B5E20] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2E7D32] transition-all duration-300;
     transform: translateY(0);
   }
 
@@ -85,7 +85,7 @@ button:hover,
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-2 py-2 text-sm font-medium text-white rounded-lg shadow-lg bg-[#449735] hover:bg-[#367c2a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#449735] transition-all duration-300;
+    @apply inline-flex items-center justify-center px-2 py-2 text-sm font-medium text-white rounded-lg shadow-lg bg-[#2E7D32] hover:bg-[#1B5E20] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2E7D32] transition-all duration-300;
     transform: translateY(0);
   }
 
@@ -100,19 +100,28 @@ button:hover,
 
   /* Custom utility classes */
   .bg-primary {
-    @apply bg-green-600;
-  }
-
-  .bg-primary-dark {
     @apply bg-green-700;
   }
 
+  .bg-primary-dark {
+    @apply bg-green-800;
+  }
+
   .text-primary {
-    @apply text-green-600;
+    @apply text-green-700 dark:text-green-400;
+  }
+
+  /* Improve contrast ratio for dark mode */
+  .dark .text-neutral-500 {
+    @apply text-neutral-400;
+  }
+
+  .dark .text-neutral-600 {
+    @apply text-neutral-300;
   }
 
   .bg-primary\/10 {
-    @apply bg-green-100 dark:bg-green-900/20;
+    @apply bg-green-100 dark:bg-green-900/30;
   }
 
   /* Enhanced card styles */
@@ -185,9 +194,35 @@ button:hover,
   @apply outline-none ring-2 ring-green-500 ring-offset-2 dark:ring-offset-neutral-900;
 }
 
-/* Dark mode transition */
+/* Dark mode styles */
 .dark {
   @apply transition-colors duration-300;
+}
+
+.dark body {
+  @apply bg-neutral-900;
+}
+
+/* Dark mode text contrast improvements */
+.dark .text-neutral-500 {
+  @apply text-neutral-400;
+}
+
+.dark .text-neutral-600 {
+  @apply text-neutral-300;
+}
+
+.dark .text-neutral-800 {
+  @apply text-neutral-100;
+}
+
+/* Dark mode background contrast improvements */
+.dark .bg-neutral-100 {
+  @apply bg-neutral-800;
+}
+
+.dark .bg-white\/\[\.075\] {
+  @apply bg-white/[.15];
 }
 
 /* Handle long URLs in blog content */
