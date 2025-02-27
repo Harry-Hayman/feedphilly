@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import netlify from "@astrojs/netlify";
 import { fileURLToPath } from 'url';
 
 // https://astro.build/config
@@ -31,10 +32,6 @@ export default defineConfig({
     minimumDimensions: true
   },
   compressHTML: true,
-  experimental: {
-    // Extract critical CSS
-    inlineStylesheets: 'always'
-  },
   vite: {
     resolve: {
       alias: {
