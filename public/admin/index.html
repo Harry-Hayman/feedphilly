@@ -16,16 +16,17 @@
     }
   </style>
   <!-- Include Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-
-<body>
-  <div id="cms-root"></div>
-  <!-- Include the Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" async defer></script>
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', user => {
+    // Wait for Identity Widget to load
+    function initializeNetlifyIdentity() {
+      const initPromise = window.netlifyIdentity.init({
+        locale: 'en',
+        enableExtternalProviders: true,
+        providers: ['google', 'github']
+      });
+      
+      initPromise.then((user) => {
         if (!user) {
           window.netlifyIdentity.on('login', () => {
             document.location.href = "/admin/";
@@ -33,6 +34,21 @@
         }
       });
     }
+
+    // Initialize when the script loads
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeNetlifyIdentity);
+    } else {
+      initializeNetlifyIdentity();
+    }
+  </script>
+</head>
+
+<body>
+  <div id="cms-root"></div>
+  <!-- Include the Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
 
     // Initialize the CMS
     window.addEventListener('load', function () {
@@ -43,13 +59,12 @@
       CMS.init({
         config: {
           load_config_file: true,
-          local_backend: true,
           backend: {
             name: "git-gateway",
-            branch: "main"
-          },
-          media_folder: "src/images/blog",
-          public_folder: "src/images/blog"
+            branch: "main",
+            identity_url: "https://feedphillycoalition.org/.netlify/identity",
+            gateway_url: "https://feedphillycoalition.org/.netlify/git/github"
+          }
         }
       });
     });

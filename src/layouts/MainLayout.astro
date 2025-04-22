@@ -35,8 +35,7 @@ interface Props {
     <Meta meta={meta} structuredData={structuredData} ogMeta={ogMeta} />
     <!-- Define the title of the page -->
     <title>{title}</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-    ></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" async defer></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -53,15 +52,30 @@ interface Props {
         document.documentElement.classList.remove("dark");
       }
 
-      // Netlify Identity Configuration
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin";
-            });
-          }
-        });
+      // Initialize Netlify Identity with external providers
+      function initializeNetlifyIdentity() {
+        if (window.netlifyIdentity) {
+          const initPromise = window.netlifyIdentity.init({
+            locale: 'en',
+            enableExternal: true,
+            providers: ['google', 'github']
+          });
+          
+          initPromise.then((user) => {
+            if (!user) {
+              window.netlifyIdentity.on('login', () => {
+                document.location.href = "/admin";
+              });
+            }
+          });
+        }
+      }
+
+      // Initialize when the script loads
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeNetlifyIdentity);
+      } else {
+        initializeNetlifyIdentity();
       }
     </script>
   </head>
