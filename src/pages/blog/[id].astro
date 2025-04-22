@@ -39,9 +39,31 @@ const posts = (await getCollection("blog")) as CollectionEntry<"blog">[];
 const relatedPosts = posts.filter((entry) => entry.id !== post.id);
 
 const pageTitle = `${post.data.title} | ${SITE.title}`;
+const ogMeta = {
+  title: post.data.title,
+  description: post.data.description || post.body.slice(0, 160) + "...",
+  image: post.data.cardImage || post.data.authorImage,
+  url: Astro.url.origin + Astro.url.pathname
+};
 ---
 
-<MainLayout title={pageTitle}>
+<MainLayout
+  title={pageTitle}
+  meta={ogMeta.description}
+  ogMeta={ogMeta}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.data.title,
+    description: ogMeta.description,
+    image: ogMeta.image.src,
+    author: {
+      "@type": "Person",
+      name: post.data.author
+    },
+    datePublished: post.data.pubDate,
+    url: ogMeta.url
+  }}>
   <section class="mx-auto max-w-3xl px-4 pb-12 pt-6 sm:px-6 lg:px-8 lg:pt-10">
     <div class="max-w-2xl">
       <div class="mb-6 flex items-center justify-between">

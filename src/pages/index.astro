@@ -37,9 +37,26 @@ const features = [
     svg: "leaf",
   },
 ];
+
+const ogMeta = {
+  title: "Fighting Food Insecurity in Philadelphia",
+  description: "Together, we can create a city where everyone has access to healthy, nutritious food. Join Feed Philly Coalition in making lasting change through collaborative, data-driven solutions.",
+  image: heroImage,
+  url: Astro.url.origin + Astro.url.pathname
+};
 ---
 
-<MainLayout>
+<MainLayout
+  meta={ogMeta.description}
+  ogMeta={ogMeta}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Feed Philly Coalition",
+    description: ogMeta.description,
+    image: ogMeta.image.src,
+    url: ogMeta.url
+  }}>
   <HeroSection
     title="Fighting Food Insecurity in <span class='text-green-500 dark:text-green-400'>Philadelphia</span>"
     subTitle="Together, we can create a city where everyone has access to healthy, nutritious food."

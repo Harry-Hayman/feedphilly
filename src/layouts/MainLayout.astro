@@ -9,7 +9,7 @@ import "../styles/global.css";
 import "../styles/theme.css";
 
 // Setting expected props
-const { title = SITE.title, meta, structuredData, lang = "en" } = Astro.props;
+const { title = SITE.title, meta, structuredData, lang = "en", ogMeta } = Astro.props;
 
 // Interface to type-check the properties
 interface Props {
@@ -17,6 +17,12 @@ interface Props {
   meta?: string;
   structuredData?: object;
   lang?: string;
+  ogMeta?: {
+    title: string;
+    description: string;
+    image: any;
+    url: string;
+  };
 }
 ---
 
@@ -26,7 +32,7 @@ interface Props {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Adding metadata to the HTML document -->
-    <Meta meta={meta} structuredData={structuredData} />
+    <Meta meta={meta} structuredData={structuredData} ogMeta={ogMeta} />
     <!-- Define the title of the page -->
     <title>{title}</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"

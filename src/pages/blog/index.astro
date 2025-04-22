@@ -21,10 +21,19 @@ const subTitle: string =
   "Discover stories, updates, and insights on our mission to fight food insecurity in Philadelphia. Learn about our initiatives, community impact, and how you can get involved.";
 
 const pageTitle: string = `Blog | ${SITE.title}`;
+
+// Create Open Graph metadata for the blog index page
+const ogMeta = {
+  title: title,
+  description: subTitle,
+  image: mostRecentPost?.data.cardImage || mostRecentPost?.data.authorImage,
+  url: Astro.url.origin + Astro.url.pathname
+};
 ---
 
 <MainLayout
   title={pageTitle}
+  ogMeta={ogMeta}
   structuredData={{
     "@context": "https://schema.org",
     "@type": "WebPage",
