@@ -9,7 +9,7 @@ tags:
   - food security
   - philadelphia
 readTime: 5
-authorImageAlt: Gabrielle M.
+authorImageAlt: Harry Hayman
 contents:
   - Understanding Food Insecurity
   - Key Statistics

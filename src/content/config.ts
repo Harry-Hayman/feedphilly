@@ -7,11 +7,11 @@ const blog = defineCollection({
     pubDate: z.date(),
     author: z.string(),
     authorImage: image(),
-    authorImageAlt: z.string(),
+    // authorImageAlt: z.string(),
     cardImage: image(),
     cardImageAlt: z.string(),
     description: z.string(),
-    contents: z.array(z.string()),
+    // contents: z.array(z.string()),
     markdown: z.string().optional(),
     tags: z.array(z.string()).default(['food security']),
     readTime: z.number().optional()
@@ -29,31 +29,12 @@ const team = defineCollection({
   })
 });
 
-const products = defineCollection({
-  type: 'content',
-  schema: ({ image }) => z.object({
-    description: z.string(),
-    main: z.object({
-      imgCard: image(),
-      imgAlt: z.string(),
-    })
-  })
-});
-
-const achivement = defineCollection({
-  type: 'content',
-  schema: z.object({})
-});
-
-const feedphilly = defineCollection({
-  type: 'content',
-  schema: z.object({})
-});
+// Exporting the collections
+// to be used in the Astro project
+// and to be imported in the pages
+// or components where needed
 
 export const collections = {
   blog,
   team,
-  products,
-  achivement,
-  feedphilly
 };

@@ -9,7 +9,13 @@ import "../styles/global.css";
 import "../styles/theme.css";
 
 // Setting expected props
-const { title = SITE.title, meta, structuredData, lang = "en", ogMeta } = Astro.props;
+const {
+  title = SITE.title,
+  meta,
+  structuredData,
+  lang = "en",
+  ogMeta,
+} = Astro.props;
 
 // Interface to type-check the properties
 interface Props {
@@ -35,7 +41,10 @@ interface Props {
     <Meta meta={meta} structuredData={structuredData} ogMeta={ogMeta} />
     <!-- Define the title of the page -->
     <title>{title}</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" async defer></script>
+    <script
+      src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+      async
+      defer></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -56,14 +65,14 @@ interface Props {
       function initializeNetlifyIdentity() {
         if (window.netlifyIdentity) {
           const initPromise = window.netlifyIdentity.init({
-            locale: 'en',
+            locale: "en",
             enableExternal: true,
-            providers: ['google', 'github']
+            providers: ["google", "github"],
           });
-          
+
           initPromise.then((user) => {
             if (!user) {
-              window.netlifyIdentity.on('login', () => {
+              window.netlifyIdentity.on("login", () => {
                 document.location.href = "/admin";
               });
             }
@@ -72,8 +81,11 @@ interface Props {
       }
 
       // Initialize when the script loads
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeNetlifyIdentity);
+      if (document.readyState === "loading") {
+        document.addEventListener(
+          "DOMContentLoaded",
+          initializeNetlifyIdentity,
+        );
       } else {
         initializeNetlifyIdentity();
       }
@@ -89,7 +101,7 @@ interface Props {
       </main>
     </div>
     <FooterSection />
-    <ChatBot />
+    <!-- <ChatBot /> -->
     <script>
       import "@scripts/lenisSmoothScroll.js";
     </script>

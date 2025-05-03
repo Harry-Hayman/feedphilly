@@ -2,7 +2,7 @@
 title: Does Donation Solve Food Insecurity?
 pubDate: 2025-02-18T08:06:00.000Z
 author: Gabrielle M.
-authorImage: /src/images/blog/members/Gabrielle M- President .jpg
+authorImage: src/images/blog/img_5782_3.jpg
 authorImageAlt: Gabrielle M.
 cardImage: src/images/blog/donating_food-2-.png
 cardImageAlt: food-donation-philadelphia

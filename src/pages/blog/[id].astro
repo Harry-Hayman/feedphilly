@@ -43,7 +43,7 @@ const ogMeta = {
   title: post.data.title,
   description: post.data.description || post.body.slice(0, 160) + "...",
   image: post.data.cardImage || post.data.authorImage,
-  url: Astro.url.origin + Astro.url.pathname
+  url: Astro.url.origin + Astro.url.pathname,
 };
 ---
 
@@ -59,11 +59,12 @@ const ogMeta = {
     image: ogMeta.image.src,
     author: {
       "@type": "Person",
-      name: post.data.author
+      name: post.data.author,
     },
     datePublished: post.data.pubDate,
-    url: ogMeta.url
-  }}>
+    url: ogMeta.url,
+  }}
+>
   <section class="mx-auto max-w-3xl px-4 pb-12 pt-6 sm:px-6 lg:px-8 lg:pt-10">
     <div class="max-w-2xl">
       <div class="mb-6 flex items-center justify-between">
@@ -71,7 +72,7 @@ const ogMeta = {
           <Image
             class="inline-block h-12 w-12 rounded-full ring-2 ring-white dark:ring-neutral-800"
             src={post.data.authorImage}
-            alt={post.data.authorImageAlt}
+            alt={`${post.data.author}'s avatar`}
             width={48}
             height={48}
           />
