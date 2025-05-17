@@ -1,7 +1,8 @@
 ---
-name: David Greensburg
+name: David J. Greenburg
 role: Communications Lead
 image: src/images/blog/unnamed.jpg
+authorImageAlt: David J. Greenburg's Portrait
 bio: >-
   Philadelphia native David J. Greenberg is a filmmaker, professor, and author.
   Raised by conscientious activist educators, his set of values, morals, and
