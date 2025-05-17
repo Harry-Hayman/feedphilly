@@ -2,7 +2,7 @@
 title: "Processed Meats: How Dangerous Are They ?"
 pubDate: 2025-05-03T19:41:00.000Z
 draft: true
-author: David Greensburg
+author: David J. Greenburg
 authorImage: src/images/blog/unnamed.jpg
 cardImage: src/images/blog/chatgpt-image-may-1-2025-11_53_41-am.png
 cardImageAlt: "Processed Meats: How Dangerous Are They ?"

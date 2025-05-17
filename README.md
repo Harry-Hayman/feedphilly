@@ -14,3 +14,10 @@ Click the button below to start deploying your project on Netlify:
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/mearashadowfax/feedphilly/tree/monolingual-site)
 
+
+### Testing Locally
+
+npm install -g netlify-cms-proxy-server
+netlify-cms-proxy-server
+
+
