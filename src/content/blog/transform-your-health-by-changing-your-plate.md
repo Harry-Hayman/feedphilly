@@ -2,14 +2,14 @@
 title: Transform Your Health by Changing Your Plate
 pubDate: 2025-05-03T06:34:00.000Z
 draft: true
-author: David Greensburg
+author: David J. Greenburg
 authorImage: src/images/blog/unnamed.jpg
-authorImageAlt: David Greensburg
 cardImage: src/images/blog/chatgpt-image-apr-22-2025-10_22_57-am.png
 cardImageAlt: Transform Your Health by Changing Your Plate
-description: "Transform Your Health by Changing Your Plate"
+description: Transform Your Health by Changing Your Plate
 tags:
   - food security
+authorImageAlt: David Greensburg
 ---
 What if the key to feeling better, having more energy, and even preventing disease was as simple as changing what you eat? It might sound too good to be true, but there’s a growing body of evidence that shows how powerful food can be when it comes to your health.
 
