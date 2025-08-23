@@ -4,7 +4,7 @@ import Meta from "@components/Meta.astro";
 import Navbar from "@components/sections/Navbar.astro";
 import FooterSection from "@components/sections/FooterSection.astro";
 import ChatBot from "@components/ui/chat/ChatBot.astro";
-import { SITE } from "@data/constants.ts";
+import { SITE } from "@data/constants";
 import "../styles/global.css";
 import "../styles/theme.css";
 
@@ -95,7 +95,11 @@ interface Props {
     class="bg-neutral-200 selection:bg-green-400 selection:text-neutral-700 dark:bg-neutral-800"
   >
     <div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
-      <Navbar />
+        <!-- Maintenance Banner -->
+        <div class="bg-yellow-300 text-black text-center py-2 font-semibold w-full rounded-b-lg shadow-md mb-2">
+          Website is under maintenance
+        </div>
+        <Navbar />
       <main class="min-h-screen">
         <slot />
       </main>
