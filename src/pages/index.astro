@@ -6,9 +6,9 @@ import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro
 import TestimonialsSection from "@components/sections/testimonials/TestimonialsSection.astro";
 import FeaturesNavs from "@components/sections/features/FeaturesNavs.astro";
 import heroImage from "@images/feedphilly/hungry_girl_hero_image.webp";
-import donationImage from "@images/feedphilly/feed_philly_donation.png";
+import donationImage from "@images/real_images/20250212_104744.jpeg";
 import teamImage from "@images/feedphilly/feed_philly_team.jpg";
-import warehouseImage from "@images/feedphilly/feed_philly_warehouse.jpg";
+import warehouseImage from "@images/real_images/IMG_0483.jpeg";
 import truckImage from "@images/feedphilly/feed_philly_truck1.jpg";
 
 const features = [
@@ -40,9 +40,10 @@ const features = [
 
 const ogMeta = {
   title: "Fighting Food Insecurity in Philadelphia",
-  description: "Together, we can create a city where everyone has access to healthy, nutritious food. Join Feed Philly Coalition in making lasting change through collaborative, data-driven solutions.",
+  description:
+    "Together, we can create a city where everyone has access to healthy, nutritious food. Join Feed Philly Coalition in making lasting change through collaborative, data-driven solutions.",
   image: heroImage,
-  url: Astro.url.origin + Astro.url.pathname
+  url: Astro.url.origin + Astro.url.pathname,
 };
 ---
 
@@ -55,8 +56,9 @@ const ogMeta = {
     name: "Feed Philly Coalition",
     description: ogMeta.description,
     image: ogMeta.image.src,
-    url: ogMeta.url
-  }}>
+    url: ogMeta.url,
+  }}
+>
   <HeroSection
     title="Fighting Food Insecurity in <span class='text-green-500 dark:text-green-400'>Philadelphia</span>"
     subTitle="Together, we can create a city where everyone has access to healthy, nutritious food."
