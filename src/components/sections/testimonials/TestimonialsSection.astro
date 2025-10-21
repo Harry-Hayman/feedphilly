@@ -31,52 +31,53 @@ type StatProps = {
 };
 ---
 
-<section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
->
+<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
   <!-- Title and Subtitle - Centered -->
-  <div class="mb-8 text-center">
-    <h2
-      class="mb-2 text-3xl font-bold text-neutral-800 dark:text-neutral-200 lg:text-4xl"
-    >
+  <div class="mb-12 text-center">
+    <h2 class="mb-4 text-3xl font-bold text-neutral-800 dark:text-neutral-200 lg:text-4xl">
       {title}
     </h2>
-    {subTitle &&
-    <p class="text-neutral-600 dark:text-neutral-400">
-      {subTitle}
-    </p>
-  }
+    {subTitle && (
+      <p class="mx-auto max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
+        {subTitle}
+      </p>
+    )}
   </div>
 
-  <!-- Container for the testimonials and statistics -->
-  <div class="lg:grid lg:grid-cols-12 lg:items-start lg:gap-16">
+  <!-- Main Content Grid -->
+  <div class="grid gap-8 lg:grid-cols-12 lg:gap-16">
     <!-- Testimonials Carousel -->
     <div class="lg:col-span-6">
       {testimonials && testimonials.length > 0 && (
-        <div class="relative overflow-hidden">
-          <div
-            id="testimonials-carousel"
-            class="flex transition-transform duration-500 ease-in-out"
-            style="width: calc(100% * var(--total-slides));"
-          >
-            {testimonials.map((testimonial, index) => (
-              <div class="w-full flex-shrink-0 px-4">
-                <TestimonialItem
-                  content={testimonial.content}
-                  author={testimonial.author}
-                  role={testimonial.role}
-                  avatarSrc={testimonial.avatarSrc}
-                />
-              </div>
-            ))}
+        <div class="relative">
+          <!-- Carousel Container -->
+          <div class="overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-800/50">
+            <div 
+              id="testimonials-carousel" 
+              class="flex transition-transform duration-700 ease-in-out"
+            >
+              {testimonials.map((testimonial, index) => (
+                <div class="w-full flex-shrink-0">
+                  <div class="p-8 sm:p-12">
+                    <TestimonialItem 
+                      content={testimonial.content} 
+                      author={testimonial.author} 
+                      role={testimonial.role} 
+                      avatarSrc={testimonial.avatarSrc} 
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           
-          <!-- Carousel indicators -->
-          <div class="flex justify-center mt-6 space-x-2">
+          <!-- Navigation Dots -->
+          <div class="mt-6 flex justify-center space-x-3">
             {testimonials.map((_, index) => (
-              <button
-                class="w-2 h-2 rounded-full bg-neutral-300 dark:bg-neutral-600 transition-colors duration-200 testimonial-indicator"
+              <button 
+                class="h-3 w-3 rounded-full transition-all duration-300 testimonial-indicator bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-600 dark:hover:bg-neutral-500"
                 data-slide={index}
+                aria-label={`Go to testimonial ${index + 1}`}
               ></button>
             ))}
           </div>
@@ -84,17 +85,15 @@ type StatProps = {
       )}
     </div>
 
-    <!-- Statistics -->
+    <!-- Statistics Grid -->
     {statistics && (
-      <div class="mt-10 lg:col-span-6 lg:mt-0">
-        <div class="space-y-6 sm:space-y-8">
-          <ul
-            class="grid grid-cols-2 divide-x-2 divide-y-2 divide-neutral-300 overflow-hidden dark:divide-neutral-700"
-          >
-            {statistics.map((stat, index) => (
+      <div class="lg:col-span-6">
+        <div class="grid h-full grid-cols-2 gap-1 overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-700">
+          {statistics.map((stat, index) => (
+            <div class="bg-neutral-50 p-6 sm:p-8 dark:bg-neutral-800">
               <StatsGrid count={stat.count} description={stat.description} index={index}/>
-            ))}
-          </ul>
+            </div>
+          ))}
         </div>
       </div>
     )}
@@ -102,12 +101,8 @@ type StatProps = {
 </section>
 
 <style>
-  :root {
-    --total-slides: 4;
-  }
-  
   .testimonial-indicator.active {
-    @apply bg-green-500 dark:bg-green-400;
+    @apply bg-green-500 dark:bg-green-400 scale-125;
   }
 </style>
 
@@ -120,10 +115,8 @@ type StatProps = {
     
     let currentSlide = 0;
     const totalSlides = indicators.length;
-    const autoScrollDelay = 4000; // 4 seconds
-    
-    // Set CSS custom property for total slides
-    document.documentElement.style.setProperty('--total-slides', totalSlides.toString());
+    const autoScrollDelay = 5000; // 5 seconds
+    let autoScrollInterval: number;
     
     function updateCarousel() {
       if (!carousel) return;
@@ -142,33 +135,37 @@ type StatProps = {
       updateCarousel();
     }
     
-    // Initialize first indicator
+    function startAutoScroll() {
+      autoScrollInterval = window.setInterval(nextSlide, autoScrollDelay);
+    }
+    
+    function stopAutoScroll() {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+      }
+    }
+    
+    // Initialize
     updateCarousel();
+    startAutoScroll();
     
-    // Auto-scroll functionality
-    let autoScrollInterval = setInterval(nextSlide, autoScrollDelay);
-    
-    // Manual navigation with indicators
+    // Manual navigation
     indicators.forEach((indicator, index) => {
       indicator.addEventListener('click', () => {
         currentSlide = index;
         updateCarousel();
         
-        // Reset auto-scroll timer when user interacts
-        clearInterval(autoScrollInterval);
-        autoScrollInterval = setInterval(nextSlide, autoScrollDelay);
+        // Restart auto-scroll
+        stopAutoScroll();
+        startAutoScroll();
       });
     });
     
-    // Pause auto-scroll on hover
-    if (carousel) {
-      carousel.addEventListener('mouseenter', () => {
-        clearInterval(autoScrollInterval);
-      });
-      
-      carousel.addEventListener('mouseleave', () => {
-        autoScrollInterval = setInterval(nextSlide, autoScrollDelay);
-      });
-    }
+    // Pause on hover
+    carousel.addEventListener('mouseenter', stopAutoScroll);
+    carousel.addEventListener('mouseleave', startAutoScroll);
+    
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', stopAutoScroll);
   });
 </script>
