@@ -31,50 +31,141 @@ type StatProps = {
 };
 ---
 
-<section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
->
-  <!-- Container for the testimonials -->
-  <div
-    class="lg:grid lg:grid-cols-12 lg:items-center lg:justify-between lg:gap-16"
-  >
-    <div class="lg:col-span-5 lg:col-start-1">
-      <!-- Title and Subtitle -->
-      <div class="mb-8">
-        <h2
-          class="mb-2 text-3xl font-bold text-neutral-800 dark:text-neutral-200 lg:text-4xl"
-        >
-          {title}
-        </h2>
-        {subTitle &&
-        <p class="text-neutral-600 dark:text-neutral-400">
-          {subTitle}
-        </p>
-      }
-      </div>
+<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+  <!-- Title and Subtitle - Centered -->
+  <div class="mb-12 text-center">
+    <h2 class="mb-4 text-3xl font-bold text-neutral-800 dark:text-neutral-200 lg:text-4xl">
+      {title}
+    </h2>
+    {subTitle && (
+      <p class="mx-auto max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
+        {subTitle}
+      </p>
+    )}
+  </div>
 
-      <!-- Generate a blockquote for each testimonial in the testimonials array by mapping over the array. -->
-      { testimonials &&
-        testimonials.map((testimonial) => (
-        <TestimonialItem content={testimonial.content} author={testimonial.author} role={testimonial.role} avatarSrc={testimonial.avatarSrc} />
-        ))
-      }
+  <!-- Main Content Grid -->
+  <div class="grid gap-8 lg:grid-cols-12 lg:gap-16">
+    <!-- Testimonials Carousel -->
+    <div class="lg:col-span-6">
+      {testimonials && testimonials.length > 0 && (
+        <div class="relative">
+          <!-- Carousel Container -->
+          <div class="overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-800/50">
+            <div 
+              id="testimonials-carousel" 
+              class="flex transition-transform duration-700 ease-in-out"
+            >
+              {testimonials.map((testimonial, index) => (
+                <div class="w-full flex-shrink-0">
+                  <div class="p-8 sm:p-12">
+                    <TestimonialItem 
+                      content={testimonial.content} 
+                      author={testimonial.author} 
+                      role={testimonial.role} 
+                      avatarSrc={testimonial.avatarSrc} 
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <!-- Navigation Dots -->
+          <div class="mt-6 flex justify-center space-x-3">
+            {testimonials.map((_, index) => (
+              <button 
+                class="h-3 w-3 rounded-full transition-all duration-300 testimonial-indicator bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-600 dark:hover:bg-neutral-500"
+                data-slide={index}
+                aria-label={`Go to testimonial ${index + 1}`}
+              ></button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
-{ statistics &&
-    <div class="mt-10 lg:col-span-6 lg:col-end-13 lg:mt-0">
-      <div class="space-y-6 sm:space-y-8">
-        <ul
-          class="grid grid-cols-2 divide-x-2 divide-y-2 divide-neutral-300 overflow-hidden dark:divide-neutral-700"
-        >
-          <!-- Generate a list item for each stat in the statistics array by mapping over the array. -->
-          {
-            statistics.map((stat, index) => (
-            <StatsGrid count={stat.count} description={stat.description} index={index}/>
-            ))
-          }
-        </ul>
+
+    <!-- Statistics Grid -->
+    {statistics && (
+      <div class="lg:col-span-6">
+        <div class="grid h-full grid-cols-2 gap-1 overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-700">
+          {statistics.map((stat, index) => (
+            <div class="bg-neutral-50 p-6 sm:p-8 dark:bg-neutral-800">
+              <StatsGrid count={stat.count} description={stat.description} index={index}/>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  }
+    )}
   </div>
 </section>
+
+<style>
+  .testimonial-indicator.active {
+    @apply bg-green-500 dark:bg-green-400 scale-125;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.getElementById('testimonials-carousel') as HTMLElement | null;
+    const indicators = document.querySelectorAll('.testimonial-indicator') as NodeListOf<HTMLElement>;
+    
+    if (!carousel || indicators.length === 0) return;
+    
+    let currentSlide = 0;
+    const totalSlides = indicators.length;
+    const autoScrollDelay = 5000; // 5 seconds
+    let autoScrollInterval: number;
+    
+    function updateCarousel() {
+      if (!carousel) return;
+      
+      const translateX = -(currentSlide * 100);
+      carousel.style.transform = `translateX(${translateX}%)`;
+      
+      // Update indicators
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+      });
+    }
+    
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+    
+    function startAutoScroll() {
+      autoScrollInterval = window.setInterval(nextSlide, autoScrollDelay);
+    }
+    
+    function stopAutoScroll() {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+      }
+    }
+    
+    // Initialize
+    updateCarousel();
+    startAutoScroll();
+    
+    // Manual navigation
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        currentSlide = index;
+        updateCarousel();
+        
+        // Restart auto-scroll
+        stopAutoScroll();
+        startAutoScroll();
+      });
+    });
+    
+    // Pause on hover
+    carousel.addEventListener('mouseenter', stopAutoScroll);
+    carousel.addEventListener('mouseleave', startAutoScroll);
+    
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', stopAutoScroll);
+  });
+</script>

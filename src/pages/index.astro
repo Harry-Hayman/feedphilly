@@ -5,10 +5,10 @@ import HeroSection from "@components/sections/landing/HeroSection.astro";
 import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
 import TestimonialsSection from "@components/sections/testimonials/TestimonialsSection.astro";
 import FeaturesNavs from "@components/sections/features/FeaturesNavs.astro";
-import heroImage from "@images/feedphilly/hungry_girl_hero_image.webp";
-import donationImage from "@images/feedphilly/feed_philly_donation.png";
+import heroImage from "@images/feedphilly/hero1.png";
+import donationImage from "@images/real_images/20250212_104744.jpeg";
 import teamImage from "@images/feedphilly/feed_philly_team.jpg";
-import warehouseImage from "@images/feedphilly/feed_philly_warehouse.jpg";
+import warehouseImage from "@images/real_images/IMG_0483.jpeg";
 import truckImage from "@images/feedphilly/feed_philly_truck1.jpg";
 
 const features = [
@@ -40,9 +40,10 @@ const features = [
 
 const ogMeta = {
   title: "Fighting Food Insecurity in Philadelphia",
-  description: "Together, we can create a city where everyone has access to healthy, nutritious food. Join Feed Philly Coalition in making lasting change through collaborative, data-driven solutions.",
+  description:
+    "Together, we can create a city where everyone has access to healthy, nutritious food. Join Feed Philly Coalition in making lasting change through collaborative, data-driven solutions.",
   image: heroImage,
-  url: Astro.url.origin + Astro.url.pathname
+  url: Astro.url.origin + Astro.url.pathname,
 };
 ---
 
@@ -55,8 +56,9 @@ const ogMeta = {
     name: "Feed Philly Coalition",
     description: ogMeta.description,
     image: ogMeta.image.src,
-    url: ogMeta.url
-  }}>
+    url: ogMeta.url,
+  }}
+>
   <HeroSection
     title="Fighting Food Insecurity in <span class='text-green-500 dark:text-green-400'>Philadelphia</span>"
     subTitle="Together, we can create a city where everyone has access to healthy, nutritious food."
@@ -93,7 +95,7 @@ const ogMeta = {
         content:
           "We raise awareness about food insecurity through educational campaigns, events, and partnerships.",
         svg: "users",
-        src: teamImage,
+        src: warehouseImage,
         alt: "Feed Philly community awareness",
         second: true,
       },
@@ -118,7 +120,30 @@ const ogMeta = {
         author: "Maria Rodriguez",
         role: "Community Leader | North Philadelphia",
         avatarSrc:
-          "https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?q=80&w=1453&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+          "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
+      },
+      {
+        content:
+          "The coalition's collaborative approach to fighting food insecurity has made a tremendous impact in our community. Their dedication to policy change is inspiring.",
+        author: "David Greensburg",
+        role: "Communications Director | Feed Philly Coalition",
+        avatarSrc:
+          "/src/images/blog/members/David Greensburg-Communications I.jpg",
+      },
+      {
+        content:
+          "I founded Feed Philly Coalition with the vision of bringing together diverse voices to tackle food insecurity. Seeing our collaborative efforts create real policy change and community impact has been incredibly rewarding.",
+        author: "Harry Hayman",
+        role: "Founder | Feed Philly Coalition",
+        avatarSrc: "/src/images/blog/members/harryhayman_founder.jpg",
+      },
+      {
+        content:
+          "The data-driven approach and commitment to addressing root causes of food insecurity sets this coalition apart. Real change is happening.",
+        author: "Sarah Johnson",
+        role: "Policy Advocate | Philadelphia Food Alliance",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=400&fit=crop&crop=face",
       },
     ]}
     statistics={[
@@ -133,6 +158,10 @@ const ogMeta = {
       {
         count: "5+",
         description: "policy initiatives supported",
+      },
+      {
+        count: "1k+",
+        description: "people reached",
       },
     ]}
   />
