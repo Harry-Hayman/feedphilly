@@ -34,47 +34,141 @@ type StatProps = {
 <section
   class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
 >
-  <!-- Container for the testimonials -->
-  <div
-    class="lg:grid lg:grid-cols-12 lg:items-center lg:justify-between lg:gap-16"
-  >
-    <div class="lg:col-span-5 lg:col-start-1">
-      <!-- Title and Subtitle -->
-      <div class="mb-8">
-        <h2
-          class="mb-2 text-3xl font-bold text-neutral-800 dark:text-neutral-200 lg:text-4xl"
-        >
-          {title}
-        </h2>
-        {subTitle &&
-        <p class="text-neutral-600 dark:text-neutral-400">
-          {subTitle}
-        </p>
-      }
-      </div>
-
-      <!-- Generate a blockquote for each testimonial in the testimonials array by mapping over the array. -->
-      { testimonials &&
-        testimonials.map((testimonial) => (
-        <TestimonialItem content={testimonial.content} author={testimonial.author} role={testimonial.role} avatarSrc={testimonial.avatarSrc} />
-        ))
-      }
-    </div>
-{ statistics &&
-    <div class="mt-10 lg:col-span-6 lg:col-end-13 lg:mt-0">
-      <div class="space-y-6 sm:space-y-8">
-        <ul
-          class="grid grid-cols-2 divide-x-2 divide-y-2 divide-neutral-300 overflow-hidden dark:divide-neutral-700"
-        >
-          <!-- Generate a list item for each stat in the statistics array by mapping over the array. -->
-          {
-            statistics.map((stat, index) => (
-            <StatsGrid count={stat.count} description={stat.description} index={index}/>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
+  <!-- Title and Subtitle - Centered -->
+  <div class="mb-8 text-center">
+    <h2
+      class="mb-2 text-3xl font-bold text-neutral-800 dark:text-neutral-200 lg:text-4xl"
+    >
+      {title}
+    </h2>
+    {subTitle &&
+    <p class="text-neutral-600 dark:text-neutral-400">
+      {subTitle}
+    </p>
   }
   </div>
+
+  <!-- Container for the testimonials and statistics -->
+  <div class="lg:grid lg:grid-cols-12 lg:items-start lg:gap-16">
+    <!-- Testimonials Carousel -->
+    <div class="lg:col-span-6">
+      {testimonials && testimonials.length > 0 && (
+        <div class="relative overflow-hidden">
+          <div
+            id="testimonials-carousel"
+            class="flex transition-transform duration-500 ease-in-out"
+            style="width: calc(100% * var(--total-slides));"
+          >
+            {testimonials.map((testimonial, index) => (
+              <div class="w-full flex-shrink-0 px-4">
+                <TestimonialItem
+                  content={testimonial.content}
+                  author={testimonial.author}
+                  role={testimonial.role}
+                  avatarSrc={testimonial.avatarSrc}
+                />
+              </div>
+            ))}
+          </div>
+          
+          <!-- Carousel indicators -->
+          <div class="flex justify-center mt-6 space-x-2">
+            {testimonials.map((_, index) => (
+              <button
+                class="w-2 h-2 rounded-full bg-neutral-300 dark:bg-neutral-600 transition-colors duration-200 testimonial-indicator"
+                data-slide={index}
+              ></button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+
+    <!-- Statistics -->
+    {statistics && (
+      <div class="mt-10 lg:col-span-6 lg:mt-0">
+        <div class="space-y-6 sm:space-y-8">
+          <ul
+            class="grid grid-cols-2 divide-x-2 divide-y-2 divide-neutral-300 overflow-hidden dark:divide-neutral-700"
+          >
+            {statistics.map((stat, index) => (
+              <StatsGrid count={stat.count} description={stat.description} index={index}/>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )}
+  </div>
 </section>
+
+<style>
+  :root {
+    --total-slides: 4;
+  }
+  
+  .testimonial-indicator.active {
+    @apply bg-green-500 dark:bg-green-400;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.getElementById('testimonials-carousel') as HTMLElement | null;
+    const indicators = document.querySelectorAll('.testimonial-indicator') as NodeListOf<HTMLElement>;
+    
+    if (!carousel || indicators.length === 0) return;
+    
+    let currentSlide = 0;
+    const totalSlides = indicators.length;
+    const autoScrollDelay = 4000; // 4 seconds
+    
+    // Set CSS custom property for total slides
+    document.documentElement.style.setProperty('--total-slides', totalSlides.toString());
+    
+    function updateCarousel() {
+      if (!carousel) return;
+      
+      const translateX = -(currentSlide * 100);
+      carousel.style.transform = `translateX(${translateX}%)`;
+      
+      // Update indicators
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+      });
+    }
+    
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+    
+    // Initialize first indicator
+    updateCarousel();
+    
+    // Auto-scroll functionality
+    let autoScrollInterval = setInterval(nextSlide, autoScrollDelay);
+    
+    // Manual navigation with indicators
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        currentSlide = index;
+        updateCarousel();
+        
+        // Reset auto-scroll timer when user interacts
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = setInterval(nextSlide, autoScrollDelay);
+      });
+    });
+    
+    // Pause auto-scroll on hover
+    if (carousel) {
+      carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoScrollInterval);
+      });
+      
+      carousel.addEventListener('mouseleave', () => {
+        autoScrollInterval = setInterval(nextSlide, autoScrollDelay);
+      });
+    }
+  });
+</script>
