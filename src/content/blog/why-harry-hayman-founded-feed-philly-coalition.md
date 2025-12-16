@@ -6,10 +6,10 @@ authorImage: /src/images/blog/members/harryhayman_founder.jpg
 cardImage: src/images/blog/feed-philly-harry-hayman.png
 cardImageAlt: Philadelphia skyline & food insecurity
 tags:
-  harry hayman
-  founder story
-  food security
-  philadelphia
+  - harry hayman
+  - founder story
+  - food security
+  - philadelphia
 readTime: 7
 authorImageAlt: Harry Hayman, Founder
 contents:
