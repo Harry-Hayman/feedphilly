@@ -34,7 +34,7 @@
     "html-minifier-terser": "^7.2.0",
     "lenis": "^1.1.4",
     "marked": "^15.0.7",
-    "preline": "^2.0.3",
+    "preline": "^3.2.3",
     "react-simple-chatbot": "^0.6.1",
     "rehype-prism-plus": "^2.0.0",
     "remark-gfm": "^4.0.1",
