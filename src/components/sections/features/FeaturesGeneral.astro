@@ -21,23 +21,19 @@ interface Props {
 const { title, subTitle, src, alt, features } = Astro.props;
 ---
 
-<section
-  class="mx-auto max-w-[85rem] px-4 pt-2 pb-6 sm:px-6 lg:px-8 lg:pt-4 lg:pb-8 2xl:max-w-full"
->
+<section class="section-tight">
   <!-- Displaying the main content consisting of title, subtitle, and several `IconBlock` components -->
-  <div class="mt-4 grid gap-4 lg:mt-12 lg:grid-cols-3 lg:gap-6">
+  <div class="grid gap-8 lg:grid-cols-3 lg:gap-12">
     <!-- Block for title, subtitle and image -->
     <div class="lg:col-span-1">
       <!-- Rendering title -->
-      <h2
-        class="text-balance text-3xl font-bold text-neutral-800 dark:text-neutral-200 md:text-4xl lg:text-5xl"
-      >
+      <h2 class="text-balance">
         {title}
       </h2>
       <!-- Rendering subtitle -->
       {
         subTitle && (
-          <p class="mt-3 text-pretty text-xl text-neutral-600 dark:text-neutral-400 md:mt-4 lg:text-2xl">
+          <p class="lede mt-4">
             {subTitle}
           </p>
         )
@@ -45,14 +41,21 @@ const { title, subTitle, src, alt, features } = Astro.props;
       <!-- Feature image -->
       {
         src && alt && (
-          <div class="relative mt-6 overflow-hidden rounded-lg lg:mt-8">
+          <div class="relative mt-6 overflow-hidden rounded-xl lg:mt-8">
+            {/* Below the fold: lazy, with explicit dimensions so it reserves
+                its space and does not shift the layout when it arrives. */}
             <Image
               src={src}
               alt={alt}
-              class="h-full w-full object-cover object-center"
+              class="aspect-[4/3] h-full w-full object-cover object-center"
+              width={520}
+              height={390}
+              widths={[360, 520, 720]}
+              sizes="(min-width: 1024px) 22rem, 92vw"
               draggable={"false"}
               format={"avif"}
-              loading={"eager"}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         )

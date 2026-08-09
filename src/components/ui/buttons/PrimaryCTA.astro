@@ -8,22 +8,15 @@ interface Props {
   url?: string;
   noArrow?: boolean;
 }
-// Define CSS classes for styling the button
-const baseClasses =
-  "group inline-flex items-center justify-center gap-x-2 rounded-lg px-4 py-3 text-sm font-bold text-neutral-50 ring-zinc-700 transition duration-300 focus-visible:ring outline-none";
-const borderClasses = "border border-transparent";
-const bgColorClasses =
-  "bg-green-500 hover:bg-green-700 active:bg-green-900 dark:focus:outline-none";
-const disableClasses = "disabled:pointer-events-none disabled:opacity-50";
-const fontSizeClasses = "2xl:text-base";
-const ringClasses = "dark:ring-zinc-200";
+// The old background was bg-green-500 (#22c55e) behind white text: a 2.3:1
+// contrast ratio, well under the 4.5:1 minimum, and the site's reported
+// accessibility failure. .btn-primary uses the darker brand green (5.6:1) and
+// guarantees a 44px tall target.
+const classes = "btn-primary group disabled:pointer-events-none disabled:opacity-50";
 ---
 
 <!-- Link styled as a button, with dynamic title, URL, and optional arrow -->
-<a
-  class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${disableClasses} ${fontSizeClasses} ${ringClasses}`}
-  href={url}
->
+<a class={classes} href={url}>
   {title}
   <!-- Display the arrow based on the 'noArrow' property -->
 

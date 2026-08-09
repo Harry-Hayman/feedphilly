@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import Icon from "@components/ui/icons/Icon.astro";
 
 const { content, author, role, avatarSrc } = Astro.props;
@@ -8,37 +7,63 @@ interface Props {
   content: string;
   author: string;
   role: string;
-  avatarSrc: string;
+  /** Optional. A remote URL, or omitted to fall back to initials. */
+  avatarSrc?: string;
 }
+
+// Initials fallback. Two of these avatars pointed at "/src/images/..." paths,
+// which do not exist in the built site and returned 404 on the homepage.
+const initials = (author || "")
+  .split(/\s+/)
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((part: string) => part[0]?.toUpperCase() ?? "")
+  .join("");
+
+const isRemote = typeof avatarSrc === "string" && /^https?:\/\//.test(avatarSrc);
 ---
 
 <blockquote class="relative">
   <Icon name="quotation" />
 
   <div class="relative z-10">
-    <p class="text-xl italic text-neutral-800 dark:text-neutral-200 break-words hyphens-auto leading-relaxed">
+    <p
+      class="text-pretty text-lg italic leading-relaxed text-neutral-800 dark:text-neutral-200 sm:text-xl"
+    >
       {content}
     </p>
   </div>
 
-  <div class="mt-6">
+  <footer class="mt-6">
     <div class="flex items-center">
       <div class="flex-shrink-0">
-        <Image
-          class="h-8 w-8 rounded-full"
-          src={avatarSrc}
-          alt="Avatar Description"
-          loading={"eager"}
-          width={32}
-          height={32}
-        />
+        {
+          isRemote ? (
+            <img
+              class="h-10 w-10 rounded-full object-cover"
+              src={avatarSrc}
+              alt=""
+              width={40}
+              height={40}
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <span
+              class="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-sm font-bold text-green-900 dark:bg-green-900/50 dark:text-green-100"
+              aria-hidden="true"
+            >
+              {initials || "?"}
+            </span>
+          )
+        }
       </div>
       <div class="ms-4 grow">
-        <div class="font-bold text-neutral-800 dark:text-neutral-200">
+        <cite class="block font-bold not-italic text-neutral-800 dark:text-neutral-200">
           {author}
-        </div>
-        <div class="text-xs text-neutral-500">{role}</div>
+        </cite>
+        <span class="text-sm text-neutral-600 dark:text-neutral-400">{role}</span>
       </div>
     </div>
-  </div>
+  </footer>
 </blockquote>

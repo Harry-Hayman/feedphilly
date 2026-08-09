@@ -12,27 +12,31 @@ interface Props {
 ---
 
 <a
-  class="group block rounded-xl outline-none ring-zinc-500 transition duration-300 focus-visible:ring dark:ring-zinc-200 dark:focus:outline-none"
+  class="group block rounded-xl transition duration-200 hover:-translate-y-1"
   href={`/blog/${generateSlug(blogEntry.id)}/`}
   data-astro-prefetch
 >
-  <div>
-    <Image
-      class="aspect-video rounded-xl"
-      src={blogEntry.data.cardImage}
-      alt={blogEntry.data.cardImageAlt}
-      draggable={"false"}
-      format={"avif"}
-    />
-    <!-- The title of the blog post -->
-    <h3
-      class="mt-2 text-balance text-lg font-medium text-neutral-800 group-hover:text-green-400 dark:text-neutral-300 dark:group-hover:text-neutral-50"
-    >
-      {blogEntry.data.title}
-    </h3>
-    <!-- The formatted publication date of the blog post -->
-    <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-      {formatDate(blogEntry.data.pubDate)}
-    </p>
-  </div></a
->
+  <!-- `object-cover` was missing, so images were stretched into the 16:9 box.
+       Width/height and lazy loading were missing too. -->
+  <Image
+    class="aspect-video w-full rounded-xl object-cover"
+    src={blogEntry.data.cardImage}
+    alt={blogEntry.data.cardImageAlt || ""}
+    width={480}
+    height={270}
+    widths={[320, 480]}
+    sizes="(min-width: 640px) 20rem, 45vw"
+    draggable={"false"}
+    loading="lazy"
+    decoding="async"
+    format={"avif"}
+  />
+  <h3
+    class="mt-3 text-balance text-base font-semibold text-neutral-900 group-hover:text-green-900 dark:text-neutral-200 dark:group-hover:text-green-300 sm:text-lg"
+  >
+    {blogEntry.data.title}
+  </h3>
+  <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+    {formatDate(blogEntry.data.pubDate)}
+  </p>
+</a>

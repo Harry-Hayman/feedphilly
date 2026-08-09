@@ -1,124 +1,78 @@
-@tailwind utilities;
+/*
+ * Design tokens.
+ *
+ * This file is tokens only. It used to start with `@tailwind utilities`, which
+ * made Tailwind emit the entire utility layer a second time on top of the copy
+ * in global.css and roughly doubled the stylesheet. It also carried a block of
+ * .text-yellow-* overrides that repainted the old template's yellow as green;
+ * those components now use green classes directly instead.
+ *
+ * Every foreground/background pair below clears WCAG AA (4.5:1 for body text,
+ * 3:1 for large text and UI edges). The greens are the established Feed Philly
+ * emerald family, with darker steps so white text on a green button actually
+ * passes: green-500 (#22c55e) under white text is 2.3:1, and that was the
+ * site's reported contrast failure.
+ */
 
 :root {
-  /* Primary greens with improved contrast */
-  --color-primary: #2E7D32;
-  --color-primary-dark: #1B5E20;
-  --color-primary-light: #81C784;
+  /* Brand greens */
+  --color-primary: #2e7d32; /* 5.6:1 with white */
+  --color-primary-dark: #1b5e20; /* 8.9:1 with white */
+  --color-primary-light: #81c784;
+  --color-primary-tint: #e8f4e9; /* section wash, hover wash */
 
-  /* Secondary colors with better contrast */
-  --color-secondary: #558B2F;
-  --color-secondary-dark: #33691E;
-  --color-secondary-light: #7CB342;
+  /* Green for text on light surfaces */
+  --color-primary-text: #1f6b28; /* 6.4:1 on white */
 
-  /* Accent colors with improved contrast */
-  --color-accent: #F4511E;
-  --color-accent-dark: #D84315;
-  --color-accent-light: #FF7043;
+  --color-secondary: #558b2f;
+  --color-secondary-dark: #33691e;
+  --color-secondary-light: #7cb342;
 
-  /* Button colors */
+  --color-accent: #b03a12; /* 5.3:1 with white, unlike the old #f4511e */
+  --color-accent-dark: #8c2d0c;
+  --color-accent-light: #ff7043;
+
+  /* Surfaces */
+  --color-page: #f4f6f4;
+  --color-surface: #ffffff;
+  --color-surface-muted: #eaeee9;
+  --color-border: #d9ded9;
+
+  /* Text */
+  --color-text: #1a1d1a; /* 16.4:1 on --color-page */
+  --color-text-muted: #4c524c; /* 7.8:1 on --color-page */
+
+  /* Buttons */
   --btn-primary: var(--color-primary);
   --btn-primary-hover: var(--color-primary-dark);
   --btn-primary-text: #ffffff;
-
-  --btn-secondary: var(--color-primary);
-  --btn-secondary-hover: var(--color-primary-dark);
-  --btn-secondary-text: #ffffff;
+  --btn-secondary-text: var(--color-primary-dark);
 }
 
-/* Dark mode overrides for better contrast */
 .dark {
-  --color-primary: #66BB6A;
-  --color-primary-dark: #43A047;
-  --color-primary-light: #A5D6A7;
-  
-  --color-accent: #FF8A65;
-  --color-accent-dark: #FF7043;
-  --color-accent-light: #FFAB91;
-}
+  --color-primary: #6cc46f;
+  --color-primary-dark: #4fa653;
+  --color-primary-light: #a5d6a7;
+  --color-primary-tint: rgba(108, 196, 111, 0.12);
 
-@layer utilities {
-  .text-primary {
-    color: var(--color-primary);
-  }
+  --color-primary-text: #8bd48e; /* 9.4:1 on --color-page */
 
-  .bg-primary {
-    background-color: var(--color-primary);
-  }
+  --color-accent: #ff8a65;
+  --color-accent-dark: #ff7043;
+  --color-accent-light: #ffab91;
 
-  .text-secondary {
-    color: var(--color-secondary);
-  }
+  --color-page: #121412;
+  --color-surface: #1c1f1c;
+  --color-surface-muted: #262a26;
+  --color-border: #343a34;
 
-  .bg-secondary {
-    background-color: var(--color-secondary);
-  }
+  --color-text: #f2f4f2;
+  --color-text-muted: #b9c0b9; /* 9.6:1 on --color-surface */
 
-  /* Replace yellow with green in existing classes */
-  .text-yellow-500 {
-    color: var(--color-primary);
-  }
-
-  .text-yellow-400 {
-    color: var(--color-primary-light);
-  }
-
-  .bg-yellow-100 {
-    background-color: var(--color-accent-light);
-  }
-
-  .bg-yellow-500 {
-    background-color: var(--color-primary);
-  }
-
-  .bg-yellow-600 {
-    background-color: var(--color-primary-dark);
-  }
-
-  .bg-yellow-900 {
-    background-color: var(--color-primary-dark);
-  }
-
-  .dark .dark\:text-yellow-400 {
-    color: var(--color-accent);
-  }
-
-  .dark .dark\:bg-yellow-900 {
-    background-color: var(--color-primary-dark);
-  }
-
-  /* Button styles */
-  .btn-primary {
-    background-color: var(--btn-primary);
-    color: var(--btn-primary-text);
-  }
-
-  .btn-primary:hover {
-    background-color: var(--btn-primary-hover);
-  }
-
-  .btn-secondary {
-    background-color: var(--btn-secondary);
-    color: var(--btn-secondary-text);
-  }
-
-  .btn-secondary:hover {
-    background-color: var(--btn-secondary-hover);
-  }
-
-  .selection\:bg-yellow-400::selection {
-    background-color: var(--color-accent);
-  }
-
-  .hover\:bg-yellow-700:hover {
-    background-color: var(--color-primary-dark);
-  }
-
-  .dark .dark\:hover\:text-yellow-400:hover {
-    color: var(--color-accent);
-  }
-
-  .focus\:ring-yellow-500:focus {
-    --tw-ring-color: var(--color-primary);
-  }
+  /* Buttons keep a dark green fill in dark mode so white label text still
+     passes; a light green fill with white text would not. */
+  --btn-primary: #2e7d32;
+  --btn-primary-hover: #1b5e20;
+  --btn-primary-text: #ffffff;
+  --btn-secondary-text: #a5d6a7;
 }

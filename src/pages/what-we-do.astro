@@ -95,7 +95,7 @@ const stakeholders = [
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="animate-fade-in text-center">
         <h1
-          class="animate-slide-up text-4xl font-bold uppercase tracking-tight text-green-600 dark:text-green-400 sm:text-5xl md:text-6xl"
+          class="animate-slide-up text-balance"
         >
           Our Work
         </h1>
@@ -111,9 +111,9 @@ const stakeholders = [
         /* Our Impact Section
       <div class="animate-fade-up mt-16 opacity-0 [animation-delay:400ms]">
         <h2
-          class="mb-8 text-center text-3xl font-bold uppercase text-neutral-900 dark:text-white"
+          class="mb-8 text-center"
         >
-          Our <span class="text-green-600 dark:text-green-400">Impact</span>
+          Our <span class="text-green-800 dark:text-green-300">Impact</span>
         </h2>
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {
@@ -165,20 +165,24 @@ const stakeholders = [
     <!-- How We Make Difference Section -->
     <div class="mt-24 animate-fade-up opacity-0 [animation-delay:600ms]">
       <h2
-        class="mb-12 text-center text-3xl font-bold uppercase text-neutral-900 dark:text-white"
+        class="mb-12 text-center"
       >
-        How We Make a <span class="text-green-600 dark:text-green-400"
+        How We Make a <span class="text-green-800 dark:text-green-300"
           >Difference</span
         >
       </h2>
       <div class="grid gap-8 md:grid-cols-2">
         {
+          /*
+            These were <a> elements with no href: not focusable, not
+            crawlable, and flagged by the SEO audit as uncrawlable links.
+            They never linked anywhere, so they are now plain cards.
+          */
           howWeMakeDifference.map((item) => (
-            <a
-              class="group block rounded-lg bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:bg-green-50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:border dark:border-neutral-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
-              aria-label={`Learn more about ${item.heading}`}
+            <div
+              class="group block rounded-xl border border-neutral-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg dark:border-neutral-700 dark:bg-neutral-800"
             >
-              <div class="flex gap-8 p-8">
+              <div class="flex gap-6 p-8">
                 <div class="flex-shrink-0">
                   <span class="bg-primary/10 inline-block rounded-lg p-3 transition-transform duration-300 group-hover:scale-110">
                     <svg
@@ -205,15 +209,15 @@ const stakeholders = [
                   </span>
                 </div>
                 <div class="flex-grow">
-                  <h3 class="mb-3 text-xl font-bold uppercase text-neutral-900 transition-colors duration-300 group-hover:text-green-600 dark:text-white dark:group-hover:text-green-400">
+                  <h3 class="mb-3 text-xl font-bold text-neutral-900 dark:text-neutral-100">
                     {item.heading}
                   </h3>
-                  <p class="text-neutral-600 transition-colors duration-300 group-hover:text-neutral-700 dark:text-neutral-400 dark:group-hover:text-neutral-300">
+                  <p class="text-neutral-700 dark:text-neutral-300">
                     {item.content}
                   </p>
                 </div>
               </div>
-            </a>
+            </div>
           ))
         }
       </div>
@@ -222,9 +226,9 @@ const stakeholders = [
     <!-- Who We Serve Section -->
     <div class="mt-24 animate-fade-up opacity-0 [animation-delay:800ms]">
       <h2
-        class="mb-12 text-center text-3xl font-bold uppercase text-neutral-900 dark:text-white"
+        class="mb-12 text-center"
       >
-        Who We <span class="text-green-600 dark:text-green-400">Serve</span>
+        Who We <span class="text-green-800 dark:text-green-300">Serve</span>
       </h2>
       <div class="grid gap-12 lg:grid-cols-2">
         <Image
@@ -268,7 +272,7 @@ const stakeholders = [
                     </svg>
                   </span>
                   <div>
-                    <h3 class="mb-2 text-lg font-bold uppercase text-neutral-900 dark:text-white">
+                    <h3 class="mb-2 text-lg font-bold text-neutral-900 dark:text-neutral-100">
                       {item.title}
                     </h3>
                     <p class="mt-1 text-neutral-600 dark:text-neutral-400">

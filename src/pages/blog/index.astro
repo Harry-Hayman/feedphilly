@@ -52,20 +52,14 @@ const ogMeta = {
     inLanguage: "en-US",
   }}
 >
-  <section
-    class="mx-auto max-w-[85rem] space-y-8 px-4 pt-16 sm:px-6 lg:px-8 2xl:max-w-full"
-  >
+  <section class="mx-auto max-w-[85rem] px-4 pt-14 sm:px-6 lg:px-8">
     <!--Page header-->
     <div class="mx-auto max-w-3xl text-left sm:text-center">
-      <h1
-        class="block text-balance text-4xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-5xl lg:text-6xl"
-      >
+      <h1 class="text-balance">
         {title}
       </h1>
 
-      <p
-        class="mt-4 text-pretty text-lg text-neutral-600 dark:text-neutral-400"
-      >
+      <p class="lede mt-4">
         {subTitle}
       </p>
     </div>
@@ -73,7 +67,7 @@ const ogMeta = {
 
   {
     blogPosts.length === 0 ? (
-      <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+      <section class="section-tight">
         <div class="text-center">
           <p class="text-lg text-neutral-600 dark:text-neutral-400">
             No blog posts available at the moment. Check back soon!
@@ -82,21 +76,24 @@ const ogMeta = {
       </section>
     ) : (
       <>
-        <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+        {/* The newest article leads the page. It used to sit at the very
+            bottom, below thirteen other cards. */}
+        {mostRecentPost && (
+          <section class="section-tight">
+            <CardBlogRecent blogEntry={mostRecentPost} />
+          </section>
+        )}
+        <section class="section-tight">
+          <h2 class="mb-8 text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+            More articles
+          </h2>
           <!--Blog posts grid-->
           <div class="grid gap-6 lg:grid-cols-2">
-            {otherPosts.map((blogEntry) => (
-              <CardBlog blogEntry={blogEntry} />
+            {otherPosts.map((blogEntry, index) => (
+              <CardBlog blogEntry={blogEntry} eager={index < 2} />
             ))}
           </div>
         </section>
-        {
-          mostRecentPost && (
-            <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
-              <CardBlogRecent blogEntry={mostRecentPost} />
-            </section>
-          )
-        }
       </>
     )
   }

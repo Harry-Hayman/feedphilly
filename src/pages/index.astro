@@ -50,6 +50,7 @@ const ogMeta = {
 <MainLayout
   meta={ogMeta.description}
   ogMeta={ogMeta}
+  preloadImage={heroImage}
   structuredData={{
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -189,7 +190,7 @@ const ogMeta = {
     subTitle="Together, we can create a city where everyone has access to healthy, nutritious food."
     primaryBtn="Get Involved"
     primaryBtnURL="/get-involved"
-    secondaryBtn="Learn More"
+    secondaryBtn="See Our Work"
     secondaryBtnURL="/what-we-do"
     src={heroImage}
     alt="A young girl representing food insecurity in Philadelphia"
@@ -199,7 +200,7 @@ const ogMeta = {
     title="Our Impact"
     subTitle="Feed Philly Coalition is dedicated to creating lasting change through community awareness, policy making, and collaboration with organizations."
     src={donationImage}
-    alt="Feed Philly volunteers collaborating for policy change"
+    alt="Feed Philly Coalition volunteers standing behind boxes of packed food"
     features={features}
   />
 
@@ -212,7 +213,7 @@ const ogMeta = {
           "We engage with government officials and stakeholders to advocate for policies that address food insecurity and promote equity.",
         svg: "box",
         src: warehouseImage,
-        alt: "Feed Philly policy advocacy",
+        alt: "A Feed Philly Coalition meeting around a conference table, with a place card reading Harry G. Hayman",
         first: true,
       },
       {
@@ -220,9 +221,10 @@ const ogMeta = {
         content:
           "We raise awareness about food insecurity through educational campaigns, events, and partnerships.",
         svg: "users",
-        src: warehouseImage,
-        alt: "Feed Philly community awareness",
-        second: true,
+        // Was a second copy of the warehouse photo. Every tab now shows a
+        // different image, which is the point of a tabbed panel.
+        src: teamImage,
+        alt: "Feed Philly Coalition volunteers together in branded shirts",
       },
       {
         heading: "Collaboration",
@@ -230,7 +232,7 @@ const ogMeta = {
           "We collaborate with organizations and coalitions to maximize our positive impact in Philadelphia.",
         svg: "truck",
         src: truckImage,
-        alt: "Feed Philly collaboration",
+        alt: "A Feed Philly Coalition delivery truck loaded for a distribution run",
       },
     ]}
   />

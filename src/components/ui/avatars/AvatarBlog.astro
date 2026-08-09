@@ -5,27 +5,27 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
   blogEntry: CollectionEntry<"blog">;
+  eager?: boolean;
 }
 
-const { blogEntry } = Astro.props;
+const { blogEntry, eager = false } = Astro.props;
 
 // Early return if no blog entry is provided
 if (!blogEntry) return null;
-
-// Default avatar image URL (you might want to replace this with an actual default avatar image)
-const defaultAvatarUrl = "/src/images/blog/members/default-avatar.jpg";
 ---
 
 <div class="flex-shrink-0">
   {
     blogEntry.data.authorImage ? (
       <Image
-        class="size-[46px] rounded-full border-2 border-neutral-50"
+        class="size-[46px] rounded-full border-2 border-neutral-50 object-cover"
         src={blogEntry.data.authorImage}
-        alt={`${blogEntry.data.author}'s avatar`}
+        alt=""
         width={46}
         height={46}
         draggable={"false"}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
         format={"avif"}
       />
     ) : (

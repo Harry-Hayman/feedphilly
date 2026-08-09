@@ -12,11 +12,23 @@ declare global {
 }
 ---
 
+<!--
+  This component is rendered once by the footer newsletter form and again by
+  the contact form, which produced two elements sharing id="success-popup" on
+  /contact. `data-success-popup` marks every instance and the script targets
+  the first one, so the markup stays valid however many forms a page has.
+  role="status" + aria-live announces the result without stealing focus.
+-->
 <div
-  id="success-popup"
-  class="fixed left-1/2 top-24 z-[60] -translate-x-1/2 transform opacity-0 transition-all duration-300 ease-out"
+  data-success-popup
+  role="status"
+  aria-live="polite"
+  class="pointer-events-none fixed left-1/2 top-24 z-[60] -translate-x-1/2 transform opacity-0 transition-opacity duration-300 ease-out"
 >
-  <div class="rounded-lg bg-green-600 px-6 py-3 shadow-lg dark:bg-green-500">
+  <div
+    data-success-popup-box
+    class="rounded-lg bg-green-800 px-6 py-3 shadow-lg dark:bg-green-700"
+  >
     <div class="flex items-center gap-2">
       <svg
         class="h-5 w-5 text-white"
@@ -35,35 +47,31 @@ declare global {
 </div>
 
 <script>
+  let hideTimer: number | undefined;
+
   function showPopup(message: string, isError = false) {
-    const popup = document.getElementById("success-popup");
-    if (popup) {
-      const messageEl = popup.querySelector("p");
-      if (messageEl) messageEl.textContent = message;
+    const popup = document.querySelector<HTMLElement>("[data-success-popup]");
+    if (!popup) return;
 
-      if (isError) {
-        popup
-          .querySelector(".bg-green-600")
-          ?.classList.replace("bg-green-600", "bg-red-600");
-        popup
-          .querySelector(".dark\\:bg-green-500")
-          ?.classList.replace("dark:bg-green-500", "dark:bg-red-500");
-      } else {
-        popup
-          .querySelector(".bg-red-600")
-          ?.classList.replace("bg-red-600", "bg-green-600");
-        popup
-          .querySelector(".dark\\:bg-red-500")
-          ?.classList.replace("dark:bg-red-500", "dark:bg-green-500");
-      }
+    const messageEl = popup.querySelector("p");
+    if (messageEl) messageEl.textContent = message;
 
-      popup.classList.remove("opacity-0", "-translate-y-4");
-      popup.classList.add("opacity-100", "translate-y-0");
-      setTimeout(() => {
-        popup.classList.add("opacity-0", "-translate-y-4");
-        popup.classList.remove("opacity-100", "translate-y-0");
-      }, 3000);
+    const box = popup.querySelector<HTMLElement>("[data-success-popup-box]");
+    if (box) {
+      box.classList.toggle("bg-red-700", isError);
+      box.classList.toggle("dark:bg-red-600", isError);
+      box.classList.toggle("bg-green-800", !isError);
+      box.classList.toggle("dark:bg-green-700", !isError);
     }
+
+    popup.classList.remove("opacity-0");
+    popup.classList.add("opacity-100");
+
+    if (hideTimer) clearTimeout(hideTimer);
+    hideTimer = window.setTimeout(() => {
+      popup.classList.add("opacity-0");
+      popup.classList.remove("opacity-100");
+    }, 5000);
   }
 
   // Add to window for access from inline scripts

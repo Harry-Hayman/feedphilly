@@ -4,6 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import netlify from "@astrojs/netlify";
 import react from "@astrojs/react";
+import rehypeMarkdownImages from "./src/utils/rehype-markdown-images.mjs";
 import { fileURLToPath } from 'url';
 
 // https://astro.build/config
@@ -31,6 +32,12 @@ export default defineConfig({
       filter: (page) => !page.includes('/keystatic'),
     })
   ],
+  // Blog posts are plain .md, so their pipeline is configured here. The
+  // rehypePlugins on the mdx() integration above only ever applied to .mdx
+  // files, of which the site has none.
+  markdown: {
+    rehypePlugins: [rehypeMarkdownImages],
+  },
   image: {
     service: {
       entrypoint: 'astro/assets/services/sharp'

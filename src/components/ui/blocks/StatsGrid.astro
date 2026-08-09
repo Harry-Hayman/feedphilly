@@ -1,22 +1,21 @@
 ---
-import Icon from "@components/ui/icons/Icon.astro";
-
-const { count, description, index } = Astro.props;
+const { count, description } = Astro.props;
 
 interface Props {
   count: string;
   description: string;
-  index: number;
+  index?: number;
 }
 ---
 
-<li class="-m-0.5 flex flex-col p-4 sm:p-8">
+<li class="flex flex-col bg-white p-6 dark:bg-neutral-800 sm:p-8">
   <div
-    class="mb-2 flex items-end gap-x-2 text-3xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-5xl"
+    class="mb-2 flex items-end gap-x-2 text-3xl font-bold text-neutral-900 dark:text-neutral-100 sm:text-5xl"
   >
-    <span class="stats-arrow">
-      {index === 1 || index === 2 ? <Icon name="arrowUp" /> : null}
-    </span>
+    {/*
+      The arrow used to appear on items 1 and 2 only, with no rule behind it,
+      which read as a rendering bug. It is gone: the numbers carry themselves.
+    */}
     {count}
   </div>
   <p class="text-sm text-neutral-600 dark:text-neutral-400 sm:text-base">

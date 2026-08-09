@@ -12,7 +12,7 @@ import BrandLogo from "@components/BrandLogo.astro";
 >
   <!-- Navigation container -->
   <nav
-    class="relative mx-2 w-full rounded-[36px] border border-yellow-100/40 bg-yellow-50/60 px-4 py-3 backdrop-blur-md dark:border-neutral-700/40 dark:bg-neutral-800/80 dark:backdrop-blur-md md:flex md:items-center md:justify-between md:px-6 md:py-0 lg:px-8 xl:mx-auto"
+    class="relative mx-2 w-full rounded-[36px] border border-green-700/10 bg-white/85 px-4 py-3 shadow-sm backdrop-blur-md dark:border-neutral-700/40 dark:bg-neutral-800/85 dark:backdrop-blur-md md:flex md:items-center md:justify-between md:px-6 md:py-0 lg:px-8 xl:mx-auto"
     aria-label="Global"
   >
     <div class="flex items-center justify-between md:w-auto">
@@ -202,6 +202,10 @@ import BrandLogo from "@components/BrandLogo.astro";
 <!--https://preline.co/plugins/html/collapse.html-->
 <!--https://preline.co/plugins/html/overlay.html-->
 <script>
+  // Only the mobile menu collapse is used on this site.
+  // `@preline/overlay` was also imported here even though no page has a modal
+  // or offcanvas. It threw "Cannot read properties of undefined (reading
+  // 'length')" from its resize handler on every mobile page load, and it was
+  // the largest part of this bundle.
   import "@preline/collapse/index.js";
-  import "@preline/overlay/index.js";
 </script>

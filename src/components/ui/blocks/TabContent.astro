@@ -3,7 +3,7 @@
 import { Image } from "astro:assets";
 
 // Destructure the component properties from Astro.props
-const { id, aria, src, alt, first, second } = Astro.props;
+const { id, aria, src, alt, first } = Astro.props;
 
 // Define TypeScript interface for the properties
 interface Props {
@@ -14,20 +14,26 @@ interface Props {
   first?: boolean;
   second?: boolean;
 }
-
-// Set class based on image type
-const imageClass = second
-  ? "shadow-xl aspect-[5/4] bg-neutral-300 dark:bg-neutral-600 object-cover p-3 lg:aspect-auto shadow-neutral-200 rounded-xl dark:shadow-neutral-900/[.2]"
-  : "shadow-xl aspect-[4/3] object-cover lg:aspect-[16/10] shadow-neutral-200 rounded-xl dark:shadow-neutral-900/[.2]";
 ---
 
 <div id={id} role="tabpanel" class="hidden" aria-labelledby={aria}>
+  {/*
+    No width/height was set here, so Astro emitted the source file at its full
+    intrinsic size: one of these is a 4075px wide photograph rendered into a
+    520px box. The `second` variant also painted a grey plate behind the image
+    for no reason, which read as a broken panel.
+  */}
   <Image
     src={src}
     alt={alt}
-    class={imageClass}
+    class="aspect-[4/3] w-full rounded-xl object-cover shadow-xl shadow-neutral-200 dark:shadow-neutral-900/[.2] lg:aspect-[16/10]"
+    width={720}
+    height={450}
+    widths={[420, 720, 1040]}
+    sizes="(min-width: 1024px) 34rem, 92vw"
     draggable={"false"}
     format={"avif"}
-    loading={"eager"}
+    loading={first ? "eager" : "lazy"}
+    decoding="async"
   />
 </div>

@@ -9,41 +9,49 @@
 @layer base {
   html {
     font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--color-text);
+    -webkit-text-size-adjust: 100%;
   }
 
-  p {
+  body {
+    background-color: var(--color-page);
+  }
+
+  p,
+  li {
     font-family: 'Open Sans', system-ui, sans-serif;
   }
-}
 
-:root {
-  --primary-color: #2E7D32;  /* Darker green for better contrast */
-  --primary-hover: #1B5E20;  /* Even darker for hover state */
-}
+  /* A consistent type scale. Chrome also warns that an <h1> inside <section>
+     has no explicit font-size ("H1UserAgentFontSizeInSection" deprecation),
+     which is what the Best Practices audit flagged. Setting these removes the
+     warning and stops h1 size depending on nesting depth. */
+  h1 {
+    @apply text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl;
+  }
 
-/* Custom leaf cursor */
-body,
-* {
-  cursor: url('data:image/x-icon;base64,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'), auto !important;
-}
+  h2 {
+    @apply text-3xl font-bold leading-tight tracking-tight sm:text-4xl;
+  }
 
-/* Interactive elements hover effect */
-button:hover,
-[role="button"]:hover {
-  box-shadow: 0 0 15px rgba(68, 151, 53, 0.5);
-  transition: box-shadow 0.3s ease;
-}
+  h3 {
+    @apply text-xl font-bold leading-snug sm:text-2xl;
+  }
 
-/* Add smooth transitions to all interactive elements except links */
-*:not(a) {
-  @apply transition-all duration-300 ease-in-out;
+  h4 {
+    @apply text-lg font-semibold leading-snug;
+  }
+
+  /* Anchor targets clear the sticky header. */
+  :target {
+    scroll-margin-top: 6rem;
+  }
 }
 
 @layer components {
-
-  /* Image optimization classes */
+  /* Image helpers */
   .img-optimize {
-    @apply object-cover w-full h-full transition-transform duration-500;
+    @apply h-full w-full object-cover transition-transform duration-500;
   }
 
   .img-optimize:hover {
@@ -55,179 +63,169 @@ button:hover,
     aspect-ratio: 16/9;
   }
 
-  /* Abstract shapes */
-  .shape-blur {
-    @apply absolute pointer-events-none;
-    filter: blur(60px);
-    transform: translate3d(0, 0, 0);
+  /*
+   * Buttons.
+   *
+   * Both .btn-primary and .btn-secondary used to be the identical solid green
+   * pill at px-2 py-2 text-sm: no visual hierarchy, and a ~32px tall target
+   * against the 44px minimum. They are now distinct and comfortably tappable.
+   */
+  .btn-base {
+    @apply inline-flex min-h-[2.75rem] items-center justify-center gap-x-2 rounded-lg px-5 py-3 text-base font-semibold;
+    @apply transition-colors duration-200 ease-out;
   }
 
-  /* Hero section decorative elements */
-  .hero-decoration {
-    @apply absolute -z-10;
-    background: radial-gradient(circle at center, var(--primary-color) 0%, transparent 70%);
-    opacity: 0.1;
-  }
-
-  /* Enhanced button styles */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-2 py-2 text-sm font-medium text-white rounded-lg shadow-lg bg-[#2E7D32] hover:bg-[#1B5E20] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2E7D32] transition-all duration-300;
-    transform: translateY(0);
+    @apply btn-base shadow-sm;
+    background-color: var(--btn-primary);
+    color: var(--btn-primary-text);
   }
 
   .btn-primary:hover {
-    @apply shadow-xl;
-    transform: translateY(-2px);
-  }
-
-  .btn-primary:active {
-    transform: translateY(0);
+    background-color: var(--btn-primary-hover);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-2 py-2 text-sm font-medium text-white rounded-lg shadow-lg bg-[#2E7D32] hover:bg-[#1B5E20] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2E7D32] transition-all duration-300;
-    transform: translateY(0);
+    @apply btn-base border-2 bg-transparent;
+    border-color: var(--btn-primary);
+    color: var(--btn-secondary-text);
   }
 
   .btn-secondary:hover {
-    @apply shadow-lg;
-    transform: translateY(-2px);
+    background-color: var(--color-primary-tint);
   }
 
-  .btn-secondary:active {
-    transform: translateY(0);
+  /* Section rhythm, so pages stop mixing py-10 / py-12 / mt-24 arbitrarily. */
+  .section {
+    @apply mx-auto max-w-[85rem] px-4 py-14 sm:px-6 lg:px-8 lg:py-20;
   }
 
-  /* Custom utility classes */
+  .section-tight {
+    @apply mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14;
+  }
+
+  .section-header {
+    @apply mx-auto mb-10 max-w-3xl text-center lg:mb-14;
+  }
+
+  .lede {
+    @apply text-pretty text-lg sm:text-xl;
+    color: var(--color-text-muted);
+  }
+
+  /* Utility colour classes used across components */
   .bg-primary {
-    @apply bg-green-700;
+    background-color: var(--color-primary);
   }
 
   .bg-primary-dark {
-    @apply bg-green-800;
+    background-color: var(--color-primary-dark);
   }
 
   .text-primary {
-    @apply text-green-700 dark:text-green-400;
-  }
-
-  /* Improve contrast ratio for dark mode */
-  .dark .text-neutral-500 {
-    @apply text-neutral-400;
-  }
-
-  .dark .text-neutral-600 {
-    @apply text-neutral-300;
+    color: var(--color-primary-text);
   }
 
   .bg-primary\/10 {
-    @apply bg-green-100 dark:bg-green-900/30;
+    background-color: var(--color-primary-tint);
   }
 
-  /* Enhanced card styles */
+  /* Cards */
   .card {
-    @apply bg-white rounded-lg shadow-lg p-6 dark:bg-neutral-800 transition-all duration-300;
+    @apply rounded-xl p-6 shadow-sm;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
   }
 
   .card-hover {
-    @apply hover:shadow-xl hover:-translate-y-1 transition-all duration-300;
+    @apply transition duration-200;
   }
 
-  /* Navigation link animations */
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-lg;
+  }
+
+  /* Navigation underline */
   .nav-link {
     @apply relative;
   }
 
   .nav-link::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300;
+    @apply absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-200;
+    background-color: var(--color-primary);
   }
 
   .nav-link:hover::after {
     @apply w-full;
   }
 
-  /* Form input animations */
   .form-input {
-    @apply transition-all duration-300 border-2 border-transparent focus:border-green-500 focus:ring-1 focus:ring-green-500;
+    @apply border-2 border-transparent transition-colors duration-200 focus:border-green-700 focus:ring-1 focus:ring-green-700;
   }
 
-  /* Testimonial card animations */
-  .testimonial-card {
-    @apply transition-all duration-500;
-  }
-
-  .testimonial-card:hover {
-    @apply transform -translate-y-2 shadow-xl;
-  }
-
-  /* Stats arrow animation */
-  @keyframes popStats {
-
-    0%,
-    100% {
-      transform: scale(1);
-    }
-
-    50% {
-      transform: scale(1.6);
-    }
-  }
-
-  .stats-arrow {
-    @apply inline-block;
-    animation: popStats 2s infinite ease-in-out;
-  }
-
-  /* Feature icon animations */
   .feature-icon {
-    @apply transition-transform duration-300;
+    @apply transition-transform duration-200;
   }
 
   .feature-icon:hover {
-    @apply transform scale-110;
+    @apply scale-110 transform;
   }
 }
 
-/* Global focus styles */
+/*
+ * Global focus ring. Uses the darker green so the ring itself is visible
+ * against both the page and white cards.
+ */
 *:focus-visible {
-  @apply outline-none ring-2 ring-green-500 ring-offset-2 dark:ring-offset-neutral-900;
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
-/* Dark mode styles */
-.dark {
-  @apply transition-colors duration-300;
+/* Blog body copy */
+.prose {
+  color: var(--color-text);
 }
 
-.dark body {
-  @apply bg-neutral-900;
-}
-
-/* Dark mode text contrast improvements */
-.dark .text-neutral-500 {
-  @apply text-neutral-400;
-}
-
-.dark .text-neutral-600 {
-  @apply text-neutral-300;
-}
-
-.dark .text-neutral-800 {
-  @apply text-neutral-100;
-}
-
-/* Dark mode background contrast improvements */
-.dark .bg-neutral-100 {
-  @apply bg-neutral-800;
-}
-
-.dark .bg-white\/\[\.075\] {
-  @apply bg-white/[.15];
-}
-
-/* Handle long URLs in blog content */
 .prose a {
-  word-break: break-word;
+  /* `break-all` used to be applied here, which chopped ordinary link text in
+     the middle of words. Only break where a word genuinely cannot fit. */
   overflow-wrap: break-word;
-  @apply break-all;
+  word-break: normal;
+  color: var(--color-primary-text);
+  text-underline-offset: 2px;
 }
+
+.dark .prose a {
+  color: var(--color-primary-light);
+}
+
+/*
+ * Respect the user's motion preference. The site animates hero and section
+ * entrances by default, which is disorienting for people who ask for less.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Removed from this file, deliberately:
+ *
+ * 1. A 16 KB base64 .ico "leaf cursor" applied to `body, *` with !important.
+ *    It shipped in the critical stylesheet on every page, overrode the text
+ *    and pointer cursors that tell people what is interactive, and could not
+ *    be turned off.
+ * 2. `*:not(a) { transition: all 300ms }`, which put a transition on every
+ *    element on the page, including ones that never change, and made the
+ *    browser watch every animatable property on all of them.
+ * 3. Two duplicated `.dark .text-neutral-*` override blocks.
+ * 4. `button:hover { box-shadow: 0 0 15px ... }` on every button everywhere.
+ */

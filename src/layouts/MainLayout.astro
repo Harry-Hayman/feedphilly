@@ -3,10 +3,9 @@
 import Meta from "@components/Meta.astro";
 import Navbar from "@components/sections/Navbar.astro";
 import FooterSection from "@components/sections/FooterSection.astro";
-import ChatBot from "@components/ui/chat/ChatBot.astro";
 import { SITE } from "@data/constants";
+import { getImage } from "astro:assets";
 import "../styles/global.css";
-import "../styles/theme.css";
 
 // Setting expected props
 const {
@@ -15,6 +14,8 @@ const {
   structuredData,
   lang = "en",
   ogMeta,
+  preloadImage,
+  preloadImageSizes = "(min-width: 1024px) 42rem, (min-width: 640px) 460px, 90vw",
 } = Astro.props;
 
 // Interface to type-check the properties
@@ -29,11 +30,32 @@ interface Props {
     image: any;
     url: string;
   };
+  /**
+   * The page's LCP image. Preloaded in <head> so the browser starts fetching
+   * it before it has parsed down to the <img>, which is what the
+   * "LCP request discovery" audit asks for. Pass the same imported image the
+   * page renders.
+   */
+  preloadImage?: ImageMetadata;
+  preloadImageSizes?: string;
 }
+
+// Build the same responsive set the hero renders, so the preload matches the
+// request the <img> will make instead of adding a second, unused download.
+const heroPreload = preloadImage
+  ? await getImage({
+      src: preloadImage,
+      width: 672,
+      height: 504,
+      widths: [340, 460, 672, 900],
+      sizes: preloadImageSizes,
+      format: "avif",
+    })
+  : null;
 ---
 
 <!doctype html>
-<html lang={lang} class="scrollbar-hide lenis lenis-smooth scroll-pt-16">
+<html lang={lang} class="scroll-smooth scroll-pt-24">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,6 +63,19 @@ interface Props {
     <Meta meta={meta} structuredData={structuredData} ogMeta={ogMeta} />
     <!-- Define the title of the page -->
     <title>{title}</title>
+    {
+      heroPreload && (
+        <link
+          rel="preload"
+          as="image"
+          type="image/avif"
+          href={heroPreload.src}
+          imagesrcset={heroPreload.srcSet.attribute}
+          imagesizes={preloadImageSizes}
+          fetchpriority="high"
+        />
+      )
+    }
     <script is:inline>
       // Script to handle dark mode. It will check if the theme is stored in localStorage or if dark theme is preferred by system settings
       if (
@@ -54,19 +89,26 @@ interface Props {
       }
     </script>
   </head>
-  <body
-    class="bg-neutral-200 selection:bg-green-400 selection:text-neutral-700 dark:bg-neutral-800"
-  >
+  <body class="selection:bg-green-200 selection:text-neutral-900">
+    <a
+      class="sr-only rounded-lg bg-white px-4 py-3 font-semibold text-green-900 focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:shadow-lg"
+      href="#main-content"
+    >
+      Skip to main content
+    </a>
     <div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
       <Navbar />
-      <main class="min-h-screen">
+      <main id="main-content" class="min-h-screen">
         <slot />
       </main>
       <FooterSection />
     </div>
-    <!-- <ChatBot /> -->
-    <script>
-      import "@scripts/lenisSmoothScroll.js";
-    </script>
+    <!--
+      The Lenis smooth-scroll script used to load here. It cost ~14 KB of
+      JavaScript, ran a requestAnimationFrame loop for the entire life of the
+      page, and took scrolling away from the browser. Tailwind's `scroll-smooth`
+      on <html> gives smooth anchor scrolling for free, and the browser turns it
+      off automatically when the visitor prefers reduced motion.
+    -->
   </body>
 </html>

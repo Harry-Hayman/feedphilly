@@ -7,9 +7,11 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
   blogEntry: CollectionEntry<"blog">;
+  /** Cards above the fold render eagerly; everything below lazy loads. */
+  eager?: boolean;
 }
 
-const { blogEntry } = Astro.props;
+const { blogEntry, eager = false } = Astro.props;
 
 // Early return if no blog entry is provided
 if (!blogEntry) return null;
@@ -20,55 +22,68 @@ if (!blogEntry) return null;
      The data-astro-prefetch is an Astro specific Dynamic HTML feature,
      which automatically prefetches the linked page to speed up navigation. -->
 <a
-  class="group relative block rounded-xl outline-none ring-zinc-500 transition duration-500 focus-visible:ring dark:ring-zinc-200 dark:focus:outline-none"
+  class="group relative block overflow-hidden rounded-xl transition duration-300 hover:-translate-y-1 hover:shadow-xl"
   href={`/blog/${generateSlug(blogEntry.id)}/`}
   data-astro-prefetch
 >
-  <!-- The container for the blog post's cover image. Uses astro:assets' Image for image source -->
-  <div
-    class="relative h-[350px] w-full flex-shrink-0 overflow-hidden rounded-xl before:absolute before:inset-x-0 before:z-[1] before:size-full before:bg-gradient-to-t before:from-neutral-900/[.7]"
-  >
+  <!--
+    The scrim. It used to be a top-only gradient, so titles sitting at the
+    bottom of the card landed on whatever the photograph happened to be there:
+    on several cards white text fell on a bright sky or on text baked into the
+    image itself, and was unreadable. This runs bottom-up and is opaque enough
+    at the base to guarantee contrast on any image.
+  -->
+  <div class="relative h-[22rem] w-full flex-shrink-0 overflow-hidden rounded-xl">
     {
       blogEntry.data.cardImage && (
         <Image
-          class="absolute start-0 top-0 size-full object-cover transition duration-500 group-hover:scale-110"
+          class="absolute start-0 top-0 size-full object-cover transition duration-500 group-hover:scale-105"
           src={blogEntry.data.cardImage}
-          alt={blogEntry.data.cardImageAlt || "Blog post image"}
+          alt={blogEntry.data.cardImageAlt || ""}
           draggable={"false"}
-          loading={"eager"}
+          loading={eager ? "eager" : "lazy"}
+          decoding={eager ? "sync" : "async"}
           format={"avif"}
           width={800}
-          height={350}
+          height={352}
+          widths={[420, 640, 800]}
+          sizes="(min-width: 1024px) 40rem, 92vw"
         />
       )
     }
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/55 to-neutral-950/20"
+    >
+    </div>
   </div>
-  <!-- The container for the blog author's avatar and associated metadata (author name and publication date) -->
+
+  <!-- Author and publication date -->
   <div class="absolute inset-x-0 top-0 z-10">
     <div class="flex h-full flex-col p-4 sm:p-6">
       <div class="flex items-center">
-        <AvatarBlog blogEntry={blogEntry} />
+        <AvatarBlog blogEntry={blogEntry} eager={eager} />
 
         <div class="ms-2.5 sm:ms-4">
-          <h4 class="font-bold text-neutral-50">
+          <p class="text-sm font-bold text-white">
             {blogEntry.data.author}
-          </h4>
-          <p class="text-xs text-neutral-50/[.8]">
+          </p>
+          <p class="text-xs text-neutral-200">
             {formatDate(blogEntry.data.pubDate)}
           </p>
         </div>
       </div>
     </div>
   </div>
-  <!-- The container for the blog post's title and description -->
+
+  <!-- Title and description -->
   <div class="absolute inset-x-0 bottom-0 z-10">
     <div class="flex h-full flex-col p-4 sm:p-6">
       <h3
-        class="text-balance text-lg font-bold text-neutral-50 group-hover:text-neutral-50/[.8] sm:text-3xl"
+        class="text-balance text-xl font-bold text-white sm:text-2xl"
       >
         {blogEntry.data.title}
       </h3>
-      <p class="mt-2 text-pretty text-neutral-50/[.8]">
+      <p class="mt-2 line-clamp-3 text-pretty text-sm text-neutral-100 sm:text-base">
         {blogEntry.data.description}
       </p>
     </div>
