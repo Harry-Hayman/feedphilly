@@ -3,8 +3,8 @@ title: Food Insecurity Crisis in Philadelphia
 pubDate: 2025-02-17T21:26:00.000Z
 author: Harry Hayman
 authorImage: /src/images/blog/members/harryhayman_founder.jpg
-cardImage: src/images/real_images/20250212_104744.jpeg
-cardImageAlt: Volunteers standing behind boxes of donated fresh produce at a food distribution
+cardImage: src/images/blog/hungry_philadelphian_people.png
+cardImageAlt: Food insecurity in Philadelphia
 tags:
   - food security
   - philadelphia
