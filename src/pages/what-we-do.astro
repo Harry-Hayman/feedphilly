@@ -2,39 +2,12 @@
 import MainLayout from "@/layouts/MainLayout.astro";
 import { Image } from "astro:assets";
 import { ORGANIZATION_SCHEMA } from "@data/constants";
-import donationImage from "@images/feedphilly/feed_philly_donation_2.png";
-import teamImage from "@images/feedphilly/feed_philly_team.jpg";
-import warehouseImage from "@images/feedphilly/feed_philly_warehouse.jpg";
 import childrenImage from "@images/feedphilly/work.png";
 
-const impact = [
-  {
-    heading: "25+",
-    text: "25+",
-    content:
-      "Organizations collaborating for policy change and community awareness",
-    icon: "chart-bar",
-  },
-  {
-    heading: "10+",
-    text: "10+",
-    content: "Community awareness campaigns launched",
-    icon: "users-group",
-  },
-  {
-    heading: "5+",
-    text: "5+",
-    content: "Policy initiatives supported at the government level",
-    icon: "location",
-  },
-  {
-    heading: "100%",
-    text: "100%",
-    content: "Commitment to data-driven solutions and sustainable impact",
-    icon: "chart-line",
-    isPercentage: true,
-  },
-];
+// Note: the "Our Impact" block below is commented out in the template, and the
+// three images it used along with the `impact` array were imported but never
+// rendered. Removed to keep the type check clean; the markup is still there in
+// the comment if the block is ever restored.
 
 const howWeMakeDifference = [
   {

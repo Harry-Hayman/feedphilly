@@ -50,7 +50,7 @@ const relatedPosts = posts
 const pageTitle = `${post.data.title} | ${SITE.title}`;
 const ogMeta = {
   title: post.data.title,
-  description: post.data.description || post.body.slice(0, 160) + "...",
+  description: post.data.description || (post.body ?? "").slice(0, 160) + "...",
   image: post.data.cardImage || post.data.authorImage,
   url: Astro.url.origin + Astro.url.pathname,
 };
