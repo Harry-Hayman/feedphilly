@@ -128,6 +128,19 @@ list it. In GitHub mode Keystatic reads from GitHub and **will** show it.
 Never run `git sparse-checkout` commands in this clone, and never let anything
 stage a deletion of that file.
 
+**That post's URL changed.** The old slug helper kept the colon in the address:
+
+    /blog/philadelphia-food-insecurity-solutions:-your-guide-to-free-nutritional-resources/
+
+Astro's Content Layer slugifies the colon away, so it is now:
+
+    /blog/philadelphia-food-insecurity-solutions-your-guide-to-free-nutritional-resources/
+
+`netlify.toml` 301s the old address to the new one, so rankings and inbound
+links carry over. This is the **only** URL on the site that moved; all 14 other
+articles and every page kept their exact address, verified by diffing the built
+page list before and after.
+
 ## Rolling back
 
 The old Decap setup was `public/admin/`, `src/pages/admin.html` and the Netlify

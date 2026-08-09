@@ -24,6 +24,24 @@
   status = 301
   force = true
 
+# One article's file name contains a colon:
+#   "Philadelphia Food Insecurity Solutions: Your Guide to Free Nutritional
+#    Resources.md"
+# The old slug helper kept that colon in the URL. Astro's Content Layer
+# slugifies it away, so this one post moved. Every other URL is unchanged.
+# 301 the old address so the existing ranking and any inbound links carry over.
+[[redirects]]
+  from = "/blog/philadelphia-food-insecurity-solutions:-your-guide-to-free-nutritional-resources/*"
+  to = "/blog/philadelphia-food-insecurity-solutions-your-guide-to-free-nutritional-resources/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/philadelphia-food-insecurity-solutions%3A-your-guide-to-free-nutritional-resources/*"
+  to = "/blog/philadelphia-food-insecurity-solutions-your-guide-to-free-nutritional-resources/"
+  status = 301
+  force = true
+
 # /services was unused boilerplate from the original site template and has been
 # removed. Send anyone holding the link to the real page.
 [[redirects]]

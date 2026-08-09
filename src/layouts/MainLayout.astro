@@ -16,6 +16,8 @@ const {
   ogMeta,
   preloadImage,
   preloadImageSizes = "(min-width: 1024px) 42rem, (min-width: 640px) 460px, 90vw",
+  preloadImageWidths = [340, 460, 672, 900],
+  preloadImageDimensions = { width: 672, height: 504 },
 } = Astro.props;
 
 // Interface to type-check the properties
@@ -38,7 +40,14 @@ interface Props {
    * page renders.
    */
   preloadImage?: ImageMetadata;
+  /**
+   * These must match the widths/sizes/dimensions the page's own <Image> uses.
+   * If they differ, the browser preloads one file and then downloads a second
+   * one for the actual <img>, which is slower than not preloading at all.
+   */
   preloadImageSizes?: string;
+  preloadImageWidths?: number[];
+  preloadImageDimensions?: { width: number; height: number };
 }
 
 // Build the same responsive set the hero renders, so the preload matches the
@@ -46,9 +55,9 @@ interface Props {
 const heroPreload = preloadImage
   ? await getImage({
       src: preloadImage,
-      width: 672,
-      height: 504,
-      widths: [340, 460, 672, 900],
+      width: preloadImageDimensions.width,
+      height: preloadImageDimensions.height,
+      widths: preloadImageWidths,
       sizes: preloadImageSizes,
       format: "avif",
     })
