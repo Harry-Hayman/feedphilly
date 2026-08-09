@@ -3,12 +3,14 @@ import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import netlify from "@astrojs/netlify";
+import react from "@astrojs/react";
 import { fileURLToPath } from 'url';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://feedphillycoalition.org',
   output: 'static',
+  adapter: netlify(),
   integrations: [
     tailwind({
       // Ensure Tailwind classes are processed
@@ -20,7 +22,14 @@ export default defineConfig({
       remarkPlugins: ['remark-gfm'],
       rehypePlugins: ['rehype-prism-plus']
     }),
-    sitemap()
+    // React powers the Keystatic admin UI only. No site page ships React.
+    // The Keystatic routes themselves are hand wired in src/pages/keystatic
+    // and src/pages/api/keystatic rather than injected from node_modules.
+    react(),
+    sitemap({
+      // The CMS is not site content: keep it out of the sitemap.
+      filter: (page) => !page.includes('/keystatic'),
+    })
   ],
   image: {
     service: {
@@ -48,22 +57,15 @@ export default defineConfig({
     build: {
       cssCodeSplit: true,
       assetsDir: '_astro',
+      // Astro's default hashed chunk/asset names are kept on purpose: the
+      // previous custom `manualChunks` forced every dependency into one
+      // "vendor" bundle, which defeats route level code splitting and breaks
+      // the server build the Keystatic routes need.
       minify: 'terser',
       terserOptions: {
         compress: {
           drop_console: true,
           drop_debugger: true
-        }
-      },
-      rollupOptions: {
-        output: {
-          assetFileNames: 'assets/[name].[hash][extname]',
-          chunkFileNames: 'assets/[name].[hash].js',
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              return 'vendor';
-            }
-          }
         }
       }
     },

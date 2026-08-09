@@ -1,23 +1,58 @@
-# feedphilly Monolingual
+# Feed Philly Coalition
 
-This branch is designed to deliver content in a single language, making it straightforward and focused on a specific audience. Most of the features from the main template are still here, except the internationalization (i18n).
+The website for [Feed Philly Coalition](https://feedphillycoalition.org), a
+Philadelphia coalition working on food insecurity. Built with Astro, styled with
+Tailwind, deployed on Netlify from `main`.
 
-### Deploying to Vercel
+## Running it locally
 
-Click the button below to start deploying your project on Vercel:  
+```bash
+npm install
+npm run dev      # http://localhost:4321
+```
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmearashadowfax%2Ffeedphilly%2Ftree%2Fmonolingual-site)
+Other scripts:
 
-### Deploying to Netlify
+```bash
+npm run build    # type check, then production build
+npm run preview  # serve the production build
+```
 
-Click the button below to start deploying your project on Netlify:  
+## Editing content
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/mearashadowfax/feedphilly/tree/monolingual-site)
+Content is edited in **Keystatic**, at `/keystatic`.
 
+- Locally: `npm run dev`, then open http://localhost:4321/keystatic. Saves write
+  straight to the files in `src/content/`. No login needed.
+- In production: https://feedphillycoalition.org/keystatic, signed in with
+  GitHub. Saves commit to this repository and Netlify redeploys.
 
-### Testing Locally
+Production mode needs a one time GitHub App setup. Read **KEYSTATIC-SETUP.md**
+before touching the CMS: it covers that setup and three content quirks worth
+knowing about, including one post that must not be edited through the editor.
 
-npm install -g netlify-cms-proxy-server
-netlify-cms-proxy-server
+## How the project is laid out
 
+```
+keystatic.config.ts       CMS schema, mirrors the frontmatter already in use
+src/content.config.ts     Astro content collections (blog, team)
+src/content/blog/*.md     Articles. The file name IS the URL: never rename one.
+src/content/team/*.md     Team members shown on /about
+src/pages/                Routes
+src/components/           UI components
+src/images/               Images, optimised at build time by Astro
+docs/legacy-copy-notes/   Old draft copy, not published anywhere
+netlify.toml              Redirects, caching and security headers
+```
 
+## Two things that will bite you
+
+**Do not rename files in `src/content/blog/`.** Each post's URL is derived from
+its file name. Renaming one silently breaks every inbound link and the page's
+search ranking.
+
+**Do not run `git sparse-checkout` in this clone.** One post's file name
+contains a colon, which Windows cannot write to disk, so that file is excluded
+locally via `skip-worktree`. It is committed and live. Sparse checkout commands
+can stage it as deleted and remove it from the site. Check
+`git status --porcelain` for unexpected deletions before every commit.

@@ -19,7 +19,9 @@ function capitalize(str:string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// Generate URL-friendly slug
+// Generate a URL-friendly slug.
+// Content Layer entry ids are already in this shape, so this is now an
+// idempotent safety net rather than a transformation.
 function generateSlug(id: string): string {
   return id.replace(/\.md$/, '').replace(/\s+/g, '-').toLowerCase();
 }

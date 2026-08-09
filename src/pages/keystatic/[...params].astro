@@ -1,0 +1,20 @@
+---
+// Keystatic admin UI. Rendered on demand (never prerendered) and excluded from
+// search engines: it is the editing tool, not site content.
+export const prerender = false;
+
+import { Keystatic } from "@components/keystatic/KeystaticPage.js";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Content Manager | Feed Philly Coalition</title>
+  </head>
+  <body>
+    <Keystatic client:only="react" />
+  </body>
+</html>

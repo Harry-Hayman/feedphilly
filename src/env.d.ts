@@ -2,39 +2,18 @@
 
 interface ImportMetaEnv {
   readonly PUBLIC_GEMINI_API_KEY: string;
+  /** Public slug of the GitHub App backing Keystatic. See KEYSTATIC-SETUP.md. */
+  readonly PUBLIC_KEYSTATIC_GITHUB_APP_SLUG: string;
+  readonly KEYSTATIC_GITHUB_CLIENT_ID: string;
+  readonly KEYSTATIC_GITHUB_CLIENT_SECRET: string;
+  readonly KEYSTATIC_SECRET: string;
 }
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 
-declare module 'astro:content' {
-  interface Render {
-    '.md': Promise<{
-      Content: import('astro').MarkdownInstance<{}>['Content'];
-      headings: import('astro').MarkdownHeading[];
-      remarkPluginFrontmatter: Record<string, any>;
-    }>;
-  }
-}
-
-declare module 'astro:content' {
-  export interface CollectionEntry<C> {
-    id: string;
-    slug: string;
-    body: string;
-    collection: C;
-    data: any;
-    render(): Render['.md'];
-  }
-
-  export function getCollection<C = any>(
-    collection: C,
-    filter?: (entry: CollectionEntry<C>) => boolean
-  ): Promise<CollectionEntry<C>[]>;
-
-  export function getEntry<C = any>(
-    collection: C,
-    slug: string
-  ): Promise<CollectionEntry<C>>;
-}
+// NOTE: this file used to redeclare `astro:content` by hand, which shadowed the
+// types Astro generates from src/content.config.ts and typed every entry's
+// `data` as `any`. Those declarations were removed so the real, schema derived
+// types apply.
