@@ -3,8 +3,8 @@ title: "The Silent Crisis of Empty Plates: Whyy Harry Hayman Prioritizes Child F
 pubDate: 2025-12-13T04:54:00.000Z
 author: Feed Philly Coalition Team
 authorImage: /src/images/blog/members/harryhayman_founder.jpg
-cardImage: src/images/blog/children_food_insecurity.png
-cardImageAlt: Child food insecurity in Philadelphia
+cardImage: src/images/real_images/20250212_104744.jpeg
+cardImageAlt: Volunteers standing behind boxes of donated fresh produce at a food distribution
 tags:
   - harry hayman
   - child hunger

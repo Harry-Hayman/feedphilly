@@ -4,8 +4,8 @@ pubDate: 2025-05-03T06:34:00.000Z
 draft: true
 author: David J. Greenburg
 authorImage: src/images/blog/unnamed.jpg
-cardImage: src/images/blog/chatgpt-image-apr-22-2025-10_22_57-am.png
-cardImageAlt: Transform Your Health by Changing Your Plate
+cardImage: src/images/real_images/20250212_104744.jpeg
+cardImageAlt: Volunteers standing behind boxes of donated fresh produce at a food distribution
 description: Transform Your Health by Changing Your Plate
 tags:
   - food security

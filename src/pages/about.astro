@@ -3,7 +3,7 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { type CollectionEntry } from "astro:content";
-import donationImage from "@images/feedphilly/feed_philly_donation_crowd2.png";
+import donationImage from "@images/real_images/20250212_104744.jpeg";
 
 const teamMembers = (await getCollection("team")) as CollectionEntry<"team">[];
 
@@ -48,7 +48,7 @@ const team = teamMembers
         <div class="mx-auto max-w-5xl overflow-hidden rounded-lg">
           <Image
             src={donationImage}
-            alt="Feed Philly team at a community event"
+            alt="Volunteers standing behind boxes of donated fresh produce at a food distribution"
             class="w-full rounded-lg shadow-xl transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
           />
         </div>

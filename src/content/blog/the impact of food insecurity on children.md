@@ -4,8 +4,8 @@ pubDate: 2025-02-18T08:06:00.000Z
 author: Harry Hayman
 authorImage: /src/images/blog/members/harryhayman_founder.jpg
 authorImageAlt: Harry Hayman
-cardImage: /src/images/blog/children_food_insecurity.png
-cardImageAlt: children affected by food insecurity
+cardImage: src/images/real_images/20250212_104744.jpeg
+cardImageAlt: Volunteers standing behind boxes of donated fresh produce at a food distribution
 description: Examining how food insecurity adversely affects children's physical health, cognitive development, and emotional well-being.
 contents:
   - Child Health and Development

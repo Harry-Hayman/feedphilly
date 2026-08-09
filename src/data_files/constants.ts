@@ -1,4 +1,4 @@
-import ogImageSrc from "@images/feedphilly/hungry_girl_hero_image.webp";
+import ogImageSrc from "@images/real_images/20250212_104744.jpeg";
 
 export const SITE = {
   title: "Feed Philly Coalition",

@@ -4,8 +4,8 @@ pubDate: 2025-02-18T08:06:00.000Z
 author: Gabrielle M.
 authorImage: src/images/blog/img_5782_3.jpg
 authorImageAlt: Gabrielle M.
-cardImage: src/images/blog/economy-impact.png
-cardImageAlt: empty supermarket shelves
+cardImage: src/images/real_images/20250212_104744.jpeg
+cardImageAlt: Volunteers standing behind boxes of donated fresh produce at a food distribution
 description: Analyzing how persistent food insecurity can undermine economic growth and stability in the coming years.
 contents:
   - Economic Impact of Food Insecurity

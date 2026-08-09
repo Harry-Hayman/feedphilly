@@ -4,8 +4,8 @@ pubDate: 2025-05-03T19:41:00.000Z
 draft: true
 author: David J. Greenburg
 authorImage: src/images/blog/unnamed.jpg
-cardImage: src/images/blog/chatgpt-image-may-1-2025-11_53_41-am.png
-cardImageAlt: "Processed Meats: How Dangerous Are They ?"
+cardImage: src/images/real_images/20250212_104744.jpeg
+cardImageAlt: Volunteers standing behind boxes of donated fresh produce at a food distribution
 description: "Processed Meats: How Dangerous Are They ?"
 tags:
   - food security
