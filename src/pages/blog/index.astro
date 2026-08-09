@@ -16,11 +16,11 @@ const mostRecentPost: CollectionEntry<"blog"> | undefined = blogPosts[0];
 const otherPosts: CollectionEntry<"blog">[] = blogPosts.length > 1 ? blogPosts.slice(1) : [];
 
 // Define variables for page content
-const title: string = "Feed Philly Coalition Blog";
+const title: string = "Food Insecurity in Philadelphia: Articles and Updates";
 const subTitle: string =
   "Discover stories, updates, and insights on our mission to fight food insecurity in Philadelphia. Learn about our initiatives, community impact, and how you can get involved.";
 
-const pageTitle: string = `Blog | ${SITE.title}`;
+const pageTitle: string = `Food Insecurity in Philadelphia: Articles | ${SITE.title}`;
 
 // Create Open Graph metadata for the blog index page
 const ogMeta = {
@@ -33,24 +33,37 @@ const ogMeta = {
 
 <MainLayout
   title={pageTitle}
+  meta={subTitle}
   ogMeta={ogMeta}
-  structuredData={{
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://feedphillycoalition.org/blog",
-    url: "https://feedphillycoalition.org/blog",
-    name: "Blog | Feed Philly Coalition",
-    description:
-      "Discover stories, updates, and insights on our mission to fight food insecurity in Philadelphia. Learn about our initiatives, community impact, and how you can get involved.",
-    isPartOf: {
-      "@type": "WebSite",
-      url: "https://feedphillycoalition.org",
-      name: "Feed Philly Coalition",
-      description:
-        "Collaborative, data-driven solutions for a stronger, healthier community.",
+  structuredData={[
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": "https://feedphillycoalition.org/blog",
+      url: "https://feedphillycoalition.org/blog",
+      name: "Food Insecurity in Philadelphia: Articles",
+      description: subTitle,
+      inLanguage: "en-US",
+      about: { "@id": "https://feedphillycoalition.org/#organization" },
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": "https://feedphillycoalition.org/#website",
+        url: "https://feedphillycoalition.org",
+        name: "Feed Philly Coalition",
+      },
+      // Listing the articles explicitly helps search and answer engines see
+      // this as a real index rather than a page of card markup.
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: blogPosts.slice(0, 20).map((post, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: `https://feedphillycoalition.org/blog/${post.id}/`,
+          name: post.data.title,
+        })),
+      },
     },
-    inLanguage: "en-US",
-  }}
+  ]}
 >
   <section class="mx-auto max-w-[85rem] px-4 pt-14 sm:px-6 lg:px-8">
     <!--Page header-->

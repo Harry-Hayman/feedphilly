@@ -22,7 +22,8 @@ const {
 interface Props {
   title?: string;
   meta?: string;
-  structuredData?: object;
+  /** A single JSON-LD object, or several to publish side by side. */
+  structuredData?: object | object[];
   lang?: string;
   ogMeta?: {
     title: string;

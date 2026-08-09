@@ -10,7 +10,7 @@ import { Image } from "astro:assets";
 import { capitalize, formatDate, calculateReadTime } from "@utils/utils";
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import { SITE } from "@data/constants";
+import { SITE, ORGANIZATION_SCHEMA } from "@data/constants";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -60,19 +60,50 @@ const ogMeta = {
   title={pageTitle}
   meta={ogMeta.description}
   ogMeta={ogMeta}
-  structuredData={{
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.data.title,
-    description: ogMeta.description,
-    image: ogMeta.image.src,
-    author: {
-      "@type": "Person",
-      name: post.data.author,
+  preloadImage={post.data.cardImage}
+  preloadImageSizes="(min-width: 768px) 42rem, 92vw"
+  structuredData={[
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "@id": `${ogMeta.url}#article`,
+      mainEntityOfPage: ogMeta.url,
+      headline: post.data.title,
+      description: ogMeta.description,
+      image: Astro.url.origin + ogMeta.image.src,
+      articleSection: post.data.tags?.[0],
+      keywords: post.data.tags?.join(", "),
+      wordCount: (post.body ?? "").split(/\s+/).filter(Boolean).length,
+      inLanguage: "en-US",
+      author: { "@type": "Person", name: post.data.author },
+      publisher: { "@id": `${Astro.url.origin}/#organization` },
+      datePublished: post.data.pubDate.toISOString(),
+      dateModified: post.data.pubDate.toISOString(),
+      url: ogMeta.url,
     },
-    datePublished: post.data.pubDate,
-    url: ogMeta.url,
-  }}
+    // Breadcrumbs give the article a visible path in search results instead of
+    // a bare URL.
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: `${Astro.url.origin}/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Articles",
+          item: `${Astro.url.origin}/blog`,
+        },
+        { "@type": "ListItem", position: 3, name: post.data.title },
+      ],
+    },
+    ORGANIZATION_SCHEMA,
+  ]}
 >
   <section class="mx-auto max-w-3xl px-4 pb-12 pt-6 sm:px-6 lg:px-8 lg:pt-10">
     <div class="max-w-2xl">

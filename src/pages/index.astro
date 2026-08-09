@@ -5,6 +5,8 @@ import HeroSection from "@components/sections/landing/HeroSection.astro";
 import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
 import TestimonialsSection from "@components/sections/testimonials/TestimonialsSection.astro";
 import FeaturesNavs from "@components/sections/features/FeaturesNavs.astro";
+import FaqSection from "@components/sections/FaqSection.astro";
+import { FAQS, ORGANIZATION_SCHEMA, SOCIAL_PROFILES } from "@data/constants";
 import heroImage from "@images/feedphilly/hero1.png";
 import donationImage from "@images/real_images/20250212_104744.jpeg";
 import teamImage from "@images/feedphilly/feed_philly_team.jpg";
@@ -38,62 +40,55 @@ const features = [
   },
 ];
 
+// Search Console shows this page collecting impressions and no clicks for
+// "food insecurity philadelphia", "food insecurity in philadelphia" and
+// "philadelphia food insecurity". The title and description now lead with that
+// phrasing and say what the organisation actually does, rather than repeating
+// the tagline.
+const pageTitle =
+  "Food Insecurity in Philadelphia | Feed Philly Coalition";
+const pageDescription =
+  "Food insecurity affects thousands of Philadelphia families, particularly children. Feed Philly Coalition unites nonprofits, businesses, schools and policymakers behind collaborative, data-driven solutions. See our work and get involved.";
+
 const ogMeta = {
   title: "Fighting Food Insecurity in Philadelphia",
-  description:
-    "Together, we can create a city where everyone has access to healthy, nutritious food. Join Feed Philly Coalition in making lasting change through collaborative, data-driven solutions.",
+  description: pageDescription,
   image: heroImage,
   url: Astro.url.origin + Astro.url.pathname,
 };
----
 
-<MainLayout
-  meta={ogMeta.description}
-  ogMeta={ogMeta}
-  preloadImage={heroImage}
-  structuredData={{
-    "@context": "https://schema.org",
-    "@type": "Organization",
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${Astro.url.origin}/#faq`,
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${Astro.url.origin}/#webpage`,
+  url: Astro.url.origin + "/",
+  name: pageTitle,
+  description: pageDescription,
+  inLanguage: "en-US",
+  about: { "@id": `${Astro.url.origin}/#organization` },
+  isPartOf: {
+    "@type": "WebSite",
+    "@id": `${Astro.url.origin}/#website`,
+    url: Astro.url.origin,
     name: "Feed Philly Coalition",
-    alternateName: "Feed Philly",
-    description: ogMeta.description,
-    image: ogMeta.image.src,
-    logo: "https://feedphillycoalition.org/src/images/FPC-logo-stacked.png",
-    url: ogMeta.url,
-    email: "info@feedphillycoalition.org",
-    telephone: "+1-215-555-1234",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "5 US-1",
-      addressLocality: "Philadelphia",
-      addressRegion: "PA",
-      postalCode: "19004",
-      addressCountry: "US",
-    },
-    areaServed: {
-      "@type": "City",
-      name: "Philadelphia",
-      "@id": "https://en.wikipedia.org/wiki/Philadelphia",
-    },
-    sameAs: [
-      "https://www.facebook.com/FeedPhilly/",
-      "https://x.com/feed_philly_",
-      "https://www.instagram.com/feed.philly/",
-    ],
-    foundingDate: "2024",
-    slogan: "Fighting Food Insecurity Together",
-    knowsAbout: [
-      "Food Security",
-      "Food Justice",
-      "Community Development",
-      "Policy Advocacy",
-      "Nonprofit Organizations",
-      "Social Services",
-      "Hunger Relief",
-      "Community Outreach",
-    ],
-    founder: {
-      "@type": "Person",
+  },
+};
+
+const founderSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://harryhayman.com/#person",
       name: "Harry Hayman",
       alternateName: "Harrison Graham Hayman IV",
       url: "https://harryhayman.com",
@@ -182,22 +177,54 @@ const ogMeta = {
         "Urban Agriculture",
         "Creative Marketing",
       ],
-    },
-  }}
+};
+---
+
+<MainLayout
+  title={pageTitle}
+  meta={pageDescription}
+  ogMeta={ogMeta}
+  preloadImage={heroImage}
+  structuredData={[
+    { ...ORGANIZATION_SCHEMA, sameAs: SOCIAL_PROFILES, founder: { "@id": founderSchema["@id"], "@type": "Person", name: "Harry Hayman" } },
+    webPageSchema,
+    faqSchema,
+    founderSchema,
+  ]}
 >
   <HeroSection
-    title="Fighting Food Insecurity in <span class='text-green-500 dark:text-green-400'>Philadelphia</span>"
+    title="Fighting Food Insecurity in <span class='text-green-800 dark:text-green-300'>Philadelphia</span>"
     subTitle="Together, we can create a city where everyone has access to healthy, nutritious food."
     primaryBtn="Get Involved"
     primaryBtnURL="/get-involved"
     secondaryBtn="See Our Work"
     secondaryBtnURL="/what-we-do"
     src={heroImage}
-    alt="A young girl representing food insecurity in Philadelphia"
+    alt="An illustration of a Philadelphia neighbourhood market, with neighbours sharing fresh produce"
   />
 
+  <!--
+    Mission summary, high on the page, in plain prose. Answer engines quote
+    short factual statements near the top of a document far more readily than
+    they quote a hero headline plus a tagline.
+  -->
+  <section class="section-tight" aria-labelledby="mission-heading">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 id="mission-heading" class="text-balance">
+        What Feed Philly Coalition does
+      </h2>
+      <p class="lede mt-4">
+        Feed Philly Coalition is a Philadelphia coalition working on food
+        insecurity. It brings together individuals, nonprofits, businesses, and
+        policymakers behind collaborative, data-driven solutions and sustainable
+        community programs, so that everyone in the city has access to healthy,
+        nutritious food. It was founded by Harry Hayman.
+      </p>
+    </div>
+  </section>
+
   <FeaturesGeneral
-    title="Our Impact"
+    title="How the coalition fights food insecurity in Philadelphia"
     subTitle="Feed Philly Coalition is dedicated to creating lasting change through community awareness, policy making, and collaboration with organizations."
     src={donationImage}
     alt="Feed Philly Coalition volunteers standing behind boxes of packed food"
@@ -205,7 +232,7 @@ const ogMeta = {
   />
 
   <FeaturesNavs
-    title="How We Make a <span class='text-green-500 dark:text-green-400'>Difference</span>"
+    title="How We Make a <span class='text-green-800 dark:text-green-300'>Difference</span>"
     tabs={[
       {
         heading: "Policy Advocacy",
@@ -291,5 +318,11 @@ const ogMeta = {
         description: "people reached",
       },
     ]}
+  />
+
+  <FaqSection
+    title="Food insecurity in Philadelphia: common questions"
+    intro="Short answers about the coalition and its work in the city."
+    faqs={FAQS}
   />
 </MainLayout>

@@ -1,6 +1,7 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import { Image } from "astro:assets";
+import { ORGANIZATION_SCHEMA } from "@data/constants";
 import donationImage from "@images/feedphilly/feed_philly_donation_2.png";
 import teamImage from "@images/feedphilly/feed_philly_team.jpg";
 import warehouseImage from "@images/feedphilly/feed_philly_warehouse.jpg";
@@ -90,18 +91,30 @@ const stakeholders = [
 ];
 ---
 
-<MainLayout title="Our Work | Feed Philly Coalition">
+<MainLayout
+  title="Our Work Against Food Insecurity in Philadelphia | Feed Philly Coalition"
+  meta="How Feed Philly Coalition works on food insecurity in Philadelphia: policy advocacy, community awareness, collaboration and education programs, with the School District of Philadelphia, local government, businesses and anchor institutions."
+  structuredData={[
+    ORGANIZATION_SCHEMA,
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      url: `${Astro.url.origin}/what-we-do`,
+      name: "Our Work Against Food Insecurity in Philadelphia",
+      description:
+        "Policy advocacy, community awareness, collaboration and education programs addressing food insecurity in Philadelphia.",
+      inLanguage: "en-US",
+      about: { "@id": `${Astro.url.origin}/#organization` },
+    },
+  ]}
+>
   <div class="py-12 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="animate-fade-in text-center">
-        <h1
-          class="animate-slide-up text-balance"
-        >
-          Our Work
+        <h1 class="animate-slide-up text-balance">
+          Our work against food insecurity in Philadelphia
         </h1>
-        <p
-          class="mx-auto mt-3 max-w-2xl animate-slide-up text-xl text-neutral-500 [animation-delay:200ms] dark:text-neutral-400 sm:mt-4"
-        >
+        <p class="lede mx-auto mt-4 max-w-2xl animate-slide-up [animation-delay:200ms]">
           Working together to create lasting change through collaborative,
           data-driven solutions.
         </p>

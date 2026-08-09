@@ -78,13 +78,14 @@ const appleTouchIcon = await getImage({
 ---
 
 <!-- Inject structured data into the page if provided. This data is formatted as JSON-LD, a method recommended by Google for structured data pass:
-     https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data -->{
-  structuredData && (
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify(structuredData)}
-    />
-  )
+     https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data
+     Accepts either a single object or an array, so a page can publish, say,
+     both its Organization and its FAQPage markup. -->{
+  (Array.isArray(structuredData) ? structuredData : [structuredData])
+    .filter(Boolean)
+    .map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))
 }
 <!-- Define the character set, description, author, and viewport settings -->
 <meta charset="utf-8" />
@@ -186,5 +187,6 @@ const appleTouchIcon = await getImage({
 <meta name="mobile-web-app-capable" content="yes" />
 <link href={appleTouchIcon.src} rel="apple-touch-icon" />
 <link href={appleTouchIcon.src} rel="shortcut icon" />
-<!-- Set theme color -->
-<meta name="theme-color" content="#facc15" />
+<!-- Set theme color. Was #facc15, a yellow left over from the site template,
+     which tinted the browser chrome a colour the brand does not use. -->
+<meta name="theme-color" content="#2e7d32" />

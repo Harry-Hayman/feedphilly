@@ -1,0 +1,50 @@
+---
+/**
+ * Plain, crawlable FAQ.
+ *
+ * Deliberately not an accordion: the answers are in the HTML, visible, with
+ * no JavaScript between a crawler (or an answer engine) and the text. Search
+ * engines do read collapsed content, but answer engines are less reliable
+ * about it, and this section exists to be quoted.
+ *
+ * Every answer comes from copy already published elsewhere on this site.
+ */
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title?: string;
+  intro?: string;
+  faqs: Faq[];
+}
+
+const {
+  title = "Food insecurity in Philadelphia: common questions",
+  intro,
+  faqs,
+} = Astro.props;
+---
+
+<section class="section-tight" id="faq" aria-labelledby="faq-heading">
+  <div class="mx-auto max-w-3xl">
+    <h2 id="faq-heading" class="text-balance">{title}</h2>
+    {intro && <p class="lede mt-4">{intro}</p>}
+
+    <dl class="mt-10 divide-y divide-neutral-200 dark:divide-neutral-700">
+      {
+        faqs.map((faq) => (
+          <div class="py-6 first:pt-0">
+            <dt class="text-lg font-bold text-neutral-900 dark:text-neutral-100">
+              {faq.question}
+            </dt>
+            <dd class="mt-2 text-pretty text-neutral-700 dark:text-neutral-300">
+              {faq.answer}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
