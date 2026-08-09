@@ -3,7 +3,7 @@ title: Philadelphia Food Insecurity Solutions - Your Guide to Free Nutritional R
 pubDate: 2025-02-26T09:15:57.000Z
 author: Harry Hayman
 authorImage: /src/images/blog/members/harryhayman_founder.jpg
-cardImage: src/images/real_images/20250212_104744.jpeg
+cardImage: /src/images/blog/hungry_philadelphian_people.png
 cardImageAlt: Community members accessing free food resources in Philadelphia
 contents:
   - Understanding Food Insecurity 
