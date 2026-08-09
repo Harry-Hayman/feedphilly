@@ -4,9 +4,9 @@ export const SITE = {
   title: "Feed Philly Coalition",
   tagline: "Fighting Food Insecurity Together",
   description:
-    "Feed Philly Coalition brings together individuals, nonprofits, businesses, and policymakers to address food insecurity in Philadelphia through collaborative, data-driven solutions and sustainable community programs.",
+    "The Feed Philly Coalition is a coalition of nonprofits, businesses, government, healthcare, education, agriculture, philanthropy, and community leaders working together to build a stronger, healthier, more resilient regional food system.",
   description_short:
-    "Creating lasting change through collaborative, data-driven solutions to food insecurity in Philadelphia.",
+    "Nonprofits, businesses, government, and community leaders working together to build a stronger, healthier, more resilient regional food system.",
   url: "https://feedphillycoalition.org",
   author: "Feed Philly Coalition",
 };
@@ -26,11 +26,9 @@ export const SOCIAL_PROFILES = [
  * search and answer engines the entity basics: what this organisation is,
  * where it operates, and which profiles belong to it.
  *
- * Deliberately omitted: the telephone number shown in the footer,
- * (215) 555-1234. 555 numbers are reserved for fiction, so it is a
- * placeholder; publishing it as machine readable contact data would be worse
- * than publishing nothing. Replace the footer number with the real one and it
- * can be added here.
+ * Deliberately omitted: a telephone number. The site has no real one yet;
+ * publishing a placeholder as machine readable contact data would be worse
+ * than publishing nothing. Add it here when a real number exists.
  */
 export const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
@@ -46,7 +44,7 @@ export const ORGANIZATION_SCHEMA = {
   foundingDate: "2024",
   founder: {
     "@type": "Person",
-    name: "Harry Hayman",
+    name: "Harry G. Hayman IV",
     url: "https://harryhayman.com",
   },
   areaServed: {
@@ -60,10 +58,10 @@ export const ORGANIZATION_SCHEMA = {
   },
   address: {
     "@type": "PostalAddress",
-    streetAddress: "5 US-1",
+    streetAddress: "640 North Broad Street, Suite 732",
     addressLocality: "Philadelphia",
     addressRegion: "PA",
-    postalCode: "19004",
+    postalCode: "19130",
     addressCountry: "US",
   },
   knowsAbout: [
@@ -74,6 +72,11 @@ export const ORGANIZATION_SCHEMA = {
     "Policy advocacy",
     "Community outreach",
     "Nonprofit collaboration",
+    "Controlled environment agriculture",
+    "Food as Medicine",
+    "Regional food infrastructure",
+    "Workforce development",
+    "Public-private partnerships",
   ],
   sameAs: SOCIAL_PROFILES,
 };
@@ -90,7 +93,7 @@ export const OG = {
   url: SITE.url,
   title: `${SITE.title}: Fighting Food Insecurity in Philadelphia`,
   description:
-    "Join Feed Philly Coalition in creating a city where everyone has access to healthy, nutritious food. Through collaboration, data-driven solutions, and community programs, we're making lasting change in Philadelphia's fight against food insecurity.",
+    "A coalition of nonprofits, businesses, government, healthcare, education, agriculture, philanthropy, and community leaders working together to build a stronger, healthier, more resilient regional food system for Philadelphia.",
   image: ogImageSrc,
 };
 
@@ -106,12 +109,17 @@ export const FAQS = [
   {
     question: "What is Feed Philly Coalition?",
     answer:
-      "Feed Philly Coalition brings together individuals, nonprofits, businesses, and policymakers to address food insecurity in Philadelphia through collaborative, data-driven solutions and sustainable community programs. It was founded by Harry Hayman.",
+      "A coalition of nonprofits, businesses, government, healthcare, education, agriculture, philanthropy, and community leaders working together to build a stronger, healthier, more resilient regional food system for Philadelphia.",
   },
   {
     question: "How does the coalition address food insecurity in Philadelphia?",
     answer:
       "Through four areas of work: policy advocacy with government officials and stakeholders, community awareness through educational campaigns and events, collaboration with other organizations and coalitions, and education programs that provide workshops and resources.",
+  },
+  {
+    question: "What is the coalition working on next?",
+    answer:
+      "The future of the regional food system: controlled environment agriculture, food innovation, Food as Medicine, workforce development, regional food infrastructure, public-private partnerships, and data-driven tools including artificial intelligence and CivicOS.",
   },
   {
     question: "Who does food insecurity in Philadelphia affect?",
@@ -131,7 +139,7 @@ export const FAQS = [
   {
     question: "How do I contact Feed Philly Coalition?",
     answer:
-      "Email info@feedphillycoalition.org, or use the form on the contact page. The coalition is based in Philadelphia, Pennsylvania.",
+      "Email info@feedphillycoalition.org, or use the form on the contact page. The coalition is at 640 North Broad Street, Suite 732, Philadelphia, PA 19130.",
   },
 ];
 

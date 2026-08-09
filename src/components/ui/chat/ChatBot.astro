@@ -97,7 +97,7 @@ import AIMessage from "./AIMessage.astro";
       >
         <!-- Initial AI Message -->
         <AIMessage
-          message="Hi! 👋 I'm here to help with questions about Feed Philly. Contact us at (215) 555-1234 or info@feedphillycoalition.org. How can I assist you?"
+          message="Hi! 👋 I'm here to help with questions about Feed Philly. Contact us at info@feedphillycoalition.org. How can I assist you?"
         />
       </div>
 
@@ -292,7 +292,7 @@ Impact:
 - 2M+ pounds food rescued yearly
 - Holiday/emergency assistance
 
-Contact: (215) 555-1234, info@feedphillycoalition.org`;
+Contact: info@feedphillycoalition.org, 640 North Broad Street, Suite 732, Philadelphia, PA 19130`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;

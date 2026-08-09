@@ -35,11 +35,11 @@ export const GET: APIRoute = async () => {
 
   const body = `# Feed Philly Coalition
 
-> Feed Philly Coalition is a Philadelphia, Pennsylvania coalition working on food insecurity. It brings together individuals, nonprofits, businesses, and policymakers behind collaborative, data-driven solutions and sustainable community programs, so that everyone in the city has access to healthy, nutritious food. It was founded by Harry Hayman.
+> The Feed Philly Coalition is a coalition of nonprofits, businesses, government, healthcare, education, agriculture, philanthropy, and community leaders in Philadelphia, Pennsylvania, working together to build a stronger, healthier, more resilient regional food system.
 
-The coalition works in four areas: policy advocacy with government officials and stakeholders, community awareness through educational campaigns and events, collaboration with other organizations and coalitions, and education programs offering workshops and resources. It works with the School District of Philadelphia, local government officials, the business community, and anchor institutions such as hospitals and universities. Food insecurity affects thousands of Philadelphia families, particularly children.
+The coalition works in four areas: policy advocacy with government officials and stakeholders, community awareness through educational campaigns and events, collaboration with other organizations and coalitions, and education programs offering workshops and resources. It works with the School District of Philadelphia, local government officials, the business community, and anchor institutions such as hospitals and universities. Food insecurity affects thousands of Philadelphia families, particularly children. The work is increasingly focused on the future of the food system: controlled environment agriculture, food innovation, Food as Medicine, workforce development, regional food infrastructure, public-private partnerships, and data-driven tools including artificial intelligence and CivicOS.
 
-Contact: info@feedphillycoalition.org. Based in Philadelphia, Pennsylvania.
+Contact: info@feedphillycoalition.org. 640 North Broad Street, Suite 732, Philadelphia, PA 19130.
 
 ## Key pages
 
