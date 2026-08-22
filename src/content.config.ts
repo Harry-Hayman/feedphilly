@@ -46,6 +46,9 @@ const team = defineCollection({
       bio: z.string(),
       image: image(),
       authorImageAlt: z.string().optional(),
+      // Optional personal or professional site, linked from the member's card
+      // on /about.
+      website: z.string().url().optional(),
       order: z.number().optional(),
     }),
 });

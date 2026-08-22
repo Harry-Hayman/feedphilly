@@ -2,13 +2,14 @@
 name: Anuj Paudel
 role: Technical Lead
 image: src/images/blog/pfp-transformed.png
-bio: Anuj blends technology and creativity to drive innovation at Feed Philly
-  Coalition. With expertise in software development, system optimization, and
-  automation, he builds scalable solutions that enhance efficiency and impact.
-  At the same time, his skills in video editing, motion graphics, and design
-  help craft compelling digital content that amplifies our mission. By merging
-  development and storytelling, Anuj ensures that technology not only
-  streamlines operations but also inspires action in the fight against food
-  insecurity.
+bio: >-
+  Anuj is an AI automation specialist based in Kathmandu, Nepal, and the founder
+  of Appynox. He automates the repetitive work that eats a team's week: back
+  office tasks, social media, outreach. At Feed Philly Coalition that means this
+  website and the systems behind it, which let a small team publish and organise
+  at a scale it could not otherwise staff. He also builds mobile apps, games and
+  web tools, and takes on the video and design work, so the same hands that
+  build the tooling also cut the films.
+website: "https://paudelanuj.com.np"
 order: 4
 ---
