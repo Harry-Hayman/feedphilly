@@ -24,11 +24,13 @@ Content is edited in **Keystatic**, at `/keystatic`.
 
 - Locally: `npm run dev`, then open http://localhost:4321/keystatic. Saves write
   straight to the files in `src/content/`. No login needed.
-- In production: https://feedphillycoalition.org/keystatic, signed in with
-  GitHub. Saves commit to this repository and Netlify redeploys.
+- In production: https://feedphillycoalition.org/keystatic, signed in through
+  Keystatic Cloud. Saves commit to this repository and Netlify redeploys.
 
-Production mode needs a one time GitHub App setup. Read **KEYSTATIC-SETUP.md**
-before touching the CMS: it covers that setup and three content quirks worth
+Production runs on **Keystatic Cloud** (team `feed-philly`, project
+`feedphilly`), so the site holds no CMS secrets and needs no environment
+variables. Read **KEYSTATIC-SETUP.md** before touching the CMS: it covers who
+can edit, what to check when sign in breaks, and three content quirks worth
 knowing about, including one post that must not be edited through the editor.
 
 ## How the project is laid out

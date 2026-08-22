@@ -2,11 +2,8 @@
 
 interface ImportMetaEnv {
   readonly PUBLIC_GEMINI_API_KEY: string;
-  /** Public slug of the GitHub App backing Keystatic. See KEYSTATIC-SETUP.md. */
-  readonly PUBLIC_KEYSTATIC_GITHUB_APP_SLUG: string;
-  readonly KEYSTATIC_GITHUB_CLIENT_ID: string;
-  readonly KEYSTATIC_GITHUB_CLIENT_SECRET: string;
-  readonly KEYSTATIC_SECRET: string;
+  // Keystatic needs no variables: it runs on Keystatic Cloud, which owns the
+  // GitHub App and the sign in. See KEYSTATIC-SETUP.md.
 }
 
 interface ImportMeta {

@@ -18,49 +18,68 @@ every published URL is unchanged.
 | Where | Mode | Behaviour |
 | --- | --- | --- |
 | `npm run dev` on your machine | `local` | Saves write straight to the files on disk. No login, no setup. |
-| Netlify (production) | `github` | Saves commit to `Harry-Hayman/feedphilly` as the logged in GitHub user. |
+| Netlify (production) | `cloud` | Saves commit to `Harry-Hayman/feedphilly` through Keystatic Cloud, as the logged in user. |
 
 Local mode works right now with no configuration at all. Run `npm run dev` and
 open http://localhost:4321/keystatic.
 
-## Turning on GitHub mode in production
+## Production runs on Keystatic Cloud
 
-**Do NOT use the /keystatic/setup wizard on the live site.** The wizard's
-final step tries to save the new app's secrets to disk, which a Netlify
-serverless function cannot do, so it ends in HTTP 500 (this is what happened
-on the first attempt). Create the GitHub App manually instead: it takes two
-minutes and lets you pick the name.
+The site used to run a **self hosted GitHub App**: four secrets in Netlify, an
+app to create and install by hand, and a setup wizard that could not work on a
+serverless host. That is gone. Production now uses **Keystatic Cloud**, which
+owns the GitHub App and the sign in.
 
-**First, clean up:** if the failed wizard already created an app (it may be
-named harryhayman), go to GitHub, Settings, Developer settings, GitHub Apps,
-and delete it (or rename it to feedphilly-cms and reuse it in step 2).
+What that means in practice:
 
-1. Create the app at https://github.com/settings/apps/new (choose the
-   Harry-Hayman account as the owner if prompted):
-   - GitHub App name: **feedphilly-cms**
-   - Homepage URL: https://feedphillycoalition.org
-   - Callback URL: **https://feedphillycoalition.org/api/keystatic/github/oauth/callback**
-   - Expire user authorization tokens: leave checked
-   - Webhook: UNCHECK Active (no webhook needed)
-   - Repository permissions: **Contents: Read and write**, **Metadata:
-     Read-only**, **Pull requests: Read and write**
-2. After creating: note the **Client ID**, then click **Generate a new
-   client secret** and copy it.
-3. Install the app: in the app's page, Install App, choose the Harry-Hayman
-   account, select **Only select repositories: feedphilly**.
-4. Generate the session secret locally (any machine):
-   `node -e "console.log(require('crypto').randomBytes(40).toString('hex'))"`
-5. In Netlify, Site configuration, Environment variables, add:
+- **No environment variables.** `KEYSTATIC_GITHUB_CLIENT_ID`,
+  `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` and
+  `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` are no longer read by anything. Delete them
+  from Netlify, Site configuration, Environment variables.
+- **No GitHub App of ours.** If `feedphilly-cms` (or the wizard's leftover app)
+  still exists under GitHub, Settings, Developer settings, GitHub Apps, delete
+  it. Keystatic Cloud installs its own app on the repository.
+- **Never use `/keystatic/setup`.** That wizard belongs to the old self hosted
+  flow and fails on Netlify. There is nothing to set up on the site any more.
+- The only link between site and account is one committed line in
+  `keystatic.config.ts`:
 
-   | Variable | Value |
-   | --- | --- |
-   | `KEYSTATIC_GITHUB_CLIENT_ID` | Client ID from step 2 |
-   | `KEYSTATIC_GITHUB_CLIENT_SECRET` | Client secret from step 2 |
-   | `KEYSTATIC_SECRET` | The random hex from step 4 |
-   | `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | The app slug: **feedphilly-cms** (from the app URL) |
+  ```ts
+  cloud: { project: 'feed-philly/feedphilly' },
+  ```
 
-6. Trigger a redeploy (public variables are baked in at build time), then
-   open https://feedphillycoalition.org/keystatic and sign in with GitHub.
+  A project name is not a secret, so it lives in the repository.
+
+### The Keystatic Cloud side
+
+Managed at https://keystatic.cloud, team **feed-philly**, project
+**feedphilly**. Two settings there have to match this site or sign in fails:
+
+| Setting | Value |
+| --- | --- |
+| Project URL (primary) | `https://feedphillycoalition.org` |
+| GitHub organisation | `Harry-Hayman` |
+| Repository | `feedphilly` |
+
+Keystatic Cloud only lets people sign in from a URL listed on the project, so
+the primary URL must be the live domain, exactly, with no trailing path. Add a
+second URL if the editor is ever needed on a Netlify deploy preview or on
+`http://localhost:4321` (local dev does not need it: it uses local mode).
+
+### Who can edit
+
+Editors are people, added on the **Users** page of the Keystatic Cloud team.
+There is no shared login and no repository access to hand out: adding somebody
+there is what lets them save, and removing them there is what stops them.
+
+### If sign in breaks
+
+1. The URL you opened the editor on is not listed on the project. Most likely
+   cause, and the fix is to add it.
+2. The person is not on the team's Users page.
+3. Keystatic Cloud lost its GitHub installation on `Harry-Hayman/feedphilly`,
+   which shows up as saves failing rather than sign in failing. Reconnect the
+   repository on the project page.
 
 ## Cautions
 

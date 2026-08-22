@@ -9,20 +9,24 @@ import { config, collection, fields } from '@keystatic/core';
  *
  * Storage:
  *   local dev  -> `local` mode, edits write straight to disk at /keystatic
- *   production -> `github` mode against Harry-Hayman/feedphilly
+ *   production -> `cloud` mode, hosted by Keystatic Cloud
  *
- * GitHub mode needs four environment variables that are created by the setup
- * wizard at /keystatic/setup. They are NEVER committed: see KEYSTATIC-SETUP.md.
+ * Cloud mode replaced the self hosted `github` mode. Keystatic Cloud owns the
+ * GitHub App and the sign in, so the site no longer needs a GitHub App of its
+ * own and no longer reads any KEYSTATIC_* environment variable. The project
+ * name below is the only thing tying the site to the account, and unlike the
+ * old client secret it is safe to commit: see KEYSTATIC-SETUP.md.
+ *
+ * Saves still land as commits in Harry-Hayman/feedphilly. That repository is
+ * connected on the Keystatic Cloud project, not named here.
  */
 const storage = import.meta.env.DEV
   ? ({ kind: 'local' } as const)
-  : ({
-      kind: 'github',
-      repo: { owner: 'Harry-Hayman', name: 'feedphilly' },
-    } as const);
+  : ({ kind: 'cloud' } as const);
 
 export default config({
   storage,
+  cloud: { project: 'feed-philly/feedphilly' },
   ui: {
     brand: { name: 'Feed Philly Coalition' },
     navigation: {
@@ -152,6 +156,12 @@ export default config({
           label: 'Bio',
           multiline: true,
           validation: { isRequired: true },
+        }),
+        website: fields.url({
+          label: 'Website',
+          description:
+            "Optional. The member's own site. Shown as a link on their card on the About page. Leave empty and no link appears.",
+          validation: { isRequired: false },
         }),
         order: fields.integer({
           label: 'Display order',

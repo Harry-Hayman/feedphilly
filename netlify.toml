@@ -66,13 +66,21 @@
     X-DNS-Prefetch-Control = "off"
     Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://tinyurl.com https://script.google.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self'; connect-src 'self' https://tinyurl.com https://script.google.com https://script.googleusercontent.com; manifest-src 'self'; upgrade-insecure-requests"
 
-# The Keystatic editor is a React app that talks to GitHub. It needs a wider
-# policy than the public site, so it gets its own, and it is never indexed.
+# The Keystatic editor is a React app that talks to Keystatic Cloud. It needs a
+# wider policy than the public site, so it gets its own, and it is never indexed.
+# connect-src, one host at a time:
+#   api.keystatic.cloud       sign in, and every read and write of the repo
+#   raw.githubusercontent.com file bodies, fetched directly because the repo is
+#                             public (Keystatic skips the proxy for those)
+#   avatars.githubusercontent.com  the signed in user's avatar
+#   live.keystatic.cloud      multiplayer editing, if the team plan has it
+# api.github.com and github.com were dropped with the self hosted GitHub App:
+# in cloud mode the browser never calls GitHub directly.
 [[headers]]
   for = "/keystatic/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
-    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://github.com https://avatars.githubusercontent.com; form-action 'self' https://github.com; worker-src 'self' blob:"
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.keystatic.cloud wss://live.keystatic.cloud https://raw.githubusercontent.com https://avatars.githubusercontent.com; form-action 'self'; worker-src 'self' blob:"
 
 [[headers]]
   for = "/api/keystatic/*"
