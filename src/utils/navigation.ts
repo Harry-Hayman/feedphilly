@@ -27,6 +27,7 @@ const footerLinks = [
       { name: "About Us", url: "/about" },
       { name: "Common Questions", url: "/#faq" },
       { name: "Contact", url: "/contact" },
+      { name: "Gemini Strategic Consultants", url: "https://geministrategicconsultants.com/" },
     ],
   },
 ];
