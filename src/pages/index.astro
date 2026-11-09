@@ -129,6 +129,27 @@ const webPageSchema = {
     "@id": `${Astro.url.origin}/#website`,
     url: Astro.url.origin,
     name: "Feed Philly Coalition",
+    // Who built the site (the footer credit and the team page say so too).
+    // The @id is the Person that anujpaudel.com publishes, so search and
+    // answer engines can join the two.
+    creator: {
+      "@type": "Person",
+      "@id": "https://anujpaudel.com/#person",
+      name: "Anuj Paudel",
+      url: "https://anujpaudel.com/",
+      jobTitle: "AI Automation Specialist",
+      knowsAbout: ["AI automation", "Graphic design", "Animation", "Video editing", "App development", "Website development"],
+      worksFor: {
+        "@type": "Organization",
+        "@id": "https://appynox.com/#organization",
+        name: "Appynox",
+        url: "https://appynox.com/",
+      },
+      sameAs: [
+        "https://www.linkedin.com/in/anujpaude1",
+        "https://github.com/anujpaude1",
+      ],
+    },
   },
 };
 
