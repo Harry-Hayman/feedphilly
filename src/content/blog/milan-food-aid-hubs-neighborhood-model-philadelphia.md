@@ -40,7 +40,7 @@ From 615 to 1,057 tonnes is a rise of about 72 percent in two years. That is my 
 
 I went looking for the reasons, because plenty of food rescue ideas never get past a pilot. Five things stand out, and every one of them is boring in the best way.
 
-The room was free. [Assolombarda's account of the launch](https://www.assolombarda.it/governance/gruppi/alimentazione/informazioni/al-via-201czerosprechi201d-il-cibo-di-aziende-e-mense-va-ai-bisognosi) says the city found an unused public space in Municipio 9 and made it available as the hub. Rent never sat on the budget.
+The room already existed. [Assolombarda's account of the launch](https://www.assolombarda.it/governance/gruppi/alimentazione/informazioni/al-via-201czerosprechi201d-il-cibo-di-aziende-e-mense-va-ai-bisognosi) says the city found an unused public space in Municipio 9 and made it available as the hub. Nobody had to build or find a building first.
 
 Stores had a reason to show up. The same page says that since February 2018, shops, companies and offices that donate food before it becomes waste can cut up to 20 percent of the variable part of Milan's waste tax, in proportion to what they give.
 
