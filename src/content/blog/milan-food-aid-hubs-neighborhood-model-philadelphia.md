@@ -1,11 +1,11 @@
 ---
-title: "Milan's Neighborhood Food Hubs and What Philadelphia Can Learn"
-pubDate: 2026-11-08T12:00:00.000Z
+title: "Milan Saved Two Million Meals From the Trash. Here Is How"
+pubDate: 2026-11-13T12:00:00.000Z
 author: Harry Hayman
 authorImage: src/images/blog/members/harryhayman_founder.jpg
 authorImageAlt: Harry Hayman, Founder
 cardImage: src/images/blog/milan-food-aid-hubs-neighborhood-model-philadelphia.jpg
-cardImageAlt: "Two volunteers lean over crates of yellow peppers, potatoes and strawberries at a Milan neighborhood food hub, with a green panel below reading Two million meals."
+cardImageAlt: "A white van with open doors outside a Milan neighborhood food hub as a volunteer unloads a crate, with crates of fruit and flowers on pallets inside the door."
 tags:
   - "Harry Hayman"
   - "Feed Philly Coalition"
@@ -18,65 +18,71 @@ tags:
   - "neighborhood food hubs"
   - "community food systems"
 readTime: 7
-description: "Milan's eight neighborhood food hubs moved over two million meal equivalents to families in 2025. Here is the model Philadelphia can study."
+description: "Milan's eight neighborhood food hubs moved over two million meal equivalents in 2025. Why the model worked, and what Philadelphia can borrow."
 ---
-Look at the photograph at the top of this page. Two volunteers lean over green crates, one lifting a tray of packed grapes while the other reaches for a yellow pepper. A window decal above them carries the marks of the City of Milan and the business association Assolombarda. Nobody is posing. It is the kind of job that becomes ordinary once a neighborhood room exists for it. What caught me is how ordinary the arrangement behind it looks once you read the numbers. In 2025, Milan's network of eight Food Aid Hubs handled over two million meal equivalents for families in the city. I want to walk through how that works, who built it, and why I think we in Philadelphia should be reading Milan's manual instead of waiting for our own.
+Look at the photograph at the top of this page. A white van is parked outside an open glass door in Milan, its back doors wide. A volunteer in a mask steps down with a green crate. Inside the door, more crates sit on pallets: grapes, apples, peppers, even a few flowering plants that a shop could not sell. Nobody is posing. In early 2019 Milan opened its first food hub like this one, in an empty public room, and the goal was 220,000 meals a year. In 2025 the city's eight hubs moved over two million meal equivalents to families. I want to walk through how that happened, why it kept growing, and why I think Philadelphia should be reading Milan's manual instead of waiting to invent our own.
 
-## What a hub does, in one afternoon
+## Where Milan stands today
 
-The mechanics are plain, and that is the appeal. [Andrea Magarini, Director of Food Policy for the City of Milan, described the routine in a 2023 Earthshot Prize interview](https://earthshotprize.org/news/from-waste-to-welfare-how-milans-food-waste-hubs-are-nourishing-the-city/). The first step is finding a local supermarket willing to supply the hub. The next is connecting with local organizations that run the redistribution. Those organizations collect the food from the supermarkets in the morning and deliver it to the hub in the afternoon. Then, in his words, "an army of volunteers" selects the products and prepares the boxes for the families who will receive them.
+Here is the current status, as of November 2026. [Assolombarda's page on the neighborhood hubs](https://www.assolombarda.it/governance/gruppi/alimentazione/zero-sprechi/hub-di-quartiere) lists eight active hubs: Isola (2019) and Lambrate (2020), run by Banco Alimentare della Lombardia; Gallaratese (2021), run by Terre des Hommes; Foody Zero Sprechi at the city's wholesale food market (2021), shared by several nonprofits; Centro (2022); and Selinunte, Loreto and Cuccagna, all opened in 2024.
 
-That is a full day of logistics with the families at the center. The hub sits in the neighborhood where the recipients live, so a box does not cross the city to reach a table. I keep coming back to that. We usually talk about food recovery as a supply problem. Milan treated it as a place problem and gave it an address.
+The latest annual figures came out in February. According to [the Politecnico di Milano School of Management's account of the 2025 results](https://www.som.polimi.it/en/highlights/food-policy-over-1000-tonnes-of-food-surplus-recovered-in-milan-in-2025/), the network recovered 1,057 tonnes of surplus food and redistributed over two million meals, equivalent to approximately 18,000 families in vulnerable conditions. I use the words meal equivalents on purpose: it is a conversion the city applies to tonnes of food, not a count of plates. [COOPI, which runs the Selinunte hub](https://coopi.org/en/day-against-waste-over-1000-tonnes-of-food-recovered-in-milan-coopis-commitment-to-the-hub-network.html), reported the same totals.
 
-## Who built it
+And it has not stopped. The same Politecnico page says that in the early months of 2026 Milan began working with the FAO to train cities in Asia-Pacific and South America. I found no newer opening or annual total yet; Milan publishes its count each February, on Italy's national day against food waste.
 
-A hub is a room, and a room needs partners. According to the same interview, the hubs were set up through the joint work of [the City of Milan, Fondazione Cariplo, Politecnico di Milano](https://www.polimi.it/en/) and [Assolombarda](https://www.assolombarda.it/), the business association. [The Earthshot Prize winner page](https://earthshotprize.org/winners-finalists/city-of-milan/) says the program launched in 2019 and describes a city policy that brings together public agencies, food banks, charities, NGOs, universities and private businesses.
+## The growth curve
 
-Later partners joined the effort. The Politecnico di Milano School of Management's highlight on the 2025 results names [Fondazione Snam](https://www.fondazionesnam.it/) among the supporters, and it credits the Politecnico's Food Sustainability Lab as scientific lead, monitoring and analyzing the network's impact. That detail matters to me. The university does not merely cheer from the side. It measures the work, and the measurements are public. [The School of Management's own account of the 2025 results](https://www.som.polimi.it/en/highlights/food-policy-over-1000-tonnes-of-food-surplus-recovered-in-milan-in-2025/) also mentions Banco Alimentare della Lombardia, which recovered over 17 tonnes of bread and about 40 tonnes of fruit from school canteens in 2025. The food bank is a partner at the table, not an afterthought, and you can read about its network on the [Banco Alimentare site](https://www.bancoalimentare.it/).
+The numbers are worth seeing in a row. In 2022, [according to an Earthshot Prize interview with Andrea Magarini of the city's Food Policy office](https://earthshotprize.org/news/from-waste-to-welfare-how-milans-food-waste-hubs-are-nourishing-the-city/), four neighborhood hubs collected over 177 tonnes from 41 retailers and reached over 3,500 families, with another 240 tonnes at the Foody market hub. In 2023 the network reached 615 tonnes. In 2024, [the Politecnico reported](https://www.som.polimi.it/en/highlights/food-policy-food-aid-hub-network-consolidates-over-795-tonnes-of-food-recovered-in-2024-25-more-than-in-2023/) 795.3 tonnes, 14,973 households, more than 126,000 people and more than 1,590,000 equivalent meals. Then 1,057 tonnes in 2025, over 32 percent more than the year before.
 
-## The numbers, and what they mean
+From 615 to 1,057 tonnes is a rise of about 72 percent in two years. That is my arithmetic on the two published figures, not the city's.
 
-Here is what the Politecnico reports for 2025. Eight hubs recovered 1,057 tonnes of surplus food. The city redistributed over two million meals, equivalent to approximately 18,000 families in vulnerable conditions. I will use the words meal equivalents throughout this post, because that is a conversion the city applies to tonnes of food and not a count of plates handed over one by one. The Deputy Mayor responsible for Food Policy, Anna Scavuzzo, said the network recovered over 32 percent more surplus than in 2024, and that in 2023 it had reached 615 tonnes. She also said, "With the Food Aid Hubs, we are not only dealing with food but also with people and families."
+## Why it worked
 
-The growth is easier to see when you look back. In 2022, [according to the Earthshot interview](https://earthshotprize.org/news/from-waste-to-welfare-how-milans-food-waste-hubs-are-nourishing-the-city/), four neighborhood hubs collected over 177 tonnes from 41 retailers of 12 supermarket brands and reached over 3,500 families. Stores numbering forty one is a modest start. It is also the kind of number a Philadelphia neighborhood could imagine matching in one place before anyone talks about a citywide system.
+I went looking for the reasons, because plenty of food rescue ideas never get past a pilot. Five things stand out, and every one of them is boring in the best way.
 
-I should be careful about the claims I do not make. The Earthshot page for the 2021 prize says each of three hubs then recovered about 130 tonnes a year, and that the city used its prize money to upgrade hubs, open new ones and reach food markets and school canteens. I am not claiming the same results would arrive here, or on the same schedule. Different cities have different grocery chains, different rules and different nonprofits. Treat Milan as a worked example, not a guarantee.
+The room was free. [Assolombarda's account of the launch](https://www.assolombarda.it/governance/gruppi/alimentazione/informazioni/al-via-201czerosprechi201d-il-cibo-di-aziende-e-mense-va-ai-bisognosi) says the city found an unused public space in Municipio 9 and made it available as the hub. Rent never sat on the budget.
+
+Stores had a reason to show up. The same page says that since February 2018, shops, companies and offices that donate food before it becomes waste can cut up to 20 percent of the variable part of Milan's waste tax, in proportion to what they give.
+
+The food moved every day. A van with a cold cell collected supermarket surplus daily, a second vehicle covered company canteens, and the hub had a cold room and shelving. Magarini's description of the routine is simple: food is collected in the morning, delivered to the hub in the afternoon, and then "an army of volunteers" selects the products and prepares the boxes.
+
+Every partner had one job. The city gave the room. Banco Alimentare ran it day to day. The Politecnico did the feasibility study and monitored the first year, building a model meant to be repeated in other neighborhoods. Assolombarda recruited the companies. Fondazione Cariplo's QuBì program paid to fit out and run the first hub. At the start, five Banco Alimentare volunteers ran it while four Politecnico researchers tracked it.
+
+And they counted, in public, every year. That is how the growth curve above exists at all. When Milan won [the 2021 Earthshot Prize](https://earthshotprize.org/winners-finalists/city-of-milan/), the city used the money to upgrade hubs and open new ones. Deputy Mayor Anna Scavuzzo put it plainly in the 2024 report: "we opened three new Hubs thanks to Earthshot Prize funds."
 
 ## More than a box
 
-The hubs do something I did not expect when I started reading. Magarini said they now act as central spaces where people in need can receive support such as language courses, kitchen courses and children's day care. A room that exists to move food turns out to be a room where neighbors learn something, meet someone, leave a child for an afternoon.
+The hubs do something I did not expect when I started reading. Magarini said they now act as central spaces where people in need can find support such as language courses, kitchen courses and children's day care. A room that exists to move food turns out to be a room where neighbors learn something and meet someone.
 
-That is the part of the model I find most useful for a coalition. A hub is infrastructure that other services can attach to, once it exists and people trust it. The Politecnico's account of 2025 also describes a school project, "Sacchetto Salvamerenda", that distributed over 19,300 snack bags across 86 schools in the first four months of the 2025/26 school year. Milan keeps finding new uses for the same logistics. I would rather we ask what Philadelphia would want its own rooms to do than copy the list.
+Milan keeps finding new uses for the same logistics. The 2025 report describes a school project that handed out over 19,300 snack bags across 86 schools in the first four months of the 2025/26 school year, and Banco Alimentare recovered over 17 tonnes of bread and about 40 tonnes of fruit from school canteens. Once the van and the room exist, the next idea is cheap.
 
 ## Ten cities visited, and Philadelphia was not one of them
 
-In 2023, according to Magarini, a tour over three days gave 10 US and European cities the chance to visit two of Milan's hubs. The delegates came from Austin, Boston, Chicago, Los Angeles, Washington D.C., Amsterdam, Barcelona, Madrid, Paris and Oslo. He thanked The Earthshot Prize, Bloomberg Philanthropies, C40 and NRDC for helping organize it. Philadelphia is not on that list.
+In 2023, according to Magarini, a three day tour brought 10 US and European cities to two of Milan's hubs: Austin, Boston, Chicago, Los Angeles, Washington D.C., Amsterdam, Barcelona, Madrid, Paris and Oslo. Philadelphia is not on that list.
 
-I do not read that as a rebuke. Nobody was excluded; those were the invitations that were sent. But it tells me where the conversation has been happening, and it tells me something useful: five American cities have already sent people to ask how this works. The planning guidelines are now published. The Politecnico's highlight says the guidelines for planning and developing Food Aid Hubs were produced by the POLIMI School of Management with the City's Food Policy office and the support of Fondazione Snam, and it points to the City of Milan's food policy page where they are available. We do not need a plane ticket to read them. The program also keeps an Instagram account, [@foodpolicymi](https://www.instagram.com/foodpolicymi/), where the hubs and their partners post.
+I do not read that as a rebuke. Those were the invitations that went out. But five American cities have already sent people to ask how this works, and the manual is now public. The Politecnico says the guidelines for planning and developing Food Aid Hubs were produced by its School of Management with the city's Food Policy office and the support of [Fondazione Snam](https://www.fondazionesnam.it/). We do not need a plane ticket to read them. The program also posts on Instagram as [@foodpolicymi](https://www.instagram.com/foodpolicymi/).
 
-I will say this plainly: I could not open the city's own site when I checked, so I am relying on the Politecnico's description of where the guidelines live. If you read Italian or have a translation tool, start there and tell me what you find.
+## What Philadelphia can learn
 
-## What I would try in Philadelphia
+Everything below is my opinion and a proposal, not an announcement and not a commitment from any partner.
 
-Everything below is my opinion and a proposal, not an announcement and not a commitment from any partner. Magarini's own advice, from the 2023 interview, is a good outline: build common goals with all the relevant stakeholders, define strategies and tools, put education about waste prevention at the center of local government's agenda, and have a solid plan for monitoring progress.
+Every type of partner Milan used has a counterpart here. We have a [city government](https://www.phila.gov/departments/office-of-sustainability/), universities that can measure results, foundations, a business community, supermarket chains and neighborhood nonprofits. We have food banks, among them [Philabundance](https://www.philabundance.org/), and Milan's own food bank partner, [Banco Alimentare](https://www.bancoalimentare.it/), is the same kind of organization. What I have not seen is one agreement that puts those partners into one room, in one neighborhood, with a shared way of counting what goes through the door. That is what [Feed Philly Coalition](https://feedphillycoalition.org/) exists to convene.
 
-Every type of partner Milan used has a counterpart here. We have a [city government](https://www.phila.gov/departments/office-of-sustainability/), universities that can measure results, foundations, a business community, supermarket chains and neighborhood nonprofits. We also have food banks, among them [Philabundance](https://www.philabundance.org/). What I have not seen is a single agreement that puts those partners into one room, in one neighborhood, with a shared way of counting what goes through the door. That is what [Feed Philly Coalition](https://feedphillycoalition.org/) exists to convene, and it is the question I would put to the partners above.
+So here is what I would borrow, in Milan's order. Find one empty public room. Give donors a reason that shows up on a bill they already pay. Buy or borrow one cold van. Give each partner exactly one job, and ask a university to count from day one. Then publish the count every year, because a number in public is what turns a pilot into a budget line.
 
-So my proposal is small. Pick one neighborhood. Ask the city for one room. Ask the supermarkets within walking distance to supply it, the nonprofits already distributing there to collect and pack, a university to measure, and a foundation to carry the first year. In 2022 Milan was running four. Families, not tonnes, are the measure that matters, and the first test is simple: did the box land on the right table, close to home?
+Milan's 2019 goal was 220,000 meals a year from one room. Pick the neighborhood, and tell me which block you think should host the first one.
 
-## Where to start reading
-
-If you work in a city agency, a foundation, a grocery company or a food bank, I would ask you to read the Milan guidelines this month and bring one question to a partner. If you are a neighbor, the best thing you can do is tell me which block you think should host the first room. The [Milan Urban Food Policy Pact](https://www.milanurbanfoodpolicypact.org/) is also worth a look. The Politecnico's highlight describes it as an agreement that involves hundreds of cities across all continents, and it frames food waste prevention as one of its central topics.
-
-The photograph at the top of this page is a press image from The Earthshot Prize and the City of Milan, taken at one of the hubs in 2021. The poster at the top is a designed graphic built from that photograph.
+The photograph behind the poster at the top of this page is a press image from The Earthshot Prize and the City of Milan, taken at one of the hubs in 2021. The poster is a designed graphic built from that photograph. The [Milan Urban Food Policy Pact](https://www.milanurbanfoodpolicypact.org/), which Milan launched in 2015, is also worth a look if you want the wider policy picture.
 
 ## Sources and references
 
+- [Politecnico di Milano School of Management: Food Policy, over 1,000 tonnes of food surplus recovered in Milan in 2025 (9 February 2026)](https://www.som.polimi.it/en/highlights/food-policy-over-1000-tonnes-of-food-surplus-recovered-in-milan-in-2025/).
+- [Politecnico di Milano School of Management: Food Aid Hub network consolidates, over 795 tonnes recovered in 2024 (17 February 2025)](https://www.som.polimi.it/en/highlights/food-policy-food-aid-hub-network-consolidates-over-795-tonnes-of-food-recovered-in-2024-25-more-than-in-2023/).
+- [COOPI: Day against waste, over 1,000 tonnes of food recovered in Milan (4 February 2026)](https://coopi.org/en/day-against-waste-over-1000-tonnes-of-food-recovered-in-milan-coopis-commitment-to-the-hub-network.html).
+- [Assolombarda: Hub di Quartiere contro lo spreco alimentare](https://www.assolombarda.it/governance/gruppi/alimentazione/zero-sprechi/hub-di-quartiere).
+- [Assolombarda: the ZeroSprechi launch, food from companies and canteens goes to people in need](https://www.assolombarda.it/governance/gruppi/alimentazione/informazioni/al-via-201czerosprechi201d-il-cibo-di-aziende-e-mense-va-ai-bisognosi).
 - [The Earthshot Prize: From Waste to Welfare, how Milan's Food Waste Hubs are nourishing the city (18 August 2023)](https://earthshotprize.org/news/from-waste-to-welfare-how-milans-food-waste-hubs-are-nourishing-the-city/).
 - [The Earthshot Prize: The City of Milan Food Waste Hubs, 2021 winner](https://earthshotprize.org/winners-finalists/city-of-milan/). Photograph credit: The Earthshot Prize / City of Milan.
-- [Politecnico di Milano School of Management: Food Policy, over 1,000 tonnes of food surplus recovered in Milan in 2025 (9 February 2026)](https://www.som.polimi.it/en/highlights/food-policy-over-1000-tonnes-of-food-surplus-recovered-in-milan-in-2025/).
-- [Politecnico di Milano](https://www.polimi.it/en/).
-- [Assolombarda](https://www.assolombarda.it/).
 - [Fondazione Snam](https://www.fondazionesnam.it/).
 - [Banco Alimentare](https://www.bancoalimentare.it/).
 - [Milan Urban Food Policy Pact](https://www.milanurbanfoodpolicypact.org/).
